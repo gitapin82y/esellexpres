@@ -58,7 +58,7 @@
     <body id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
-            <div class="container px-5">
+            <div class="container px-1 px-md-5">
                 <a class="navbar-brand fw-bold h-100 logo-homepage" href="#page-top">
                     <img src="{{ optional($store)->logo ?? asset('images/logo.png') }}" alt="Logo">
                 </a>
@@ -69,10 +69,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="/">Home</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="/#home">Home</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="#benefit">Benefit</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="#product">Product</a></li>
-                        <li class="nav-item"><a class="nav-link me-lg-0" href="#product">Contact Us</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-0" href="#contact">Contact Us</a></li>
                     </ul>
                     @if(Auth::check() && Auth::user()->role == 3)
                     <a href="/join-seller" class="btn btn-main rounded-pill px-4 py-2 mb-lg-0">
@@ -92,7 +92,7 @@
         </nav>
         <!-- Mashead header-->
             <!-- Hero Section Begin -->
-    <section class="hero-section mt-n2 pb-0">
+    <section class="hero-section mt-n2 pb-0" id="home">
         <div class="hero-items owl-carousel">
             <div class="single-hero-items set-bg" data-setbg="{{asset('penjual/img/hero-1.jpg')}}">
                 <div class="container">
@@ -213,7 +213,7 @@
         </section>
 
         <!-- App badge section-->
-        <section style="background-color: #ff9c2c" id="download">
+        <section style="background-color: #ff9c2c" id="contact">
             <div class="container px-5">
                 <div class="row">
                     @php
