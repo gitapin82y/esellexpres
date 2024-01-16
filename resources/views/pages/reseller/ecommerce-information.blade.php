@@ -39,6 +39,8 @@
                                     <div class="form-group">
                                         @if (! empty($ecommerce))
                                         <img src="{{$ecommerce->logo}}" width="150px" alt="">
+                                        @else
+                                        <img src="{{asset('images/logo.png')}}" width="150px" alt="">
                                         @endif
                                     </div>
                                     <div class="form-group">
