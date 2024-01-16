@@ -50,7 +50,7 @@ class PenjualController extends Controller
         $details = [
             'title' => 'Congratulations, you have succeeded in becoming an esellexpress seller',
             'body' => 'Now you can set up your own shop and promote it to get lots of profits from sales',
-            'url' => 'http://127.0.0.1:8000/login',
+            'url' => 'esellexpress.com/login',
         ];
 
         Mail::to($user->email)->send(new NotifMail($details));

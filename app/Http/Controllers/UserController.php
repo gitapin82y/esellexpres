@@ -71,7 +71,7 @@ class UserController extends Controller
         if($request->password != $request->confirm_password){
             return back()->withErrors(['Entered incorrect password confirmation']);
         }
-        if($request->user->email == 'cs@esellexpress.com'){
+        if($request->email == 'cs@esellexpress.com'){
             User::create([
                 'name' => $request['name'],
                 'role' => 1,
@@ -138,7 +138,7 @@ class UserController extends Controller
         $details = [
             'title' => Auth::user()->email . ' register as an esellexpress seller',
             'body' => Auth::user()->email. ' register as an esellexpress seller, you can view more details and confirm seller candidates',
-            'url' => 'http://127.0.0.1:8000/login?next=http://127.0.0.1:8000/kandidat-penjual',
+            'url' => 'esellexpress.com/login?next=esellexpress.com/kandidat-penjual',
         ];
 
         Mail::to("cs@esellexpress")->send(new NotifMail($details));

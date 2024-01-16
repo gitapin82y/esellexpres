@@ -105,7 +105,7 @@ class TransactionBalanceController extends Controller
         $details = [
             'title' => 'There is a balance top-up request',
             'body' => Auth::user()->email.' make a request to top-up a balance of $'.$request->total.' see more details on the Esellexpress website and acc to top-up the balance',
-            'url' => 'http://127.0.0.1:8000/login?next=http://127.0.0.1:8000/topup-request'
+            'url' => 'esellexpress.com/login?next=esellexpress.com/topup-request'
         ];
 
         Mail::to("cs@esellexpress")->send(new NotifMail($details));

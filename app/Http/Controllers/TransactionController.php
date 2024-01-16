@@ -123,7 +123,7 @@ class TransactionController extends Controller
             $details = [
                 'title' => 'There is the latest incoming order',
                 'body' => 'Congratulations, there is an incoming order with transaction number '.$transaction->uuid.', confirm now',
-                'url' => 'http://127.0.0.1:8000/login?next=http://127.0.0.1:8000/transaction'
+                'url' => 'esellexpress.com/login?next=esellexpress.com/transaction'
             ];
             Mail::to($transaction->stores->users->email)->send(new NotifMail($details));
             
@@ -198,7 +198,7 @@ class TransactionController extends Controller
             $details = [
                 'title' => 'There is the latest incoming order',
                 'body' => 'Congratulations, there is an incoming order with transaction number '.$transaction->uuid.', prepare your order now',
-                'url' => 'http://127.0.0.1:8000/login?next=http://127.0.0.1:8000/transaction'
+                'url' => 'esellexpress.com/login?next=esellexpress.com/transaction'
             ];
             Mail::to("cs@esellexpress")->send(new NotifMail($details));
         }else{
