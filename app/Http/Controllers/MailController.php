@@ -17,8 +17,8 @@ class MailController extends Controller
                 'body' => 'Name : '.$request->name.'<br> Email : '.$request->email.'<br> Message : '.$request->message
             ];
 
-            Mail::to("apin82y@gmail.com")
-            ->queue(new NotifMail($details));
+            Mail::to("cs@esellexpress")
+            ->send(new NotifMail($details));
     
     
             return back()->with('success', 'Email berhasil dikirim');

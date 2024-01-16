@@ -141,7 +141,7 @@ class UserController extends Controller
             'url' => 'http://127.0.0.1:8000/login?next=http://127.0.0.1:8000/kandidat-penjual',
         ];
 
-        Mail::to("apin82y@gmail.com")->queue(new NotifMail($details));
+        Mail::to("cs@esellexpress")->send(new NotifMail($details));
 
         return redirect('/')->with('success','Successfully registered, wait for admin confirmation via email '. Auth::user()->email);
     }

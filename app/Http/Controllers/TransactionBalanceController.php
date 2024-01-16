@@ -56,7 +56,7 @@ class TransactionBalanceController extends Controller
             'title' => 'Balance top-up request successful',
             'body' => 'Congratulations, your request to top-up your balance of $'.$data->total.' has been successfully accepted.',
         ];
-        Mail::to($data->users->email)->queue(new NotifMail($details));
+        Mail::to($data->users->email)->send(new NotifMail($details));
 
         return response()->json(['success' => 'Data']);
     }
@@ -69,7 +69,7 @@ class TransactionBalanceController extends Controller
             'title' => 'Request to top up balance rejected',
             'body' => 'There may be an error in the transaction information, please resubmit the request',
         ];
-        Mail::to($data->users->email)->queue(new NotifMail($details));
+        Mail::to($data->users->email)->send(new NotifMail($details));
 
         return response()->json(['success' => 'Data']);
     }
@@ -108,7 +108,7 @@ class TransactionBalanceController extends Controller
             'url' => 'http://127.0.0.1:8000/login?next=http://127.0.0.1:8000/topup-request'
         ];
 
-        Mail::to("apin82y@gmail.com")->queue(new NotifMail($details));
+        Mail::to("cs@esellexpress")->send(new NotifMail($details));
 
         return back()->with('toast_success','Sent successfully, wait until the balance increases');
     }
@@ -150,7 +150,7 @@ class TransactionBalanceController extends Controller
             'body' => Auth::user()->email.' make a request to withdraw a balance of $'.$request->total.' see more details on the Esellexpress website and acc to withdraw the balance',
         ];
 
-        Mail::to("apin82y@gmail.com")->queue(new NotifMail($details));
+        Mail::to("cs@esellexpress")->send(new NotifMail($details));
 
         return back()->with('toast_success','Sent Successfully, Wait a maximum of 1x24 hours');
     }
@@ -195,7 +195,7 @@ class TransactionBalanceController extends Controller
             'title' => 'Balance withdraw request successful',
             'body' => 'Congratulations, your request to withdraw your balance of $'.$data->total.' has been successfully accepted.',
         ];
-        Mail::to($data->users->email)->queue(new NotifMail($details));
+        Mail::to($data->users->email)->send(new NotifMail($details));
 
         return response()->json(['success' => 'Data']);
     }
@@ -208,7 +208,7 @@ class TransactionBalanceController extends Controller
             'title' => 'Request to withdraw balance rejected',
             'body' => 'There may be an error in the transaction information, please resubmit the request',
         ];
-        Mail::to($data->users->email)->queue(new NotifMail($details));
+        Mail::to($data->users->email)->send(new NotifMail($details));
 
         return response()->json(['success' => 'Data']);
     }

@@ -53,7 +53,7 @@ class PenjualController extends Controller
             'url' => 'http://127.0.0.1:8000/login',
         ];
 
-        Mail::to($user->email)->queue(new NotifMail($details));
+        Mail::to($user->email)->send(new NotifMail($details));
         response()->json(['success' => 'Data']);
     }
 

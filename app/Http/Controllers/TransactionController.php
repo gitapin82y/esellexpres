@@ -125,7 +125,7 @@ class TransactionController extends Controller
                 'body' => 'Congratulations, there is an incoming order with transaction number '.$transaction->uuid.', confirm now',
                 'url' => 'http://127.0.0.1:8000/login?next=http://127.0.0.1:8000/transaction'
             ];
-            Mail::to($transaction->stores->users->email)->queue(new NotifMail($details));
+            Mail::to($transaction->stores->users->email)->send(new NotifMail($details));
             
             return response()->json(['checkout' => true]);
         }else{
@@ -169,10 +169,10 @@ class TransactionController extends Controller
             ];
             $emailCustomer = $transaction->email;
             $emailSeller = $transaction->stores->users->email;
-            $emailReseller = "apin82y@gmail.com";
+            $emailReseller = "cs@esellexpress";
             Mail::to($emailCustomer)
             ->bcc([$emailSeller, $emailReseller])
-            ->queue(new NotifMail($details));
+            ->send(new NotifMail($details));
 
             return back()->with('toast_success', 'Successfully confirmed receipt of order');
         }
@@ -200,7 +200,7 @@ class TransactionController extends Controller
                 'body' => 'Congratulations, there is an incoming order with transaction number '.$transaction->uuid.', prepare your order now',
                 'url' => 'http://127.0.0.1:8000/login?next=http://127.0.0.1:8000/transaction'
             ];
-            Mail::to("apin82y@gmail.com")->queue(new NotifMail($details));
+            Mail::to("cs@esellexpress")->send(new NotifMail($details));
         }else{
             $details = [
                 'title' => 'Order with transaction number '.$transaction->uuid,
@@ -210,7 +210,7 @@ class TransactionController extends Controller
             $emailSeller = $transaction->stores->users->email;
             Mail::to($emailCustomer)
             ->bcc([$emailSeller])
-            ->queue(new NotifMail($details));   
+            ->send(new NotifMail($details));   
         }
     
         $transaction->save();
