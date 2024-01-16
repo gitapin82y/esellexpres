@@ -9,7 +9,7 @@
                         $query->where('role', 1);
                     })->with('users')->first();
                 @endphp
-                    <a class="navbar-brand" href="./"><img src="{{ optional($store)->logo ?? asset('images/logo.png') }}" style="max-height: 40px" alt="Logo"></a>
+                    <a class="navbar-brand" href="./"><img src="{{ optional($store)->logo ? asset($store->logo) : asset('images/logo.png') }}" style="max-height: 40px" alt="Logo"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
