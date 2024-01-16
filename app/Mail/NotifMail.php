@@ -29,12 +29,14 @@ class NotifMail extends Mailable
      */
     public function build()
     {
-        if(!empty($this->details['reply'])){
-            return $this->from($this->details['reply'],'Esellexpress')
-            ->view('emails.notif-mail');
-        }else{
-            return $this->subject($this->details['title'])
-            ->view('emails.notif-mail');
+        $mail = $this->view('emails.notif-mail');
+
+        if (!empty($this->details['reply'])) {
+            $mail->from($this->details['reply'], 'Esellexpress');
+        } else {
+            $mail->subject($this->details['title']);
         }
+    
+        return $mail;
     }
 }
