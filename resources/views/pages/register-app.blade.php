@@ -211,8 +211,8 @@ $store = Store::whereHas('users', function ($query) {
 							<p class="txt1 d-inline">
 							Already have an account?
 							</p>
-							<a href="/login" class="txt1 text-warning">
-								 Login Now
+							<a href="/login{{ isset($_GET['next']) ? '?next=' . $_GET['next'] : '' }}" class="txt1 text-warning">
+								Login Now
 							</a>
 						</div>
 					</div>
