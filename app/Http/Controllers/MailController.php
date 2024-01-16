@@ -14,7 +14,8 @@ class MailController extends Controller
         try {
             $details = [
                 'title' => $request->name.' sending the message',
-                'body' => 'Name : '.$request->name.'<br> Email : '.$request->email.'<br> Message : '.$request->message
+                'body' => 'Name : '.$request->name.'<br> Email : '.$request->email.'<br> Message : '.$request->message,
+                'reply' => $request->email,
             ];
 
             Mail::to("cs@esellexpress.com")
