@@ -58,7 +58,7 @@
     <body id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
-            <div class="container px-1 px-md-5">
+            <div class="container px-2 px-md-5">
                 <a class="navbar-brand fw-bold h-100 logo-homepage" href="#page-top">
                     <img src="{{ optional($store)->logo ?? asset('images/logo.png') }}" alt="Logo">
                 </a>
@@ -224,9 +224,9 @@
                 <h2 class="text-white font-alt mb-4">Contact Us</h2>
                 <hr>
                     <h4 class="font-alt">Email</h4>
-                    <p><i class="fa-solid fa-envelope"></i> {{ $user->email ?? '' }}</p>
+                    <p><i class="fa-solid fa-envelope"></i> {{ $user->email ?? 'cs@esellexpress.com' }}</p>
                     <h4 class="font-alt">Telepone</h4>
-                    <p><i class="fa-solid fa-phone"></i> {{ $user->phone ?? '' }}</p>
+                    <p><i class="fa-solid fa-phone"></i> {{ $user->phone ?? '085281147618' }}</p>
                 </div>
                 <div class="col-12 col-md-9 ps-md-5 pt-4">
                     <form action="send-mail" method="POST">
