@@ -45,19 +45,6 @@ Route::post('/register', [UserController::class,'registerApp'])->name('registerA
 Route::group(['middleware' => ['resellerseller']], function () {
 // reseller
 Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
-
-Route::resource('kandidat-penjual',PenjualController::class);
-Route::get('/getKandidatPenjual', [PenjualController::class,'datatable'])->name('getKandidatPenjual');
-Route::get('/kandidat-penjual/{id}/acc', [PenjualController::class,'accKandidat']);
-Route::get('/kandidat-penjual/{id}/tolak', [PenjualController::class,'tolakKandidat']);
-
-
-Route::get('/list-penjual', [PenjualController::class,'indexListPenjual'])->name('list-penjual.index');
-Route::get('/getListpenjual', [PenjualController::class,'datatableListPenjual'])->name('getListPenjual');
-Route::get('/list-penjual/{id}/produk', [PenjualController::class,'detailProduk']);
-Route::get('/list-penjual/{id}/profit', [PenjualController::class,'editProfit']);
-Route::post('/list-penjual/profit', [PenjualController::class,'updateProfit']);
-
 Route::resource('category',CategoryController::class);
 Route::resource('galleries',ProductGalleryController::class);
 Route::resource('products',ProductController::class);
@@ -91,6 +78,17 @@ Route::get('/getListDelivery', [DeliveryServicesController::class,'datatable'])-
 
 Route::resource('bank-account',BankAccountController::class);
 Route::get('/getBankAccount', [BankAccountController::class,'datatable'])->name('getBankAccount');
+
+Route::resource('kandidat-penjual',PenjualController::class);
+Route::get('/getKandidatPenjual', [PenjualController::class,'datatable'])->name('getKandidatPenjual');
+Route::get('/kandidat-penjual/{id}/acc', [PenjualController::class,'accKandidat']);
+Route::get('/kandidat-penjual/{id}/tolak', [PenjualController::class,'tolakKandidat']);
+
+
+Route::get('/list-penjual', [PenjualController::class,'indexListPenjual'])->name('list-penjual.index');
+Route::get('/getListpenjual', [PenjualController::class,'datatableListPenjual'])->name('getListPenjual');
+Route::get('/list-penjual/{id}/profit', [PenjualController::class,'editProfit']);
+Route::post('/list-penjual/profit', [PenjualController::class,'updateProfit']);
 });
 
 // seller

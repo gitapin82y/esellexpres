@@ -96,10 +96,6 @@ class PenjualController extends Controller
         ->make(true);
     }
 
-    public function detailProduk($id){
-        response()->json(['success' => 'Data']);
-    }
-
     public function editProfit($id){
         $data = User::with('stores')->find($id);
         return response()->json(['data' => $data]);
