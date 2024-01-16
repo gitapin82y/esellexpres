@@ -52,7 +52,7 @@
         <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
             <div class="container px-5">
                 <a class="navbar-brand fw-bold h-100" href="#page-top">
-                    <img src="{{ optional($store)->logo ?? asset('images/logo.png') }}" class="h-100" alt="Logo">
+                    <img src="{{ optional($store)->logo ?? asset('images/logo.png') }}" style="max-height: 50px" alt="Logo">
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
