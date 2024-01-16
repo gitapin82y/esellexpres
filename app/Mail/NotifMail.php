@@ -31,10 +31,9 @@ class NotifMail extends Mailable
     {
         $mail = $this->view('emails.notif-mail')
         ->subject($this->details['title']);
-
-    if ($this->details['reply']) {
-        $mail->replyTo($this->details['reply'], 'Esellexpress');
-    }
+        if (isset($this->details['reply'])) {
+            $mail->replyTo($this->details['reply'], 'Esellexpress');
+        }
 
     return $mail;
     }
