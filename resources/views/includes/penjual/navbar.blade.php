@@ -79,6 +79,9 @@
                                    <div class="select-items">
                                        {{-- <a href="/{{request()->segment(1)}}/profile" class="mb-3">Profile</a> --}}
                                        {{-- <br> --}}
+                                       @if (Auth::user()->role != 3)
+                                       <a href="/dashboard" class="mb-3">Dashboard</a>
+                                       @endif
                                        <a href="/{{request()->segment(1)}}/status-produk" class="mb-3">My Order</a>
                                        <br>
                                        <a href="#" class="text-dark mb-3" data-toggle="modal" data-target="#topUpModal">Top Up</a>

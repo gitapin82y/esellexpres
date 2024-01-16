@@ -32,7 +32,7 @@ class StoreController extends Controller
             $ecommerce = Store::create([
                 'user_id' => Auth::user()->id,
                 'name' => $request->name,
-                'slug' => Str::slug($request->name),
+                'slug' => 'bj20andbw01js1',
                 'logo' => $request['logo'],
             ]);
         }

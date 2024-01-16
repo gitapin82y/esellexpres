@@ -42,6 +42,10 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
+                                        <label for="name" class="form-control-label">Shop Name</label><br>
+                                        <input type="text" id="name" class="form-control" value="{{optional($ecommerce)->name ? $ecommerce->name : ''}}" name="name" required>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="logo" class="form-control-label">Logo</label>
                                         <input type="file" id="logo" name="logo"
                                             class="form-control" required>
