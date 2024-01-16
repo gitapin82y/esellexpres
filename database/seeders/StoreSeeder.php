@@ -26,9 +26,9 @@ class StoreSeeder extends Seeder
             // Pastikan kita memiliki user dengan role 1 sebelum menyimpan toko
             if ($user) {
                 $storeData = [
-                    'name' => 'esellexpres',
+                    'name' => 'esellexpress',
                     'logo' => 'images/logo.png',
-                    'slug' => 'esellexpres',
+                    'slug' => 'esellexpress',
                     'user_id' => $user->id,
                 ];
 

@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Esellexpres</title>
+        <title>Esellexpress</title>
         @php
         use App\Models\Store;
         $store = Store::whereHas('users', function ($query) {
@@ -45,14 +45,22 @@
                 background-size: cover;
                 height: auto;
             }
+            .logo-homepage img{
+                    max-height: 50px; 
+                }   
+            @media (max-width: 576px) { 
+                .logo-homepage img{
+                    max-height: 30px; 
+                }   
+             }
         </style>
     </head>
     <body id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
             <div class="container px-5">
-                <a class="navbar-brand fw-bold h-100" href="#page-top">
-                    <img src="{{ optional($store)->logo ?? asset('images/logo.png') }}" style="max-height: 50px" alt="Logo">
+                <a class="navbar-brand fw-bold h-100 logo-homepage" href="#page-top">
+                    <img src="{{ optional($store)->logo ?? asset('images/logo.png') }}" alt="Logo">
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,10 +98,10 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
-                            <span>{{ $store->name ?? 'esellexpres' }}</span>
+                            <span>{{ $store->name ?? 'esellexpress' }}</span>
                             <h1>WELCOME</h1>
                             <p class="mb-4">
-                                Welcome to {{ $store->name ?? 'esellexpres' }}! Get profits of up to tens of percent per product from sales of the products we have provided, login and register as a seller now!
+                                Welcome to {{ $store->name ?? 'esellexpress' }}! Get profits of up to tens of percent per product from sales of the products we have provided, login and register as a seller now!
                             </p>
                             @if(Auth::check() && Auth::user()->role == 3)
                             <a href="/join-seller" class="primary-btn text-decoration-none py-3 px-4 mt-1">Join As Seller</a>
@@ -108,10 +116,10 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
-                            <span>{{ $store->name ?? 'esellexpres' }}</span>
+                            <span>{{ $store->name ?? 'esellexpress' }}</span>
                             <h1>JOIN NOW</h1>
                             <p class="mb-4">
-                                Join {{ $store->name ?? 'esellexpres' }}  for an online shop business from the products we provide, login and register as a seller now!
+                                Join {{ $store->name ?? 'esellexpress' }}  for an online shop business from the products we provide, login and register as a seller now!
                             </p>
                             @if(Auth::check() && Auth::user()->role == 3)
                             <a href="/join-seller" class="primary-btn text-decoration-none py-3 px-4 mt-1">Join As Seller</a>
