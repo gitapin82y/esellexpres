@@ -10,25 +10,27 @@ use Illuminate\Support\Facades\Mail;
 class MailController extends Controller
 {
 
-    public function sendMail(Request $request){
+    public function sendMail(Request $request)
+    {
         try {
             $details = [
-                'title' => $request->name.' sending the message',
-                'body' => 'Name : '.$request->name.'<br> Email : '.$request->email.'<br> Message : '.$request->message,
+                'title' => $request->name . ' sending the message',
+                'body' => 'Name: ' . $request->name . '<br> Email: ' . $request->email . '<br> Message: ' . $request->message,
                 'reply' => $request->email,
             ];
-
-            Mail::to("cs@esellexpress.com")
-            ->send(new NotifMail($details));
     
+            Mail::to("cs@esellexpress.com")
+                ->send(new NotifMail($details));
     
             return back()->with('success', 'Email berhasil dikirim');
         } catch (\Exception $e) {
             // Log the exception if needed
             \Log::error('Error sending email: ' . $e->getMessage());
+            return response()->json(['error'=>$e->getMessage()]);
     
             // Return back with an alert for failure
             return back()->with('info', 'Email gagal dikirim. Silakan coba lagi.');
         }
     }
+    
 }
