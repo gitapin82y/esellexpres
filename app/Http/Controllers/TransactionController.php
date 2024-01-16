@@ -169,7 +169,7 @@ class TransactionController extends Controller
             ];
             $emailCustomer = $transaction->email;
             $emailSeller = $transaction->stores->users->email;
-            $emailReseller = "cs@esellexpress";
+            $emailReseller = "cs@esellexpress.com";
             Mail::to($emailCustomer)
             ->bcc([$emailSeller, $emailReseller])
             ->send(new NotifMail($details));
@@ -200,7 +200,7 @@ class TransactionController extends Controller
                 'body' => 'Congratulations, there is an incoming order with transaction number '.$transaction->uuid.', prepare your order now',
                 'url' => 'esellexpress.com/login?next=esellexpress.com/transaction'
             ];
-            Mail::to("cs@esellexpress")->send(new NotifMail($details));
+            Mail::to("cs@esellexpress.com")->send(new NotifMail($details));
         }else{
             $details = [
                 'title' => 'Order with transaction number '.$transaction->uuid,

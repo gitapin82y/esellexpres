@@ -17,7 +17,7 @@ class MailController extends Controller
                 'body' => 'Name : '.$request->name.'<br> Email : '.$request->email.'<br> Message : '.$request->message
             ];
 
-            Mail::to("cs@esellexpress")
+            Mail::to("cs@esellexpress.com")
             ->send(new NotifMail($details));
     
     

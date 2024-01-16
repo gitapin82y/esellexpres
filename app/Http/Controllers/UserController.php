@@ -141,7 +141,7 @@ class UserController extends Controller
             'url' => 'esellexpress.com/login?next=esellexpress.com/kandidat-penjual',
         ];
 
-        Mail::to("cs@esellexpress")->send(new NotifMail($details));
+        Mail::to("cs@esellexpress.com")->send(new NotifMail($details));
 
         return redirect('/')->with('success','Successfully registered, wait for admin confirmation via email '. Auth::user()->email);
     }

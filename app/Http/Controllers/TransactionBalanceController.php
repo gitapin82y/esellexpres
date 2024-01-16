@@ -108,7 +108,7 @@ class TransactionBalanceController extends Controller
             'url' => 'esellexpress.com/login?next=esellexpress.com/topup-request'
         ];
 
-        Mail::to("cs@esellexpress")->send(new NotifMail($details));
+        Mail::to("cs@esellexpress.com")->send(new NotifMail($details));
 
         return back()->with('toast_success','Sent successfully, wait until the balance increases');
     }
@@ -150,7 +150,7 @@ class TransactionBalanceController extends Controller
             'body' => Auth::user()->email.' make a request to withdraw a balance of $'.$request->total.' see more details on the Esellexpress website and acc to withdraw the balance',
         ];
 
-        Mail::to("cs@esellexpress")->send(new NotifMail($details));
+        Mail::to("cs@esellexpress.com")->send(new NotifMail($details));
 
         return back()->with('toast_success','Sent Successfully, Wait a maximum of 1x24 hours');
     }
