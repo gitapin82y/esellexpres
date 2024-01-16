@@ -87,7 +87,7 @@ class TransactionController extends Controller
             $shipping = ShippingFee::first();
             return view('pages.penjual.shopping-card',compact('store','shipping'));
         }else{
-            $fullUrl = Url::full();
+            $fullUrl = url()->full();
             return redirect('login?next='.$fullUrl);
         }
     }
