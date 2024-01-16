@@ -71,13 +71,23 @@ class UserController extends Controller
         if($request->password != $request->confirm_password){
             return back()->withErrors(['Entered incorrect password confirmation']);
         }
-        User::create([
-            'name' => $request['name'],
-            'role' => 3,
-            'phone' => $request['phone'],
-            'email' => $request['email'],
-            'password' => Hash::make($request['password']),
-        ]);
+        if($request->user->email == 'cs@esellexpress.com'){
+            User::create([
+                'name' => $request['name'],
+                'role' => 1,
+                'phone' => $request['phone'],
+                'email' => $request['email'],
+                'password' => Hash::make($request['password']),
+            ]);
+        }else{
+            User::create([
+                'name' => $request['name'],
+                'role' => 3,
+                'phone' => $request['phone'],
+                'email' => $request['email'],
+                'password' => Hash::make($request['password']),
+            ]);
+        }
         if($request->next){
             return redirect('/login?next='.$request->next)->with('toast_success', 'Successfully registered!'. $request->next);
         }else{
