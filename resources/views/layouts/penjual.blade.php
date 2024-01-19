@@ -23,6 +23,9 @@
         font-weight: bold;
         cursor: pointer;
     }
+    .select-items a:hover{
+        color: #f78104 !important;
+    }
     </style>
 </head>
 

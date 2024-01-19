@@ -19,13 +19,13 @@
                         @if (Auth::check() && Auth::user()->role == 1)
                         <div class="dropdown">
                             Balance <small>(Total Income)</small> : 
-                            <span style="color:#e7ab3c">${{Auth::user()->balance}}</span>
+                            <span style="color:#e7ab3c; font-size:20px;">${{Auth::user()->balance}}</span>
                         </div>
                         @else
                         <div class="dropdown">
                             <a href="#" class="text-dark" data-toggle="modal" data-target="#topUpModal">
                             Balance : 
-                            <span style="color:#e7ab3c">${{Auth::user()->balance}}</span>
+                            <span style="color:#e7ab3c;font-size:20px;">${{Auth::user()->balance}}</span>
                                 <i class="fa fa-plus-circle" style="color: #e7ab3c;"></i>
                             </a>
                         </div>
@@ -78,6 +78,7 @@
 
                         <div class="user-menu dropdown-menu">
                             {{-- <a class="nav-link" href="#"><i class="fa fa-user"></i>My Profile</a> --}}
+                            <a class="nav-link" href="/reset-password"><i class="fa fa-cog"></i>Reset Password</a>
                             <a class="nav-link" href="{{route('logoutApp')}}"><i class="fa fa-power-off"></i>Logout</a>
                         </div>
                     </div>

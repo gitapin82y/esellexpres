@@ -63,7 +63,7 @@ class TransactionController extends Controller
             return $aksi;
         })
         ->addColumn('created_at',function($data){
-                return Carbon::parse($data->created_at)->format('d F Y');
+                return Carbon::parse($data->created_at)->format('F j, Y');
         })
         ->addColumn('profit',function($data){
             if( $data->status == 'The customer has received the order'){

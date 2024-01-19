@@ -21,7 +21,7 @@
     </tr>
     <tr>
         <th>Purchase Date</th>
-        <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d F Y') }}</td>
+        <td>{{ \Carbon\Carbon::parse($item->created_at)->format('F j, Y') }}</td>
     </tr>
     <tr>
         <th>Status Product</th>
@@ -54,7 +54,7 @@
         </td>
     </tr>
     <tr>
-        <th>Tax <small>(Shipping Fee)</small></th>
+        <th>Tax & Shipping Cost</th>
         <td style="color: #e7ab3c;">${{ $item->tax }}</td>
     </tr>
     <tr>

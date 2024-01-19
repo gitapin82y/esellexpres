@@ -101,11 +101,11 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
 
         @if(session('failedConfirm'))
                 Swal.fire({
-                    title: "Saldo Tidak Cukup",
+                    title: "Insufficient Balance",
                     text: 'Your balance is not enough to make a profit on product sales',
                     icon: "warning",
                     confirmButtonColor: "#e7ab3c",
-                    confirmButtonText: "Isi Saldo Sekarang"
+                    confirmButtonText: "Top Up Balance Now"
                     }).then((result) => {
 
                     if (result.isConfirmed) {

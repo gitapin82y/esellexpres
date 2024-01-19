@@ -34,7 +34,7 @@ class DeliveryServicesController extends Controller
             '</div>';
         })
         ->addColumn('created_at',function($data){
-            return Carbon::parse($data->created_at)->format('d F Y');
+            return Carbon::parse($data->created_at)->format('F j, Y');
         })
         ->rawColumns(['action'])
         ->addIndexColumn()

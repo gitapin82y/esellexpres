@@ -141,7 +141,7 @@
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count">{{$orderProcess}}</span></div>
-                                            <div class="stat-heading">Orderan Process</div>
+                                            <div class="stat-heading">Orders Process</div>
                                         </div>
                                     </div>
                                 </div>
@@ -159,7 +159,7 @@
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count">{{$orderCompleted}}</span></div>
-                                            <div class="stat-heading">Orderan Completed</div>
+                                            <div class="stat-heading">Orders Completed</div>
                                         </div>
                                     </div>
                                 </div>

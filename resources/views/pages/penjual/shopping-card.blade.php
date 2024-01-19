@@ -116,10 +116,10 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                             <div class="proceed-checkout">
                                 <ul>
                                     <li class="subtotal mt-3">Subtotal <span id="total-price-shopping-cart">$0.00</span></li>
-                                    <li class="subtotal mt-3">Tax <small>(Shipping Fee)</small> <span id="taxAmount">0</span></li>
+                                    <li class="subtotal mt-3">Tax & Shipping Cost <span id="taxAmount">0</span></li>
                                     <li class="subtotal mt-3">Total Amount <span id="totalAmount">$0.00</span></li>
                                 </ul>
-                                <button type="submit" id="checkout-product" class="proceed-btn w-100">I ALREADY PAID</a>
+                                <button type="submit" id="checkout-product" class="proceed-btn w-100">MAKE PAYMENT</a>
                             </div>
                         </form>
 
@@ -396,7 +396,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
                     icon: "success",
                     confirmButtonColor: "#e7ab3c",
                     allowOutsideClick: false,
-                    confirmButtonText: "Lihat Status Produk"
+                    confirmButtonText: "View Product Status"
                     }).then((result) => {
                     if (result.isConfirmed) {
 

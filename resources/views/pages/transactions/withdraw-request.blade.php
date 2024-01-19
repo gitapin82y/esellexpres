@@ -82,7 +82,7 @@
                 <label for="number">
                     Number<span style="color:red;">*</span>
                 </label>
-                <input type="number" class="form-control form-control-sm inputtext" required id="number" name="number">
+                <input type="text" class="form-control form-control-sm inputtext" required id="number" name="number">
             </div>
             <label for="total">
                 Total Withdraw<span style="color:red;">*</span>

@@ -8,7 +8,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
-                            <span>{{$store}}</span>
+                            <span style="font-size: 28px;">{{$store}}</span>
                             <h1>WELCOME</h1>
                             <p>
                                 Welcome to {{ $store }}! Discover the beauty of the latest products and experience a pleasant online shopping experience. Explore our collection and enjoy special discounts.
@@ -22,7 +22,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
-                            <span>{{$store}}</span>
+                            <span style="font-size: 28px;">{{$store}}</span>
                             <h1>FIND YOUR STYLE</h1>
                             <p>
                                 Find the latest styles and exclusive deals from {{ $store }}! Get quality products at special prices, just for you.

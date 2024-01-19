@@ -33,7 +33,7 @@
                         @if (Auth::check())
                         <li class="mr-3 mr-md-2">
                             <a href="#" class="text-dark" data-toggle="modal" data-target="#topUpModal">
-                            <span style="color:#e7ab3c">${{Auth::user()->balance}}</span>
+                            <span style="color:#e7ab3c;font-size:24px;">${{Auth::user()->balance}}</span>
                                 <i class="icon_plus_alt2" style="color: #e7ab3c;"></i>
                             </a>
                         </li>
@@ -75,19 +75,23 @@
                                <a href="#">
                                    <i class="far fa-user"></i>
                                </a>
-                               <div class="cart-hover" style="width: 160px; margin-right:40px;margin-top:-25px;">
+                               <div class="cart-hover" style="width: 200px; margin-right:40px;margin-top:-25px;">
                                    <div class="select-items">
                                        {{-- <a href="/{{request()->segment(1)}}/profile" class="mb-3">Profile</a> --}}
                                        {{-- <br> --}}
                                        @if (Auth::user()->role != 3)
-                                       <a href="/dashboard" class="mb-3">Dashboard</a>
+                                       <a href="/dashboard" class="mb-2" style="font-size:17px;">Dashboard</a>
+                                        <br>
                                        @endif
-                                       <a href="/{{request()->segment(1)}}/status-produk" class="mb-3">My Order</a>
+                                       <a href="/{{request()->segment(1)}}/status-produk" class="mb-2" style="font-size:17px;">My Order</a>
                                        <br>
-                                       <a href="#" class="text-dark mb-3" data-toggle="modal" data-target="#topUpModal">Top Up</a>
-                                       <a href="#" class="text-dark mb-3" data-toggle="modal" data-target="#withdrawModal">Withdraw</a>
+                                       <a href="#" class="text-dark mb-2" data-toggle="modal" data-target="#topUpModal" style="font-size:17px;">Top Up</a>
                                        <br>
-                                       <a href="{{ url('/logout?next=' . url()->full()) }}" >Logout</a>
+                                       <a href="#" class="text-dark mb-2" data-toggle="modal" data-target="#withdrawModal" style="font-size:17px;">Withdraw</a>
+                                       <br>
+                                       <a href="/reset-password" class="mb-2" style="font-size:17px;">Reset Password</a>
+                                       <br>
+                                       <a href="{{ url('/logout?next=' . url()->full()) }}" style="font-size:17px;">Logout</a>
                                    </div>
                                </div>
                             </a>

@@ -38,6 +38,9 @@ Route::get('/login', [UserController::class,'viewLoginApp']);
 Route::post('/login', [UserController::class,'loginApp'])->name('loginApp');
 Route::get('/logout', [UserController::class,'logout'])->name('logoutApp');
 
+Route::get('/reset-password', [UserController::class,'viewResetPassword']);
+Route::post('/reset-password', [UserController::class,'storeResetPassword'])->name('reset-password');
+
 Route::get('/register', [UserController::class,'viewRegisterApp']);
 Route::post('/register', [UserController::class,'registerApp'])->name('registerApp');
 

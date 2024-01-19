@@ -89,7 +89,7 @@ class UserController extends Controller
             ]);
         }
         if($request->next){
-            return redirect('/login?next='.$request->next)->with('toast_success', 'Successfully registered!'. $request->next);
+            return redirect('/login?next='.$request->next)->with('toast_success', 'Successfully registered!');
         }else{
             return redirect()->route('loginApp')->with('toast_success', 'Successfully registered!');
         }
@@ -162,37 +162,34 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $User
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $User)
+    public function viewResetPassword(Request $request)
     {
-        //
+        return view('pages.reset-password');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $User
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, User $User)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $User
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $User)
+    public function storeResetPassword(Request $request)
     {
-        //
+        $request->validate([
+            'email' => 'required|email',
+            'old_password' => 'required',
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        $user = User::where('email',$request->email)->first();
+
+        if (!$user) {
+            return back()->withErrors(['Email not found']);
+        }
+
+        if (!Hash::check($request->old_password, $user->password)) {
+            return back()->withErrors(['The provided old password does not match your current password.']);
+        }
+
+        $user->update([
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect('/login')->with('success', 'Password has been reset successfully.');
     }
 }

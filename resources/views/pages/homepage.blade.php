@@ -53,6 +53,43 @@
                     max-height: 30px; 
                 }   
              }
+             
+             .namaClass {
+    text-decoration: none; /* Remove underline from the link */
+    position: relative;
+}
+.user-avatar{
+    width: 40px;
+}
+.namaClass:hover .cart-hover {
+    display: block;
+}
+
+.namaClass:active .cart-hover {
+    display: block; /* Keep the dropdown visible on click */
+
+}
+
+.cart-hover {
+
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 0 30px rgba(50, 50, 50, 0.068);
+    padding: 10px;
+    z-index: 1;
+    transition: display 1s ease; /* Add transition for a smooth effect */
+}
+.select-items a{
+    color: #212529;
+    text-decoration:none;
+}
+.select-items a:hover{
+    color: #f78104;
+    text-decoration:none;
+}
+
+
         </style>
     </head>
     <body id="page-top">
@@ -74,12 +111,35 @@
                         <li class="nav-item"><a class="nav-link me-lg-3" href="#product">Product</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-0" href="#contact">Contact Us</a></li>
                     </ul>
-                    @if(Auth::check() && Auth::user()->role == 3)
-                    <a href="/join-seller" class="btn btn-main rounded-pill px-4 py-2 mb-lg-0">
-                        <span class="d-flex align-items-center">
-                            <span class="small">Join As Seller</span>
-                        </span>
-                    </a>
+                    @if(Auth::check())
+                        <li class=" namaClass nav-link">
+                            <div class="mt-1"></div>
+                            <div class="nama d-inline" style="text-transform: capitalize;">
+                                {{ Auth::user()->name }}
+                            </div>
+                            &nbsp;
+                            <img class="user-avatar rounded-circle" src="{{asset('images/admin.jpg')}}" alt="User Avatar">
+                    
+                            {{-- dropdown --}}
+                            <div class="cart-hover" style="width: 160px; margin-right: 40px; margin-top: 0px;">
+                                <div class="select-items mb-2 ms-2">
+                                    @if (Auth::user()->role != 3)
+                                        <a href="/dashboard">Dashboard</a>
+                                        <br>
+                                    @endif
+                                    @if (Auth::user()->role == 3)
+                                    <a href="/join-seller">Join As Seller</a>
+                                    @endif
+                                    <div class="my-2"></div>
+                                    <a href="/reset-password">Reset Password</a>
+                                    <div class="my-2"></div>
+                                    <a href="{{ url('/logout')}}">Logout</a>
+                                </div>
+                            </div>
+                        </li>
+                    
+                    
+                    
                     @else
                     <a href="/login" class="btn btn-main rounded-pill px-4 py-2 mb-lg-0">
                         <span class="d-flex align-items-center">
@@ -225,8 +285,8 @@
                 <hr>
                     <h4 class="font-alt">Email</h4>
                     <p><i class="fa-solid fa-envelope"></i> {{ $user->email ?? 'cs@esellexpress.com' }}</p>
-                    <h4 class="font-alt">Telepone</h4>
-                    <p><i class="fa-solid fa-phone"></i> {{ $user->phone ?? '085281147618' }}</p>
+                    {{-- <h4 class="font-alt">Telepone</h4>
+                    <p><i class="fa-solid fa-phone"></i> {{ $user->phone ?? '085281147618' }}</p> --}}
                 </div>
                 <div class="col-12 col-md-9 ps-md-5 pt-4">
                     <form action="send-mail" method="POST">

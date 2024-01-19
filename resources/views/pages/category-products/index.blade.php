@@ -34,7 +34,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $category->products->count() }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($category->created_at)->format('d F Y') }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($category->created_at)->format('F j, Y') }}</td>
                                         <td>
                                             <a href="{{ route('category.edit', $category->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
                                             <form action="{{ route('category.destroy', $category->id) }}" class="d-inline" method="POST">

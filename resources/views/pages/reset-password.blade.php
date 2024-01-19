@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>nama store | Login</title>
+	<title>Reset Password Esellexpress</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	@php
+	use App\Models\Store;
+	$store = Store::whereHas('users', function ($query) {
+		$query->where('role', 1);
+	})->with('users')->first();
+	@endphp
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="{{asset('form/images/icons/favicon.ico')}}"/>
+	<link rel="icon" type="image/png" href="{{ optional($store)->logo ?? asset('images/logo.png') }}" style="width: 16px; height: 16px; object-fit: contain;"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{asset('form/vendor/bootstrap/css/bootstrap.min.css')}}">
 <!--===============================================================================================-->
@@ -36,22 +42,27 @@
 	
 	<div class="limiter">
 		<div class="container-login100">
+	
 			<div class="wrap-login100">
-				<form method="POST" class="login100-form validate-form">
+				<form action="{{ route('reset-password') }}" method="POST" class="login100-form validate-form">
 					@csrf
 					<div class="logo-form pb-5 text-center">
-						@php
-						use App\Models\Store;
-						$store = Store::whereHas('users', function ($query) {
-							$query->where('role', 1);
-						})->with('users')->first();
-					@endphp
-					<img src="{{ optional($store)->logo ?? asset('images/logo.png') }}" class="w-50" alt="logo">
-						
+						<a class="navbar-brand fw-bold" href="/"><img src="{{ optional($store)->logo ?? asset('images/logo.png') }}" style="width: 130px;" alt="Logo"></a>
 					</div>
+					
 					<span class="login100-form-title p-b-43">
-						Login to continue
+						Reset Password 
 					</span>
+
+					@if ($errors->any())
+					<div class="alert alert-danger">
+						<ul>
+							@foreach ($errors->all() as $error)
+								<li>{{ $error }}</li>
+							@endforeach
+						</ul>
+					</div>
+				@endif
 					
 					
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: name@gmail.com">
@@ -60,20 +71,31 @@
 						<span class="label-input100">Email</span>
 					</div>
 					
-					
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="pass">
+						<input class="input100" type="password" name="old_password">
 						<span class="focus-input100"></span>
-						<span class="label-input100">Password</span>
+						<span class="label-input100">Old Password</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<input class="input100" type="password" name="password">
+						<span class="focus-input100"></span>
+						<span class="label-input100">New Password</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<input class="input100" type="password" name="password_confirmation">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Confirm New Password</span>
 					</div>
 
 					<div class="flex-sb-m w-full p-t-3 p-b-32">
 						<div>
 							<p class="txt1 d-inline">
-								Don't have an account yet
+								Want to come in?
 							</p>
-							<a href="/{{session('namaStores').'/register'}}" class="txt1 text-warning">
-								 Register Now
+							<a href="/register{{ isset($_GET['next']) ? '?next=' . $_GET['next'] : '' }}" class="txt1 text-warning">
+								Login Now
 							</a>
 						</div>
 					</div>
@@ -81,7 +103,7 @@
 
 					<div class="container-login100-form-btn">
 						<button type="submit" class="login100-form-btn">
-							Login
+							Reset Password Now
 						</button>
 					</div>
 				</form>
@@ -92,9 +114,7 @@
 		</div>
 	</div>
 	
-	
-
-	
+	@include('sweetalert::alert')
 	
 <!--===============================================================================================-->
 	<script src="{{asset('form/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
