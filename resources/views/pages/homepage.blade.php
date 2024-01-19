@@ -118,7 +118,7 @@
                                 {{ Auth::user()->name }}
                             </div>
                             &nbsp;
-                            <img class="user-avatar rounded-circle" src="{{asset('images/admin.jpg')}}" alt="User Avatar">
+                            <img class="user-avatar rounded-circle" src="{{asset('images/avatar.png')}}" alt="User Avatar">
                     
                             {{-- dropdown --}}
                             <div class="cart-hover" style="width: 160px; margin-right: 40px; margin-top: 0px;">
