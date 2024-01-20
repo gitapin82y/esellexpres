@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\NotifMail;
 use Illuminate\Support\Facades\Mail;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class UserController extends Controller
@@ -35,18 +36,17 @@ class UserController extends Controller
         $user = User::where('email',$request->email)->first();
         if($user && Hash::check($request->password, $user->password)){
                 Auth::login($user);
-
+                Alert::toast('Login successful', 'success');
                 if($user->role == 3){
                     if($request->next){
-                        return redirect($request->next)->with('toast_success', 'Login successful');
+                        return redirect($request->next);
                     }
-                    return redirect('/')->with('toast_success', 'Login successful');
+                    return redirect('/');
                 }
                 if($request->next){
-                    return redirect($request->next)->with('toast_success', 'Login successful');
+                    return redirect($request->next);
                 }
-
-                return redirect()->route('dashboard')->with('toast_success', 'Login successful');
+                return redirect()->route('dashboard');
         }
         return back()->with('toast_error', 'User has not register');
         

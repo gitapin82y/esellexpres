@@ -30,7 +30,7 @@
                                 <tbody>
                                     @forelse ($galleries as $gallery)
                                         <tr>
-                                        <td>{{ $gallery->product->id }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>
                                             <a href="{{ url($gallery->photo) }}" data-lightbox="roadtrip">
                                                 <img src="{{ url($gallery->photo) }}" alt="product-gallery"></td>

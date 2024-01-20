@@ -163,8 +163,10 @@
                             <p class="mb-4">
                                 Welcome to {{ $store->name ?? 'esellexpress' }}! Get profits of up to tens of percent per product from sales of the products we have provided, login and register as a seller now!
                             </p>
-                            @if(Auth::check() && Auth::user()->role == 3)
-                            <a href="/join-seller" class="primary-btn text-decoration-none py-3 px-4 mt-1">Join As Seller</a>
+                            @if(Auth::check())
+                            @if (Auth::user()->role == 3)
+                            <a href="/join-seller" class="primary-btn text-decoration-none py-3 px-4 mt-3">Join As Seller</a>
+                            @endif
                             @else
                             <a href="/login" class="primary-btn text-decoration-none py-3 px-4 mt-1">Login Now</a>
                             @endif
@@ -181,8 +183,10 @@
                             <p class="mb-4">
                                 Join {{ $store->name ?? 'esellexpress' }}  for an online shop business from the products we provide, login and register as a seller now!
                             </p>
-                            @if(Auth::check() && Auth::user()->role == 3)
-                            <a href="/join-seller" class="primary-btn text-decoration-none py-3 px-4 mt-1">Join As Seller</a>
+                            @if(Auth::check())
+                            @if (Auth::user()->role == 3)
+                            <a href="/join-seller" class="primary-btn text-decoration-none py-3 px-4 mt-3">Join As Seller</a>
+                            @endif
                             @else
                             <a href="/login" class="primary-btn text-decoration-none py-3 px-4 mt-1">Login Now</a>
                             @endif
@@ -259,8 +263,10 @@
                     <div class="col-12 col-md-7">
                         <h2 class="display-4 lh-1 mb-4">We provide various kinds of products in various categories</h2>
                         <p class="lead fw-normal text-muted mb-2">You register as a seller and take the products provided to resellers online and promote your shop or product to get a profit from total sales, login and register as a seller!!</p>
-                        @if(Auth::check() && Auth::user()->role == 3)
+                        @if(Auth::check())
+                        @if (Auth::user()->role == 3)
                         <a href="/join-seller" class="primary-btn text-decoration-none py-3 px-4 mt-4">Join As Seller</a>
+                        @endif
                         @else
                         <a href="/login" class="primary-btn text-decoration-none py-3 px-4 mt-4">Login Now</a>
                         @endif

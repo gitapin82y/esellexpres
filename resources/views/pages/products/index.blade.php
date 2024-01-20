@@ -32,7 +32,9 @@
                                         <td>Quantity</td>
                                         <td>Views</td>
                                         <td>Sold</td>
+                                        @if (Request::is('products'))
                                         <td style="width: 150px;">Action</td>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,7 +66,13 @@
                                                 </form>
                                             </td>
                                         @else
-                                            @if (Request::is('products-list'))
+
+                                        @if (Request::is('products'))
+                                        <td>
+                                            <a href="{{ url('products/'.$product->id.'/take') }}" class="btn btn-success btn-sm"><i class="fa fa-check"></i> Take</a>
+                                        </td>
+                                        @endif
+                                            {{-- @if (Request::is('products-list'))
                                                 <td>
                                                 <a href="{{ url('products/'.$product->id.'/delete') }}" class="btn btn-warning btn-sm"><i class="fa fa-times"></i> Return</a>
                                                 </td>
@@ -72,7 +80,8 @@
                                             <td>
                                                 <a href="{{ url('products/'.$product->id.'/take') }}" class="btn btn-success btn-sm"><i class="fa fa-check"></i> Take</a>
                                             </td>
-                                            @endif
+                                            @endif --}}
+
                                         @endif
 
                                         @empty

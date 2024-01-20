@@ -1,5 +1,14 @@
 @extends('layouts.penjual')
 @section('title', 'All Product')
+
+@push('before_style')
+   <style>
+    .pi-pic img {
+    min-width: 100%;
+    max-height: 350px !important;
+    }
+    </style> 
+@endpush
 @section('content')
 
 <!-- Women Banner Section Begin -->

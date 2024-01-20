@@ -433,10 +433,35 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
 
         },
         error: function (error) {
+            Swal.fire({
+                    title: "Sorry, there are transaction problems",
+                    text: "There may be products at checkout that have been deleted by the owner, please checkout again",
+                    icon: "warning",
+                    confirmButtonColor: "#e7ab3c",
+                    allowOutsideClick: false,
+                    confirmButtonText: "Shopping again"
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Mengambil data produk dari local storage (contoh: cart)
+                        var cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+                        // Gantilah ini dengan cara Anda mendapatkan ID pengguna saat ini
+                        const userId = getUserId();
+                        const slugStore = getSlugStore();
+
+                        // Hapus item dari localStorage berdasarkan user ID
+                        cart = cart.filter(item => item.userId !== userId || item.slugStore !== slugStore);
+                        localStorage.setItem('cart', JSON.stringify(cart));
+
+                        var nameStore = "{{ request()->segment(1) }}";
+                        var halamanTujuan = "/" + nameStore + "/all-products";
+                        window.location.href = halamanTujuan;
+                    }
+                });
             // Tampilkan alert jika gagal
             console.log('Error:', error);
-            alert('An error occurred while making a transaction.');
-            // Lakukan tindakan lain jika diperlukan
+            // alert('An error occurred while making a transaction.');
+            // // Lakukan tindakan lain jika diperlukan
         }
     });
 

@@ -24,9 +24,8 @@ class MailController extends Controller
     
             return back()->with('success', 'Email berhasil dikirim');
         } catch (\Exception $e) {
-            // Log the exception if needed
-            \Log::error('Error sending email: ' . $e->getMessage());
-            return response()->json(['error'=>$e->getMessage()]);
+            // cek error
+            // return response()->json(['error'=>$e->getMessage()]);
     
             // Return back with an alert for failure
             return back()->with('info', 'Email gagal dikirim. Silakan coba lagi.');

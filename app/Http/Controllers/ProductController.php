@@ -65,7 +65,8 @@ class ProductController extends Controller
             'store_id'=> $storeid,
             'product_id'=> $product->id,
         ]);
-        return back()->with('toast_success', 'Taken successfully');
+        Alert::toast('Taken successfully', 'success');
+        return back();
     }
 
     public function deleteProduct($id){
@@ -75,7 +76,8 @@ class ProductController extends Controller
             'store_id'=> $storeid,
             'product_id'=> $product->id,
         ])->delete();
-        return back()->with('toast_success', 'Return successfully');
+        Alert::toast('Return successfully', 'success');
+        return back();
     }
 
     /**
@@ -119,8 +121,9 @@ class ProductController extends Controller
             'photo' => $photo,
             'is_default' => 1,
         ]);
+        Alert::toast('Add product successfully', 'success');
 
-        return redirect()->route('products.index')->with('toast_success', 'Add product successfully');
+        return redirect()->route('products.index');
 
         // return redirect()->route('products.index');
     }
@@ -184,8 +187,8 @@ class ProductController extends Controller
                 'photo' => $photo,
             ]);    
         }
-
-        return redirect()->route('products.index')->with('toast_success', 'Edit product successfully');
+        Alert::toast('Edit product successfully', 'success');
+        return redirect()->route('products.index');
     }
 
     /**
@@ -207,8 +210,9 @@ class ProductController extends Controller
 
         ProductGallery::where('products_id',$id)->delete();
         Product::destroy($id);
-        return back()->with('toast_success', 'Deleted product successfully');
-        // return redirect()->route('products.index');
+
+        Alert::toast('Deleted product successfully', 'success');
+        return back();
     }
 
     public function gallery($id)
