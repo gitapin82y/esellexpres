@@ -57,10 +57,10 @@
     
                                                 <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
                                                 
-                                                <form action="{{ route('products.destroy', $product->id) }}" class="d-inline" method="POST">
+                                                <form action="{{ route('products.destroy', $product->id) }}" class="d-inline" method="POST" id="deleteForm">
                                                     @method('delete')
                                                     @csrf
-                                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $product->id }}')"><i class="fa fa-trash"></i></button>
                                                 </form>
                                             </td>
                                         @else
@@ -103,3 +103,24 @@
     </div>
 
 @endsection
+
+@push('after-script')
+<script>
+    function confirmDelete(productId) {
+        Swal.fire({
+            title: 'Are you sure you want to delete?',
+            text: 'If you delete this product, all transactions related to this product will be lost!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('deleteForm').action = "{{ url('products') }}/" + productId;
+                document.getElementById('deleteForm').submit();
+            }
+        });
+    }
+</script>
+@endpush

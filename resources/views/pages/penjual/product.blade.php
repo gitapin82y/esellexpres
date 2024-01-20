@@ -82,9 +82,11 @@
                                         !!this.value && Math.abs(this.value) >= 1 ? Math.abs(this.value) : 1" value="1" style="width: 70px; padding-left:14px;">
 
                                         @if (Auth::check())
-                                            <a onclick="addToCart({{ $detail->products->id }},{{ $detail->products->quantity }}, '{{ $detail->products->name }}', '{{ $basePrice }}','{{ $promoPrice }}','{{ $detail->stores->slug }}','{{$detail->products->price * $detail->stores->profit / 100}}', '{{ $detail->products->galleries[0]->photo }}')" href="javascript:void(0)" class="primary-btn pd-cart mx-1 py-3 px-4">Add To Card</a>
+                                            <a onclick="addToCart('addToCart',{{ $detail->products->id }},{{ $detail->products->quantity }}, '{{ $detail->products->name }}', '{{ $basePrice }}','{{ $promoPrice }}','{{ $detail->stores->slug }}','{{$detail->products->price * $detail->stores->profit / 100}}', '{{ $detail->products->galleries[0]->photo }}')" href="javascript:void(0)" class="primary-btn pd-cart mx-1 py-3 px-4">Add To Card</a>
+                                            <a onclick="addToCart('buy',{{ $detail->products->id }},{{ $detail->products->quantity }}, '{{ $detail->products->name }}', '{{ $basePrice }}','{{ $promoPrice }}','{{ $detail->stores->slug }}','{{$detail->products->price * $detail->stores->profit / 100}}', '{{ $detail->products->galleries[0]->photo }}')" href="javascript:void(0)" class="primary-btn pd-cart py-3 px-4">Buy</a>
                                         @else
                                         <a href="{{ url('/logout?next=' . url()->full()) }}" class="primary-btn pd-cart mx-1 py-3 px-4">Add To Cart</a>
+                                        <a href="{{ url('/logout?next=' . url()->full()) }}" class="primary-btn pd-cart mx-1 py-3 px-4">Buy</a>
                                         @endif
                                     </div>
                                 </div>

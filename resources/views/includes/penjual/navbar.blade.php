@@ -73,7 +73,7 @@
                                 {{Auth::user()->name}}
                                 &nbsp;
                                <a href="#">
-                                   <i class="far fa-user"></i>
+                                   <img class=" rounded-circle" src="{{asset('images/avatar.png')}}" width="30px;" alt="User Avatar">
                                </a>
                                <div class="cart-hover" style="width: 200px; margin-right:40px;margin-top:-25px;">
                                    <div class="select-items">

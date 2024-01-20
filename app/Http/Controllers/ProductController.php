@@ -11,6 +11,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\ProductRequest;
 use App\Models\Store;
 use App\Models\Category;
+use App\Models\TransactionDetail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
@@ -119,7 +120,9 @@ class ProductController extends Controller
             'is_default' => 1,
         ]);
 
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')->with('toast_success', 'Add product successfully');
+
+        // return redirect()->route('products.index');
     }
 
     /**
@@ -182,7 +185,7 @@ class ProductController extends Controller
             ]);    
         }
 
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')->with('toast_success', 'Edit product successfully');
     }
 
     /**
@@ -193,9 +196,19 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        Product::destroy($id);
+        $product = Product::findOrFail($id);
+        ProductStore::where([
+            'product_id'=> $product->id,
+        ])->delete();
+
+        TransactionDetail::where([
+            'product_id'=> $product->id,
+        ])->delete();
+
         ProductGallery::where('products_id',$id)->delete();
-        return redirect()->route('products.index');
+        Product::destroy($id);
+        return back()->with('toast_success', 'Deleted product successfully');
+        // return redirect()->route('products.index');
     }
 
     public function gallery($id)

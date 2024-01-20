@@ -18,7 +18,10 @@
                     <div class="header-left">
                         @if (Auth::check() && Auth::user()->role == 1)
                         <div class="dropdown">
+
+                                
                             Balance <small>(Total Income)</small> : 
+
                             <span style="color:#e7ab3c; font-size:20px;">${{Auth::user()->balance}}</span>
                         </div>
                         @else

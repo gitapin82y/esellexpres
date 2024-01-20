@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-function addToCart(productId,stock,productName,productPrice,promoPrice,slugStore,profit, productImage) {
+function addToCart(type,productId,stock,productName,productPrice,promoPrice,slugStore,profit, productImage) {
     
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     
@@ -116,15 +116,19 @@ function addToCart(productId,stock,productName,productPrice,promoPrice,slugStore
     //     });
     // }
 
-    Swal.fire({
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateData();
+
+    if(type == 'buy'){
+        window.location.href = '/'+slugStore+'/shopping-cart';
+    }else{
+        Swal.fire({
         title: "Product Added Successfully",
         text: "Check Shopping Cart and Checkout Now",
         icon: "success",
         confirmButtonColor: "#e7ab3c",
-    })
-
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateData();
+        });
+    }
 }
 
 function removeFromCart(productId) {
