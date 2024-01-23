@@ -25,9 +25,19 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header bg-white py-4 mb-4">
-                        <div class="col-md-6 text-left col-12">
+                        <div class="row">
+
+                        <div class="col-md-4 text-left col-12">
                             <h4>Seller List</h4>
                         </div>
+                        <div class="col-md-8 text-right col-12">
+                            <h5 class="d-inline mr-2">Filter Status</h5>
+                            <button class="btn btn-warning btn-sm mr-2" id="showAllStatusBtn">All</button>
+                            <button class="btn btn-danger btn-sm mr-2" id="statusOffBtn">Status Off</button>
+                            <button class="btn btn-success btn-sm" id="statusOnBtn">Status On</button>
+                        </div>     
+                    </div>
+
                     </div>
 
                     <div class="card-body pb-5 pt-2 w-100">
@@ -45,6 +55,7 @@
                                         <th>Total Sales</th>
                                         <th>Percent Profit</th>
                                         <th>Address</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -151,6 +162,16 @@
                     data: 'address',
                     name: 'address',
                 },{
+                    data: 'stores.is_active',
+                    name: 'stores.is_active',
+                    render: function(data) {
+                        if(data == "ON"){
+                            return '<span class="text-success">'+data+'</span>'
+                        }else{
+                            return '<span class="text-danger">'+data+'</span>'
+                        }
+                    }
+                },{
                     data: 'list_produk',
                     name: 'list_produk',
                 },
@@ -168,8 +189,77 @@
             });
         });
 
-  
+        $('body').on('click', '.statusStore', function () {
+            var id = $(this).data('id');
+            var status = $(this).data('status');
+            console.log(status);
+            $.get('list-penjual/status?is_active='+status+'&id='+id, function (data) {
+                        table.ajax.reload();
 
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+
+                        Toast.fire({
+                            icon: 'success',
+                            title: data.success 
+                        });
+            });
+        });
+
+  
+ // Tambahkan event listener untuk tombol "Status Off"
+        $('#statusOffBtn').on('click', function () {
+            updateStatusFilter('OFF');
+        });
+
+        // Tambahkan event listener untuk tombol "Status On"
+        $('#statusOnBtn').on('click', function () {
+            updateStatusFilter('ON');
+        });
+
+          // Tambahkan event listener untuk tombol "Show All Status"
+          $('#showAllStatusBtn').on('click', function () {
+            showAllStatus();
+        });
+
+
+        function updateStatusFilter(status) {
+            // Set filter pada kolom "Status" sesuai dengan status yang diklik
+              table.column('stores.is_active:name').search(status).draw();
+
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 2000
+            });
+
+            Toast.fire({
+                icon: 'success',
+                title: 'Filtered by Status ' + status
+            });
+        }
+
+        function showAllStatus() {
+            // Hapus filter pada kolom "Status"
+            table.column('stores.is_active:name').search('').draw();
+
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 2000
+            });
+
+            Toast.fire({
+                icon: 'success',
+                title: 'Show All Status'
+            });
+        }
 
         // $('#simpan').click(function (e) {
             $('body').on('click', '#simpan', function (e) {

@@ -37,6 +37,14 @@
                             <img src="{{$stores->logo}}" width="150px" class="mb-2">
                             <h4>Visit Store <br> <a href="{{Request::root().'/'.$stores->slug}}" class="text-primary">{{Request::root().'/'.$stores->slug}}</a></h4>
                             @endif
+                            <hr>
+                            @if ($stores->status == "OFF")
+                            <h4>You can reactivate the store</h4> 
+                                <a href="javascript::void(0)" data-id="{{$stores->id}}" data-status="ON" class="statusStore btn btn-success mt-2">Request ON</a>
+                            @else
+                            <h4>You can deactivate the store</h4> 
+                            <a href="javascript::void(0)" data-id="{{$stores->id}}" data-status="OFF" class="statusStore btn btn-danger mt-2">Request OFF</a>
+                            @endif
                         </div>
                         <div class="col-12 col-lg-6">
                             <form action="{{route('stores.add')}}" method="POST" enctype="multipart/form-data">
@@ -51,7 +59,7 @@
                                         class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block">Save</button>
+                                    <button type="submit" class="btn btn-main btn-block mt-3">Save</button>
                                 </div>
                             </form>
                         </div>
@@ -64,3 +72,44 @@
     </section>
 </div>
 @endsection
+
+@push('after-script')
+    <script>
+         jQuery(document).ready(function ($) {
+        $('body').on('click', '.statusStore', function () {
+            var id = $(this).data('id');
+            var status = $(this).data('status');
+
+            Swal.fire({
+            title: 'Are you sure you want to make a request?',
+            text: 'This request requires an acc from the admin, if the admin acc you will get an email notification',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#f78104',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, apply now!'
+        }).then((result) => {
+
+            if (result.isConfirmed) {
+
+                $.get('stores/request?is_active='+status+'&store_id='+id, function (data) {
+
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Request sent successfully'
+                        });
+                });
+            }
+        });
+           
+    });
+});
+    </script>
+@endpush

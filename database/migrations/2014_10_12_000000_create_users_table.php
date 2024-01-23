@@ -17,12 +17,13 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->integer('role')->comment('1=reseler,2=seller,3=user'); 
             $table->decimal('balance', 12, 2)->default(0.00);
+            $table->string('avatar')->default('images/avatar.png');
             $table->string('name');
             $table->string('phone');
             $table->text('address')->nullable();
             $table->boolean('register')->nullable()->comment('register seller');
             $table->text('type_card')->nullable();
-            $table->text('id_card')->nullable();
+            $table->text('photo_card')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

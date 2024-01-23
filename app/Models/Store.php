@@ -15,9 +15,15 @@ class Store extends Model
         return $this->belongsTo(User::class,'user_id','id');
     }
 
+
     public function transactions()
     {
         return $this->hasMany(Transaction::class,'store_id');
+    }
+
+    public function request()
+    {
+        return $this->hasMany(RequestStore::class,'store_id');
     }
 
 

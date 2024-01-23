@@ -72,8 +72,8 @@
                             <a href="/{{request()->segment(1)}}/status-produk">
                                 {{Auth::user()->name}}
                                 &nbsp;
-                               <a href="#">
-                                   <img class=" rounded-circle" src="{{asset('images/avatar.png')}}" width="30px;" alt="User Avatar">
+                               <a href="#" style="margin-bottom: -12px">
+                                   <img class="user-avatar" src="{{asset(Auth::user()->avatar)}}" alt="User Avatar">
                                </a>
                                <div class="cart-hover" style="width: 200px; margin-right:40px;margin-top:-25px;">
                                    <div class="select-items">
@@ -83,6 +83,7 @@
                                        <a href="/dashboard" class="mb-2" style="font-size:17px;">Dashboard</a>
                                         <br>
                                        @endif
+                                       <a href="/{{request()->segment(1)}}/information-profile" class="mb-2" style="font-size:17px;">Profile</a><br>
                                        <a href="/{{request()->segment(1)}}/status-produk" class="mb-2" style="font-size:17px;">My Order</a>
                                        <br>
                                        <a href="#" class="text-dark mb-2" data-toggle="modal" data-target="#topUpModal" style="font-size:17px;">Top Up</a>

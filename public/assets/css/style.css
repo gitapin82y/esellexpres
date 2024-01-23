@@ -1416,8 +1416,12 @@ header .form-inline .search-form.close {
 }
 .user-area .user-avatar {
     float: right;
+    border-radius: 50%;
     width: 40px;
+    height: 40px;
+    object-fit: cover;
 }
+
 .user-area .user-info .name {
     color: #8c8c8c;
     font-size: 14px;

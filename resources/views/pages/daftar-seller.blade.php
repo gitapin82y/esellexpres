@@ -147,6 +147,20 @@
 .file-upload .file-select.file-select-disabled:hover{cursor:default;display:block;border: 2px solid #dce4ec;color: #34495e;cursor:pointer;height:40px;line-height:40px;margin-top:5px;text-align:left;background:#FFFFFF;overflow:hidden;position:relative;}
 .file-upload .file-select.file-select-disabled:hover .file-select-button{background:#dce4ec;color:#666666;padding:0 10px;display:inline-block;height:40px;line-height:40px;}
 .file-upload .file-select.file-select-disabled:hover .file-select-name{line-height:40px;display:inline-block;padding:0 10px;}
+
+.file-upload1{display:block;text-align:center;font-family: Helvetica, Arial, sans-serif;font-size: 12px;}
+.file-upload1 .file-select{display:block;border: 2px solid #dce4ec;color: #34495e;cursor:pointer;height:40px;line-height:40px;text-align:left;background:#FFFFFF;overflow:hidden;position:relative;}
+.file-upload1 .file-select .file-select-button{background:#dce4ec;padding:0 10px;display:inline-block;height:40px;line-height:40px;}
+.file-upload1 .file-select .file-select-name{line-height:40px;display:inline-block;padding:0 10px;}
+.file-upload1 .file-select:hover{border-color:#34495e;transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;-webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;}
+.file-upload1 .file-select:hover .file-select-button{background:#34495e;color:#FFFFFF;transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;-webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;}
+.file-upload1.active .file-select{border-color:#3fa46a;transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;-webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;}
+.file-upload1.active .file-select .file-select-button{background:#3fa46a;color:#FFFFFF;transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;-webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;}
+.file-upload1 .file-select input[type=file]{z-index:100;cursor:pointer;position:absolute;height:100%;width:100%;top:0;left:0;opacity:0;filter:alpha(opacity=0);}
+.file-upload1 .file-select.file-select-disabled{opacity:0.65;}
+.file-upload1 .file-select.file-select-disabled:hover{cursor:default;display:block;border: 2px solid #dce4ec;color: #34495e;cursor:pointer;height:40px;line-height:40px;margin-top:5px;text-align:left;background:#FFFFFF;overflow:hidden;position:relative;}
+.file-upload1 .file-select.file-select-disabled:hover .file-select-button{background:#dce4ec;color:#666666;padding:0 10px;display:inline-block;height:40px;line-height:40px;}
+.file-upload1 .file-select.file-select-disabled:hover .file-select-name{line-height:40px;display:inline-block;padding:0 10px;}
 </style>
 </head>
 <body style="background-color: #666666;">
@@ -185,7 +199,7 @@
 						<div class="file-select">
 						  <div class="file-select-button" id="fileName">Upload Logo Store</div>
 						  <div class="file-select-name" id="noFile">No file chosen...</div> 
-						  <input type="file" name="logoStore" id="chooseFile" required>
+						  <input type="file" name="logoStore" id="chooseFile" accept="image/*" required>
 						</div>
 					</div>
 
@@ -197,10 +211,12 @@
 						<option value="Driver License">Driver License</option>
 					</select> </div>
 
-					<div class="wrap-input100 validate-input" data-validate="ID Number is required">
-						<input class="input100" type="number" value="{{ old('id_card') }}" name="id_card" required>
-						<span class="focus-input100"></span>
-						<span class="label-input100">ID Number</span>
+					<div class="file-upload1">
+						<div class="file-select">
+						  <div class="file-select-button" id="fileName1">Upload Card</div>
+						  <div class="file-select-name" id="noFile1">No file chosen...</div> 
+						  <input type="file" name="photo_card" id="chooseFile1" accept="image/*" required>
+						</div>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Address is required">
@@ -271,6 +287,19 @@ $('#chooseFile').bind('change', function () {
   else {
     $(".file-upload").addClass('active');
     $("#noFile").text(filename.replace("C:\\fakepath\\", "")); 
+  }
+});
+
+//input file
+$('#chooseFile1').bind('change', function () {
+  var filename = $("#chooseFile1").val();
+  if (/^\s*$/.test(filename)) {
+    $(".file-upload1").removeClass('active');
+    $("#noFile1").text("No file chosen..."); 
+  }
+  else {
+    $(".file-upload1").addClass('active');
+    $("#noFile1").text(filename.replace("C:\\fakepath\\", "")); 
   }
 });
 

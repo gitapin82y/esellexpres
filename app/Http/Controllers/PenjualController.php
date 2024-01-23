@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 
-use Yajra\Datatables\Datatables;
 use App\Models\User;
-use App\Models\Transaction;
 use App\Mail\NotifMail;
+use App\Models\Transaction;
+use App\Models\BadgeSidebar;
+use App\Models\RequestStore;
+use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\BadgeSidebarController;
 
 class PenjualController extends Controller
 {
@@ -20,6 +25,7 @@ class PenjualController extends Controller
      */
     public function index()
     {
+        BadgeSidebar::where('user_id',Auth::user()->id)->where('name', 'Seller Candidates')->delete();
         return view('pages.reseller.kandidat-penjual');
     }
 
@@ -35,7 +41,7 @@ class PenjualController extends Controller
             '</div>';
         })
         ->addColumn('card',function($data){
-                return $data->type_card . ' - ' . $data->id_card;
+            return $data->type_card . '<br><a href="'.$data->photo_card.'" data-lightbox="roadtrip"><img src="'.$data->photo_card.'" width="90px"></a>';
         })
         ->rawColumns(['card','action'])
         ->addIndexColumn()
@@ -78,13 +84,22 @@ class PenjualController extends Controller
 
       return Datatables::of($data)
         ->addColumn('list_produk', function ($data) {
-            return  '<div class="btn-group">' .
-            '<a href="'.$data->stores->slug.'" target="_blank" class="detailProduk mx-1 btn btn-info btn-lg">Visit Store</a>'.
-            '<a href="javascript::void(0)" data-id="'.$data->id.'" class="profitSeller btn btn-primary btn-lg">Profit</a>'.
-            '</div>';
+            $acction =  '<div class="btn-group">' .
+            '<a href="'.$data->stores->slug.'" target="_blank" class="detailProduk mr-1 btn btn-info btn-lg">Visit Store</a>'.
+            '<a href="javascript::void(0)" data-id="'.$data->id.'" class="profitSeller btn btn-primary btn-lg mr-1">Profit</a>';
+
+            if($data->stores->is_active == "OFF"){
+                $acction .= '<a href="javascript::void(0)" data-id="'.$data->id.'" data-status="ON" class="statusStore btn btn-success btn-lg">ON</a>';
+            }else{
+                $acction .= '<a href="javascript::void(0)" data-id="'.$data->id.'" data-status="OFF" class="statusStore btn btn-danger btn-lg">OFF</a>';
+            }
+
+            $acction .='</div>';
+
+            return $acction;
         })
         ->addColumn('card',function($data){
-                return $data->type_card . ' - ' . $data->id_card;
+                return $data->type_card . '<br><a href="'.$data->photo_card.'" data-lightbox="roadtrip"><img src="'.$data->photo_card.'" width="90px"></a>';
         })
         ->addColumn('total_sales',function($data){
             $taken = Transaction::where('store_id', $data->stores->id)->where('is_confirmed', 'Y')
@@ -108,69 +123,71 @@ class PenjualController extends Controller
         return response()->json(['success' => 'Profit successfully saved']);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function updateStatus(Request $request){
+        $data = User::with('stores')->find($request->id);
+        $data->stores->is_active = $request->is_active;
+        $data->stores->save();
+        return response()->json(['success' => 'Store status updated successfully']);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function indexRequestPenjual()
     {
-        //
+        BadgeSidebar::where('user_id',Auth::user()->id)->where('name', 'Seller Request')->delete();
+        return view('pages.reseller.request-penjual');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function datatableRequestPenjual(){
+        $data = RequestStore::with('stores.users')->orderBy('created_at', 'desc')->get();
+      return Datatables::of($data)
+        ->addColumn('action', function ($data) {
+            $acction =  '<div class="btn-group">';
+
+            if($data->is_acc){
+                $acction .= '<a href="javascript::void(0)" class="statusStore btn btn-secondary mr-1 btn-lg disabled" >Success Acc</a>';
+            }else{
+                $acction .= '<a href="javascript::void(0)" data-id="'.$data->stores->users->id.'" data-status="'.$data->request.'" data-reqid="'.$data->id.'" class="statusStore btn btn-success mr-1 btn-lg">ACC Request</a>';
+            }
+
+            $acction .= '<a href="'.$data->stores->slug.'" target="_blank" class="detailProduk btn btn-info btn-lg">Visit Store</a>';
+
+            $acction .='</div>';
+
+            return $acction;
+        })
+        ->addColumn('created_at',function($data){
+            return Carbon::parse($data->created_at)->format('F j, Y');
+        })
+        ->rawColumns(['action'])
+        ->addIndexColumn()
+        ->make(true);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+
+    public function requestStatus(Request $request){
+        RequestStore::create([
+            'store_id' => $request->store_id, 
+            'request' => $request->is_active, 
+        ]);
+
+        BadgeSidebarController::send('Seller Request');
+
+        return response()->json(['success' => 'Request sent successfully']);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    public function requestupdateStatus(Request $request){
+        $data = User::with('stores')->find($request->id);
+        $data->stores->is_active = $request->is_active;
+        $data->stores->save();
+        
+        $reqStore = RequestStore::find($request->reqid);
+        $reqStore->is_acc = 1;
+        $reqStore->save();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $details = [
+            'title' => 'Store status request has been accepted',
+            'body' => 'Congratulations. The shop status request has been received, now your shop is '.$request->is_active.'. To request off/on again, please access your shop dashboard',
+        ];
+        Mail::to($data->email)->send(new NotifMail($details));
+        return response()->json(['success' => 'Store status request has been accepted']);
     }
 }

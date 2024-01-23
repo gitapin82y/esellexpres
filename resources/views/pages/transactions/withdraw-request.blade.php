@@ -129,14 +129,14 @@
             },
             scrollX: true,
             "order": [
-                [0, "desc"]
+                [0, "asc"]
             ],
             ajax: {
                 url: '{{route("getwithdraw")}}',
             },
             columns: [{
-                    data: 'id',
-                    name: 'id',
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
                 },{
                     data: 'bank_account',
                     name: 'bank_account',

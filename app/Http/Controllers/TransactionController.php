@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transaction;
-use App\Models\TransactionDetail;
-use App\Models\Product;
-use App\Models\ShippingFee;
-use App\Models\Store;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Url;
 use DB;
 use App\Models\User;
-use Yajra\Datatables\Datatables;
-use Illuminate\Support\Carbon;
+use App\Models\Store;
 use App\Mail\NotifMail;
+use App\Models\Product;
+use App\Models\ShippingFee;
+use App\Models\Transaction;
+use App\Models\BadgeSidebar;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Yajra\Datatables\Datatables;
+use App\Models\TransactionDetail;
+use Illuminate\Support\Facades\Url;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\BadgeSidebarController;
 
 
 class TransactionController extends Controller
@@ -27,6 +29,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
+        BadgeSidebar::where('user_id',Auth::user()->id)->where('name', 'Incoming Orders')->delete();
         if(Auth::user()->role == 1){
             return view('pages.transactions.incoming-orders');
         }else{
@@ -125,6 +128,9 @@ class TransactionController extends Controller
                 'body' => 'Congratulations, there is an incoming order with transaction number '.$transaction->uuid.', confirm now',
                 'url' => 'esellexpress.com/login?next=https://esellexpress.com/transaction'
             ];
+
+            BadgeSidebarController::send('Incoming Orders',$transaction->stores->users->id);
+            
             Mail::to($transaction->stores->users->email)->send(new NotifMail($details));
             
             return response()->json(['checkout' => true]);
@@ -190,6 +196,9 @@ class TransactionController extends Controller
 
             // Update the balance for the user with role_id == 1
             User::where('role', 1)->increment('balance', $transaction->transaction_total);
+
+
+            BadgeSidebarController::send('Incoming Orders');
             
             $notifOrderMasuk = true;
         }

@@ -24,5 +24,24 @@
             background-color:#ffa13d;
             color: white;
         }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 50%;
+            background-color: #ff0000; /* Warna background badge */
+            color: #fff; /* Warna teks badge */
+            font-size: 14px; /* Ukuran teks */
+            font-weight: bold; /* Ketebalan teks */
+            position: relative;
+        }
+
+        /* CSS untuk angka di dalam badge */
+        .badge span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
     </style>
     

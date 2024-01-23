@@ -28,6 +28,7 @@ https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/css/lightbox.min.css
 .line-through{
     text-decoration: line-through;
 }
+
 .text-main{
     color: #f78104;
 }
@@ -84,5 +85,33 @@ https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/css/lightbox.min.css
     .lb-nav{
     display: none !important;
 }
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.badge {
+    display: inline-block !important;
+    width: 20px;
+    height: 20px;
+    margin-top: 3px !important;
+    border-radius: 20px !important;
+    background-color: #fb3a3a; /* Warna background badge */
+    color: #fff; /* Warna teks badge */
+    font-size: 14px; /* Ukuran teks */
+    z-index: 999;
+    font-weight: bold; /* Ketebalan teks */
+    position: relative;
+    animation: blink 2s infinite; /* Menambahkan animasi kedip kedip (2 detik per kedipan) */
+    animation-delay: 2s; /* Menambahkan delay 2s sebelum animasi dimulai */
+}
+
+        /* CSS untuk angka di dalam badge */
+        .badge span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
 
 </style>

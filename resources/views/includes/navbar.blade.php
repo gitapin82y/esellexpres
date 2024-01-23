@@ -76,11 +76,12 @@
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{Auth::user()->name}} &nbsp;
-                            <img class="user-avatar rounded-circle" src="{{asset('images/avatar.png')}}" alt="User Avatar">
+                            <img class="user-avatar rounded-circle" src="{{asset(Auth::user()->avatar)}}" alt="User Avatar">
                         </a>
 
                         <div class="user-menu dropdown-menu">
                             {{-- <a class="nav-link" href="#"><i class="fa fa-user"></i>My Profile</a> --}}
+                            <a class="nav-link" href="/profile"><i class="fa fa-user"></i>Profile</a>
                             <a class="nav-link" href="/reset-password"><i class="fa fa-cog"></i>Reset Password</a>
                             <a class="nav-link" href="{{route('logoutApp')}}"><i class="fa fa-power-off"></i>Logout</a>
                         </div>

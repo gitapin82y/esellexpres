@@ -28,9 +28,15 @@
                             <div class="col-md-6 text-left col-12">
                                 <h4>Top Up Request</h4>
                             </div>
+                            <?php
+                            use App\Models\BadgeSidebar;
+                            $withdraw = BadgeSidebar::where('user_id',Auth::user()->id)->where('name', 'withdraw')->first();
+                            $withdrawTotal = $withdraw ? $withdraw->total : 0;
+                            ?>
                             <div class="col-md-6 text-left col-12 justify-content-end row">
                                 <a href="{{route('topup-request.index')}}" class="btn mr-2 {{Request::is('topup-request') ? 'btn-main' : 'btn-border' }}">Top Up Request</a>
-                                <a href="{{route('withdraw-request.index')}}" class="btn {{Request::is('withdraw-request') ? 'btn-main' : 'btn-border' }}">Withraw Request</a>
+                                <a href="{{route('withdraw-request.index')}}" class="btn {{Request::is('withdraw-request') ? 'btn-main' : 'btn-border' }}">Withraw Request </a>
+                                {!!$withdrawTotal > 0 ? '<div class="badge" style="top: -10px;margin-left:-10px;"><span>'.$withdrawTotal.'</span></div>' : ''!!}
                             </div>
                         </div>
                     </div>

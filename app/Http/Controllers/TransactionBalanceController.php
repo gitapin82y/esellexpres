@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TransactionBalance;
+use App\Mail\NotifMail;
+use App\Models\BadgeSidebar;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
-use Illuminate\Support\Facades\Auth;
-use App\Mail\NotifMail;
-use Illuminate\Support\Facades\Mail;
+use App\Models\TransactionBalance;
 use App\Jobs\SendTopupNotification;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\BadgeSidebarController;
 
 
 class TransactionBalanceController extends Controller
@@ -20,6 +22,7 @@ class TransactionBalanceController extends Controller
      */
     public function index()
     {
+        BadgeSidebar::where('user_id',Auth::user()->id)->where('name', 'topup')->delete();
         return view('pages.transactions.reseller.topup-request');
     }
 
@@ -108,6 +111,8 @@ class TransactionBalanceController extends Controller
             'url' => 'esellexpress.com/login?next=https://esellexpress.com/topup-request'
         ];
 
+        BadgeSidebarController::send('topup');
+
         Mail::to("cs@esellexpress.com")->send(new NotifMail($details));
 
         return back()->with('toast_success','Sent successfully, wait until the balance increases');
@@ -150,6 +155,8 @@ class TransactionBalanceController extends Controller
             'body' => Auth::user()->email.' make a request to withdraw a balance of $'.$request->total.' see more details on the Esellexpress website and acc to withdraw the balance',
         ];
 
+        BadgeSidebarController::send('withdraw');
+
         Mail::to("cs@esellexpress.com")->send(new NotifMail($details));
 
         return back()->with('toast_success','Sent Successfully, Wait a maximum of 1x24 hours');
@@ -159,6 +166,7 @@ class TransactionBalanceController extends Controller
     //  admin withdraw
     public function withdraw()
     {
+        BadgeSidebar::where('user_id',Auth::user()->id)->where('name', 'withdraw')->delete();
         return view('pages.transactions.reseller.withdraw-request');
     }
 

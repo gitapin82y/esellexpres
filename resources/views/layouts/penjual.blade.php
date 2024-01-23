@@ -26,6 +26,14 @@
     .select-items a:hover{
         color: #f78104 !important;
     }
+    .user-avatar {
+    float: right;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+    
     </style>
 </head>
 
@@ -52,6 +60,17 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
 
 document.addEventListener('DOMContentLoaded', function() {
     updateData();
+
+    @if($store && $store->is_active == 'OFF')
+        Swal.fire({
+            title: "Store is Inactive",
+            text: "Sorry, the store is currently inactive. You cannot perform certain actions.",
+            icon: "warning",
+            confirmButtonColor: "#e7ab3c",
+            allowOutsideClick: false,
+            showConfirmButton: false
+        });
+    @endif
 });
 
 

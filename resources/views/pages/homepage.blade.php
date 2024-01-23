@@ -58,9 +58,6 @@
     text-decoration: none; /* Remove underline from the link */
     position: relative;
 }
-.user-avatar{
-    width: 40px;
-}
 .namaClass:hover .cart-hover {
     display: block;
 }
@@ -88,6 +85,13 @@
     color: #f78104;
     text-decoration:none;
 }
+.user-avatar {
+    float: right;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
 
 
         </style>
@@ -112,13 +116,12 @@
                         <li class="nav-item"><a class="nav-link me-lg-0" href="#contact">Contact Us</a></li>
                     </ul>
                     @if(Auth::check())
-                        <li class=" namaClass nav-link">
-                            <div class="mt-1"></div>
-                            <div class="nama d-inline" style="text-transform: capitalize;">
+                        <li class=" namaClass nav-link d-flex">
+                            <div class="nama d-inline" style="text-transform: capitalize;padding-top:8px;">
                                 {{ Auth::user()->name }}
                             </div>
                             &nbsp;
-                            <img class="user-avatar rounded-circle" src="{{asset('images/avatar.png')}}" alt="User Avatar">
+                            <img class="user-avatar" src="{{asset(Auth::user()->avatar)}}" alt="User Avatar">
                     
                             {{-- dropdown --}}
                             <div class="cart-hover" style="width: 160px; margin-right: 40px; margin-top: 0px;">

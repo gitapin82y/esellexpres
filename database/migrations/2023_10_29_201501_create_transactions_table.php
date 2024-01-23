@@ -28,7 +28,7 @@ class CreateTransactionsTable extends Migration
             $table->decimal('transaction_total',12,2);
             $table->decimal('profit',12,2);
             $table->decimal('tax', 10, 2)->default(10.00);
-            $table->string('status')->default('Waiting process');
+            $table->string('status')->default('Waiting process')->comment('Waiting process, Process, The order is being prepared, The order is being packed, The order has been taken by the delivery service, The order is in the process of being sent to the sorting center, The order is in the delivery process, The order is being delivered to the destination address, The customer has received the order');
             $table->string('resi')->nullable();
             $table->timestamps();
         });

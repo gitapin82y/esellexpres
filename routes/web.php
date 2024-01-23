@@ -31,8 +31,6 @@ Route::get('/',function(){
     return view('pages.homepage');
 });
 Route::post('send-mail',[MailController::class,'sendMail']);
-Route::get('/join-seller', [UserController::class,'viewJoinSeller']);
-Route::post('/join-seller', [UserController::class,'joinSeller'])->name('joinSeller');
 
 Route::get('/login', [UserController::class,'viewLoginApp']);
 Route::post('/login', [UserController::class,'loginApp'])->name('loginApp');
@@ -43,6 +41,25 @@ Route::post('/reset-password', [UserController::class,'storeResetPassword'])->na
 
 Route::get('/register', [UserController::class,'viewRegisterApp']);
 Route::post('/register', [UserController::class,'registerApp'])->name('registerApp');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/join-seller', [UserController::class,'viewJoinSeller']);
+    Route::post('/join-seller', [UserController::class,'joinSeller'])->name('joinSeller');
+
+    Route::get('/profile', [UserController::class,'indexProfile']);
+    Route::post('/profile', [UserController::class,'updateProfile'])->name('updateProfile');
+
+
+    Route::resource('/transaction',TransactionController::class);
+Route::get('/getIncomingOrders', [TransactionController::class,'datatable'])->name('getIncomingOrders');
+Route::get('transactions/{id}/set-status',[TransactionController::class,'setStatus'])->name('transactions.status');
+
+Route::post('/topup-balance', [TransactionBalanceController::class,'storetopup']);
+Route::post('/withdraw-balance', [TransactionBalanceController::class,'storewithdraw']);
+
+Route::get('/{stores}/information-profile', [UserController::class,'indexProfileUser']);
+
+});
 
 // end user
 Route::group(['middleware' => ['resellerseller']], function () {
@@ -61,6 +78,9 @@ Route::get('products/{id}/gallery',[ProductController::class,'gallery'])->name('
 // reseller
 Route::group(['middleware' => ['reseller']], function () {
     
+Route::resource('users',UserController::class);
+Route::get('/getUsers', [UserController::class,'datatable'])->name('getUsers');
+
 Route::patch('shipping-fee/update', [ShippingFeeController::class, 'update'])->name('shipping-fee.update');
 
 Route::get('/topup-request', [TransactionBalanceController::class,'index'])->name('topup-request.index');
@@ -92,10 +112,17 @@ Route::get('/list-penjual', [PenjualController::class,'indexListPenjual'])->name
 Route::get('/getListpenjual', [PenjualController::class,'datatableListPenjual'])->name('getListPenjual');
 Route::get('/list-penjual/{id}/profit', [PenjualController::class,'editProfit']);
 Route::post('/list-penjual/profit', [PenjualController::class,'updateProfit']);
+Route::get('/list-penjual/status', [PenjualController::class,'updateStatus']);
+
+Route::get('/request-penjual', [PenjualController::class,'indexRequestPenjual'])->name('request-penjual.index');
+Route::get('/getRequestPenjual', [PenjualController::class,'datatableRequestPenjual'])->name('getRequestPenjual');
+Route::get('/request-penjual/status', [PenjualController::class,'requestupdateStatus']);
 });
 
 // seller
 Route::group(['middleware' => ['seller']], function () {
+    Route::get('/stores/request', [PenjualController::class,'requestStatus'])->name('stores.request');
+
     Route::get('/stores', [StoreController::class,'stores'])->name('stores.index');
     Route::post('/stores', [StoreController::class,'storesadd'])->name('stores.add');
 
@@ -106,14 +133,6 @@ Route::get('/getTopup', [TransactionBalanceController::class,'datatabletopup'])-
 Route::get('/withdraw-balance', [TransactionBalanceController::class,'indexwithdraw'])->name('withdraw-balance.index');
 Route::get('/getwithdraw', [TransactionBalanceController::class,'datatablewithdraw'])->name('getwithdraw');
 });
-
-Route::resource('/transaction',TransactionController::class);
-Route::get('/getIncomingOrders', [TransactionController::class,'datatable'])->name('getIncomingOrders');
-Route::get('transactions/{id}/set-status',[TransactionController::class,'setStatus'])->name('transactions.status');
-
-Route::post('/topup-balance', [TransactionBalanceController::class,'storetopup']);
-Route::post('/withdraw-balance', [TransactionBalanceController::class,'storewithdraw']);
-
 
 Route::get('{name}/status-produk', [TransactionController::class,'statusProduct']);
 Route::get('/{name}/shopping-cart',[TransactionController::class,'shoppingCart']);
