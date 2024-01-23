@@ -124,7 +124,7 @@
                             <img class="user-avatar" src="{{asset(Auth::user()->avatar)}}" alt="User Avatar">
                     
                             {{-- dropdown --}}
-                            <div class="cart-hover" style="width: 160px; margin-right: 40px; margin-top: 0px;">
+                            <div class="cart-hover" style="width: 160px; margin-right: 40px; margin-top: 40px;">
                                 <div class="select-items mb-2 ms-2">
                                     @if (Auth::user()->role != 3)
                                         <a href="/dashboard">Dashboard</a>
@@ -161,7 +161,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
-                            <span>{{ $store->name ?? 'esellexpress' }}</span>
+                            <span style="font-size: 28px;margin-bottom:10px;">{{ $store->name ?? 'esellexpress' }}</span>
                             <h1>WELCOME</h1>
                             <p class="mb-4">
                                 Welcome to {{ $store->name ?? 'esellexpress' }}! Get profits of up to tens of percent per product from sales of the products we have provided, login and register as a seller now!
@@ -181,7 +181,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
-                            <span>{{ $store->name ?? 'esellexpress' }}</span>
+                            <span style="font-size: 28px;margin-bottom:10px;">{{ $store->name ?? 'esellexpress' }}</span>
                             <h1>JOIN NOW</h1>
                             <p class="mb-4">
                                 Join {{ $store->name ?? 'esellexpress' }}  for an online shop business from the products we provide, login and register as a seller now!
