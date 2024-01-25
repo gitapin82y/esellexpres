@@ -42,8 +42,8 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Type Pembayaran</th>
-                                        <th>Number</th>
+                                        <th>Bank Account</th>
+                                        <th>Account Number</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -84,7 +84,7 @@
 
             <div class="form-group">
                 <label for="account_number">
-                    Number<span style="color:red;">*</span>
+                    Account Number<span style="color:red;">*</span>
                 </label>
                 <input type="text" class="form-control form-control-sm inputtext" id="account_number" name="account_number" required>
             </div>

@@ -108,7 +108,7 @@
                         if(data == 2){
                             return 'seller';
                         }else{
-                            return 'pembeli';
+                            return 'buyer';
                         }
                     }
                 },{
