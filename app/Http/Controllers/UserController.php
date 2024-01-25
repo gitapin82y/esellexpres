@@ -238,7 +238,7 @@ class UserController extends Controller
         $details = [
             'title' => 'Did you reset your password?',
             'body' => 'If you reset your password, please press the reset password confirmation button, but if you dont reset your password, please change your password for account security on the website www.esellexpress.com',
-            'url' => 'http://127.0.0.1:8000/confirmResetPassword?token='.$tokenEmail.'-'.$tokenPassword
+            'url' => 'esellexpress.com/confirmResetPassword?token='.$tokenEmail.'-'.$tokenPassword
         ];
         Mail::to($request->email)->send(new ConfirmMail($details));
     
