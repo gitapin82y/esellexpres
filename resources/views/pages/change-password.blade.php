@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login Esellexpress</title>
+	<title>Change Password</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	@php
@@ -44,14 +44,25 @@
 		<div class="container-login100">
 	
 			<div class="wrap-login100">
-				<form action="{{ route('loginApp',['next' => request('next')]) }}" method="POST" class="login100-form validate-form">
+				<form action="{{ route('change-password') }}" method="POST" class="login100-form validate-form">
 					@csrf
 					<div class="logo-form pb-5 text-center">
 						<a class="navbar-brand fw-bold" href="/"><img src="{{ optional($store)->logo ?? asset('images/logo.png') }}" style="width: 130px;" alt="Logo"></a>
 					</div>
+					
 					<span class="login100-form-title p-b-43">
-						Login 
+						Change Password 
 					</span>
+
+					@if ($errors->any())
+					<div class="alert alert-danger">
+						<ul>
+							@foreach ($errors->all() as $error)
+								<li>{{ $error }}</li>
+							@endforeach
+						</ul>
+					</div>
+				@endif
 					
 					
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: name@gmail.com">
@@ -60,22 +71,31 @@
 						<span class="label-input100">Email</span>
 					</div>
 					
-					<a href="/reset-password" class="txt1 pb-2 text-warning float-right">
-						Forgot Passsword?
-					</a>
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<input class="input100" type="password" name="old_password">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Old Password</span>
+					</div>
+
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<input class="input100" type="password" name="password">
 						<span class="focus-input100"></span>
-						<span class="label-input100">Password</span>
+						<span class="label-input100">New Password</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<input class="input100" type="password" name="password_confirmation">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Confirm New Password</span>
 					</div>
 
 					<div class="flex-sb-m w-full p-t-3 p-b-32">
 						<div>
 							<p class="txt1 d-inline">
-								Don't have an account yet
+								Want to come in?
 							</p>
 							<a href="/register{{ isset($_GET['next']) ? '?next=' . $_GET['next'] : '' }}" class="txt1 text-warning">
-								Register Now
+								Login Now
 							</a>
 						</div>
 					</div>
@@ -83,11 +103,10 @@
 
 					<div class="container-login100-form-btn">
 						<button type="submit" class="login100-form-btn">
-							Login
+							Change Password Now
 						</button>
 					</div>
 				</form>
-
 
 				<div class="login100-more" style="background-image: url('/form/images/bg-01.png');">
 				</div>

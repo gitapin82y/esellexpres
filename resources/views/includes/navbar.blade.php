@@ -83,6 +83,7 @@
                             {{-- <a class="nav-link" href="#"><i class="fa fa-user"></i>My Profile</a> --}}
                             <a class="nav-link" href="/profile"><i class="fa fa-user"></i>Profile</a>
                             <a class="nav-link" href="/reset-password"><i class="fa fa-cog"></i>Reset Password</a>
+                            <a class="nav-link" href="/change-password"><i class="fa fa-cog"></i>Change Password</a>
                             <a class="nav-link" href="{{route('logoutApp')}}"><i class="fa fa-power-off"></i>Logout</a>
                         </div>
                     </div>

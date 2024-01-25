@@ -7,12 +7,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NotifMail extends Mailable
+class ConfirmMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $details;
-  
+
     /**
      * Create a new message instance.
      *
@@ -22,6 +22,7 @@ class NotifMail extends Mailable
     {
         $this->details = $details;
     }
+
     /**
      * Build the message.
      *
@@ -29,7 +30,7 @@ class NotifMail extends Mailable
      */
     public function build()
     {
-        $mail = $this->view('emails.notif-mail')
+        $mail = $this->view('emails.confirm-mail')
         ->subject($this->details['title']);
         if (isset($this->details['reply'])) {
             $mail->replyTo($this->details['reply'], 'Esellexpress');

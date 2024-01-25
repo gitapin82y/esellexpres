@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\Mail\NotifMail;
+use App\Mail\ConfirmMail;
 use App\Models\Transaction;
 use App\Models\TransactionBalance;
 use Illuminate\Support\Facades\Mail;
@@ -176,13 +177,13 @@ class UserController extends Controller
         }
     }
 
-    public function viewResetPassword(Request $request)
+    public function viewChangePassword(Request $request)
     {
-        return view('pages.reset-password');
+        return view('pages.change-password');
     }
 
 
-    public function storeResetPassword(Request $request)
+    public function storeChangePassword(Request $request)
     {
         $request->validate([
             'email' => 'required|email',
@@ -207,6 +208,62 @@ class UserController extends Controller
     
         $user->update([
             'password' => encrypt($new_password_plain), // Menggunakan encrypt untuk menyimpan password baru
+        ]);
+    
+        return redirect('/login')->with('success', 'Password changed successfully');
+    }
+
+    public function viewResetPassword(Request $request)
+    {
+        return view('pages.reset-password');
+    }
+
+
+    public function storeResetPassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6|confirmed',
+        ]);
+    
+        $user = User::where('email', $request->email)->first();
+    
+        if (!$user) {
+            return back()->withErrors(['Email not found']);
+        }
+
+        $tokenEmail = encrypt($request->email);
+        $tokenPassword= encrypt($request->password);
+    
+        $details = [
+            'title' => 'Did you reset your password?',
+            'body' => 'If you reset your password, please press the reset password confirmation button, but if you dont reset your password, please change your password for account security on the website www.esellexpress.com',
+            'url' => 'http://127.0.0.1:8000/confirmResetPassword?token='.$tokenEmail.'-'.$tokenPassword
+        ];
+        Mail::to($request->email)->send(new ConfirmMail($details));
+    
+        return back()->with('success', 'We have sent a password reset confirmation via email '.$request->email);
+    }
+
+    public function confirmResetPassword(Request $request){
+
+        $hasilSplit = explode("-", $request->token);
+        // Mengambil elemen pertama (indeks 0)
+        $tokenEmail = $hasilSplit[0];
+
+        // Mengambil elemen kedua (indeks 1)
+        $tokenPassword = $hasilSplit[1];
+
+        $email = decrypt($tokenEmail);
+
+        $user = User::where('email', $email)->first();
+
+        if (!$user) {
+            return 'Email not found';
+        }
+
+        $user->update([
+            'password' => $tokenPassword, // Menggunakan encrypt untuk menyimpan password baru
         ]);
     
         return redirect('/login')->with('success', 'Password has been reset successfully.');

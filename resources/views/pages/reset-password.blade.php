@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Reset Password Esellexpress</title>
+	<title>Reset Password</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	@php
@@ -69,12 +69,6 @@
 						<input class="input100" type="text" name="email">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Email</span>
-					</div>
-					
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="old_password">
-						<span class="focus-input100"></span>
-						<span class="label-input100">Old Password</span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Password is required">

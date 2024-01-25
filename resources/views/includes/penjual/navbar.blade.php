@@ -75,7 +75,7 @@
                                <a href="#" style="margin-bottom: -12px">
                                    <img class="user-avatar" src="{{asset(Auth::user()->avatar)}}" alt="User Avatar">
                                </a>
-                               <div class="cart-hover" style="width: 200px; margin-right:40px;margin-top:-25px;">
+                               <div class="cart-hover" style="width: 250px; margin-right:40px;margin-top:-25px;">
                                    <div class="select-items">
                                        {{-- <a href="/{{request()->segment(1)}}/profile" class="mb-3">Profile</a> --}}
                                        {{-- <br> --}}
@@ -91,6 +91,8 @@
                                        <a href="#" class="text-dark mb-2" data-toggle="modal" data-target="#withdrawModal" style="font-size:17px;">Withdraw</a>
                                        <br>
                                        <a href="/reset-password" class="mb-2" style="font-size:17px;">Reset Password</a>
+                                       <br>
+                                       <a href="/change-password" class="mb-2" style="font-size:17px;">Change Password</a>
                                        <br>
                                        <a href="{{ url('/logout?next=' . url()->full()) }}" style="font-size:17px;">Logout</a>
                                    </div>

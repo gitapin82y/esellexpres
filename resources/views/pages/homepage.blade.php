@@ -134,7 +134,7 @@
                                     <a href="/join-seller">Join As Seller</a>
                                     @endif
                                     <div class="my-2"></div>
-                                    <a href="/reset-password">Reset Password</a>
+                                    <a href="/change-password">Reset Password</a>
                                     <div class="my-2"></div>
                                     <a href="{{ url('/logout')}}">Logout</a>
                                 </div>
