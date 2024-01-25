@@ -46,8 +46,8 @@
                                         <th>Phone</th>
                                         <th>Role</th>
                                         <th>Category</th>
-                                        <th>Bank Account</th>
-                                        <th>Number</th>
+                                        <th>Account Name</th>
+                                        <th>Account Number</th>
                                         <th>Total</th>
                                         <th>Message</th>
                                         <th>Status</th>
@@ -158,7 +158,7 @@
             var number = $(this).data('number');
                 Swal.fire({
                     title: 'Acc Withdraw Request?',
-                    html: 'Complete the withdrawal payment and the users balance will decrease, <br> transfer with a nominal value of '+nominal+' to: <br> <hr> Bank Account : <strong>'+bank_account+'</strong> <br> <div class="d-flex justify-content-center">Number : &nbsp;<p id="account_number" class="text-main">'+number+'</p> &nbsp; <a class="copy-button" style="cursor: pointer;" data-clipboard-target="#account_number"><small>(Click for copy)</small></a></div>',
+                    html: 'Complete the withdrawal payment and the users balance will decrease, <br> transfer with a nominal value of '+nominal+' to: <br> <hr> Account Name : <strong>'+bank_account+'</strong> <br> <div class="d-flex justify-content-center">Number : &nbsp;<p id="account_number" class="text-main">'+number+'</p> &nbsp; <a class="copy-button" style="cursor: pointer;" data-clipboard-target="#account_number"><small>(Click for copy)</small></a></div>',
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

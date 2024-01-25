@@ -41,8 +41,8 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Bank Account</th>
-                                        <th>Number</th>
+                                        <th>Account Name</th>
+                                        <th>Account Number</th>
                                         <th>Total</th>
                                         <th>Message</th>
                                         <th>Status</th>
@@ -74,13 +74,13 @@
                 @csrf
             <div class="form-group">
                 <label for="bank_account">
-                    Bank Account<span style="color:red;">*</span>
+                    Account Name<span style="color:red;">*</span>
                 </label>
                 <input type="text" class="form-control form-control-sm inputtext" required id="bank_account" name="bank_account">
             </div>
             <div class="form-group">
                 <label for="number">
-                    Number<span style="color:red;">*</span>
+                    Account Number<span style="color:red;">*</span>
                 </label>
                 <input type="text" class="form-control form-control-sm inputtext" required id="number" name="number">
             </div>
