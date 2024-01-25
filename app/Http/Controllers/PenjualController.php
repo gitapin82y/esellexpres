@@ -127,6 +127,13 @@ class PenjualController extends Controller
         $data = User::with('stores')->find($request->id);
         $data->stores->is_active = $request->is_active;
         $data->stores->save();
+
+        $details = [
+            'title' => 'Your shop status was changed by the admin',
+            'body' => 'Your shop status has now been changed by the admin to '.$request->is_active.'. If you want to activate or deactivate the shop again, please send an email to cs@esellexpress.com',
+        ];
+        Mail::to($data->email)->send(new NotifMail($details));
+
         return response()->json(['success' => 'Store status updated successfully']);
     }
 
