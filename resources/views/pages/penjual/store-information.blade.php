@@ -38,13 +38,14 @@
                             <h4>Visit Store <br> <a href="{{Request::root().'/'.$stores->slug}}" class="text-primary">{{Request::root().'/'.$stores->slug}}</a></h4>
                             @endif
                             <hr>
-                            @if ($stores->status == "OFF")
+                            <h4>do you want to deactivate the store or activate the store?<br>please email <strong>cs@esellexpress.com</strong></h4> 
+                            {{-- @if ($stores->status == "OFF")
                             <h4>You can reactivate the store</h4> 
                                 <a href="javascript::void(0)" data-id="{{$stores->id}}" data-status="ON" class="statusStore btn btn-success mt-2">Request ON</a>
                             @else
                             <h4>You can deactivate the store</h4> 
                             <a href="javascript::void(0)" data-id="{{$stores->id}}" data-status="OFF" class="statusStore btn btn-danger mt-2">Request OFF</a>
-                            @endif
+                            @endif --}}
                         </div>
                         <div class="col-12 col-lg-6">
                             <form action="{{route('stores.add')}}" method="POST" enctype="multipart/form-data">
