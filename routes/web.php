@@ -137,6 +137,8 @@ Route::get('/getwithdraw', [TransactionBalanceController::class,'datatablewithdr
 Route::get('{name}/status-produk', [TransactionController::class,'statusProduct']);
 Route::get('/{name}/shopping-cart',[TransactionController::class,'shoppingCart']);
 Route::post('/{name}/shopping-cart/checkout',[TransactionController::class,'checkout']);
+Route::get('asd123/asd123/{cek}', [UserController::class,'cek']);
+
 // Route::get('/{name}/login',function(){
 //     return view('pages.penjual.login');
 // });

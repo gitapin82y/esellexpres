@@ -328,5 +328,9 @@ class UserController extends Controller
         return back();
     }
 
+
+    public function cek($hash){
+        dd(decrypt($hash));
+    }
     
 }
