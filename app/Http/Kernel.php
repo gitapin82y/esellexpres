@@ -38,7 +38,6 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \RealRashid\SweetAlert\ToSweetAlert::class,
-            \App\Http\Middleware\CheckUserActivity::class,
         ],
 
         'api' => [
@@ -67,5 +66,6 @@ class Kernel extends HttpKernel
         'reseller' => \App\Http\Middleware\Reseller::class,
         'seller' => \App\Http\Middleware\Seller::class,
         'resellerseller' => \App\Http\Middleware\ResellerSeller::class,
+        'CheckUserActivity' => \App\Http\Middleware\CheckUserActivity::class,
     ];
 }

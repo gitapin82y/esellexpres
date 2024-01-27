@@ -14,6 +14,8 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ShippingFeeController;
+use App\Http\Middleware\CheckUserActivity;
+use App\Http\Middleware\ResellerSeller;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +48,7 @@ Route::post('/reset-password', [UserController::class,'storeResetPassword'])->na
 Route::get('/register', [UserController::class,'viewRegisterApp']);
 Route::post('/register', [UserController::class,'registerApp'])->name('registerApp');
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth', 'CheckUserActivity']], function () {
     Route::get('/join-seller', [UserController::class,'viewJoinSeller']);
     Route::post('/join-seller', [UserController::class,'joinSeller'])->name('joinSeller');
 
@@ -66,7 +68,7 @@ Route::get('/{stores}/information-profile', [UserController::class,'indexProfile
 });
 
 // end user
-Route::group(['middleware' => ['resellerseller']], function () {
+Route::group(['middleware' => ['resellerseller', 'CheckUserActivity']], function () {
 // reseller
 Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
 Route::resource('category',CategoryController::class);
@@ -80,7 +82,7 @@ Route::get('products/{id}/gallery',[ProductController::class,'gallery'])->name('
 });
 
 // reseller
-Route::group(['middleware' => ['reseller']], function () {
+Route::group(['middleware' => ['reseller', 'CheckUserActivity']], function () {
     
 Route::resource('users',UserController::class);
 Route::get('/getUsers', [UserController::class,'datatable'])->name('getUsers');
@@ -121,10 +123,12 @@ Route::get('/list-penjual/status', [PenjualController::class,'updateStatus']);
 Route::get('/request-penjual', [PenjualController::class,'indexRequestPenjual'])->name('request-penjual.index');
 Route::get('/getRequestPenjual', [PenjualController::class,'datatableRequestPenjual'])->name('getRequestPenjual');
 Route::get('/request-penjual/status', [PenjualController::class,'requestupdateStatus']);
+
+Route::get('/logout-all-users', [UserController::class,'logoutAllUsers'])->name('logoutAllUsers');
 });
 
 // seller
-Route::group(['middleware' => ['seller']], function () {
+Route::group(['middleware' => ['seller', 'CheckUserActivity']], function () {
     Route::get('/stores/request', [PenjualController::class,'requestStatus'])->name('stores.request');
 
     Route::get('/stores', [StoreController::class,'stores'])->name('stores.index');
@@ -138,9 +142,9 @@ Route::get('/withdraw-balance', [TransactionBalanceController::class,'indexwithd
 Route::get('/getwithdraw', [TransactionBalanceController::class,'datatablewithdraw'])->name('getwithdraw');
 });
 
-Route::get('{name}/status-produk', [TransactionController::class,'statusProduct']);
-Route::get('/{name}/shopping-cart',[TransactionController::class,'shoppingCart']);
-Route::post('/{name}/shopping-cart/checkout',[TransactionController::class,'checkout']);
+Route::get('{name}/status-produk', [TransactionController::class,'statusProduct'])->middleware('CheckUserActivity');;
+Route::get('/{name}/shopping-cart',[TransactionController::class,'shoppingCart'])->middleware('CheckUserActivity');;
+Route::post('/{name}/shopping-cart/checkout',[TransactionController::class,'checkout'])->middleware('CheckUserActivity');;
 Route::get('asd123/asd123/{cek}', [UserController::class,'cek']);
 
 // Route::get('/{name}/login',function(){

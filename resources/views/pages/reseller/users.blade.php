@@ -28,6 +28,9 @@
                                 <div class="col-md-6 text-left col-12 align-self-center">
                                     <h4>All Users</h4>
                                 </div>
+                                <div class="col-md-6 text-right col-12 align-self-center">
+                                    <a href="{{ route('logoutAllUsers') }}" class="btn btn-main">Logout All User</a>
+                                </div>
                             </div>
                         </div>
 

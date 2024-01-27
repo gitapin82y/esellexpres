@@ -41,6 +41,7 @@ class UserController extends Controller
 
         if ($user && decrypt($user->password) == $request->password) {
             Auth::login($user);
+            $user->update(['last_activity' => now()]);
             Alert::toast('Login successful', 'success');
 
             if ($user->role == 3) {
@@ -175,6 +176,19 @@ class UserController extends Controller
         }else{
             return redirect('/login');
         }
+    }
+
+    public function logoutAllUsers()
+    {
+        // Mendapatkan semua user
+        $users = User::where('role','!=',1)->get();
+    
+        foreach ($users as $user) {
+            // Menghapus last_activity pada model User
+            $user->update(['last_activity' => null]);
+        }
+        Alert::toast('All users have been logged out.', 'success');
+        return back();
     }
 
     public function viewChangePassword(Request $request)

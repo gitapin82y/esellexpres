@@ -19,6 +19,11 @@ class CheckUserActivity
         if (auth()->check()) {
             $user = auth()->user();
             $lastActivity = $user->last_activity;
+
+            if ($lastActivity === null) {
+                auth()->logout();
+                return redirect('/login')->with('status', 'You have been automatically logged out.');
+            }
     
             if ($lastActivity && now()->diffInDays($lastActivity) >= 2) {
                 auth()->logout();
