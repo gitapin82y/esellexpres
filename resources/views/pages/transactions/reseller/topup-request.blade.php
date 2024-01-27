@@ -25,7 +25,7 @@
                 <div class="card">
                     <div class="card-header bg-white py-4 mb-4">
                         <div class="row col-12">
-                            <div class="col-md-6 text-left col-12">
+                            <div class="col-md-6 text-left col-12 align-self-center">
                                 <h4>Top Up Request</h4>
                             </div>
                             <?php
