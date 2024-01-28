@@ -41,7 +41,7 @@
                                         <th>Card</th>
                                         <th>Name Store</th>
                                         <th>Logo Store</th>
-                                        <th>Address</th>
+                                        {{-- <th>Address</th> --}}
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -106,9 +106,6 @@
                         return '<a href="'+data+'" data-lightbox="roadtrip"><img src="'+data+'" width="90px"></a>'
                     }
 
-                },{
-                    data: 'address',
-                    name: 'address',
                 },{
                     data: 'action',
                     name: 'action',

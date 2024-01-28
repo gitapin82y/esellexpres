@@ -219,11 +219,11 @@
 						</div>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Address is required">
+					{{-- <div class="wrap-input100 validate-input" data-validate="Address is required">
 						<input class="input100" type="text" value="{{ old('address') }}" name="address" required>
 						<span class="focus-input100"></span>
 						<span class="label-input100">Address</span>
-					</div>
+					</div> --}}
 
 					<div class="flex-sb-m w-full p-t-3 p-b-32">
 						<div>

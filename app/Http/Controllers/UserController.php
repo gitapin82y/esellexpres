@@ -71,6 +71,7 @@ class UserController extends Controller
         $request->validate([
             'email' => 'unique:users',
             'password' => 'min:6',
+            'gender' => 'required',
         ]);
 
         if ($request->password != $request->confirm_password) {
@@ -85,6 +86,10 @@ class UserController extends Controller
                 'role' => 1,
                 'phone' => $request['phone'],
                 'email' => $request['email'],
+                'born' => $request['born'],
+                'gender' => $request['gender'],
+                'country' => $request['country'],
+                'address' => $request['address'],
                 'password' => encrypt($password_plain),
             ]);
         } else {
@@ -93,6 +98,10 @@ class UserController extends Controller
                 'role' => 3,
                 'phone' => $request['phone'],
                 'email' => $request['email'],
+                'born' => $request['born'],
+                'gender' => $request['gender'],
+                'country' => $request['country'],
+                'address' => $request['address'],
                 'password' => encrypt($password_plain),
             ]);
         }
@@ -132,7 +141,7 @@ class UserController extends Controller
             'register' => 1,
             'type_card' => $request->type_card,
             'photo_card' => $photo_card,
-            'address' => $request->address,
+            // 'address' => $address,
         ]);
 
         if ($request->hasFile('logoStore')) {
@@ -331,6 +340,9 @@ class UserController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'balance' => $request->balance,
+            'born' => $request->born,
+            'gender' => $request->gender,
+            'country' => $request->country,
             'password' => encrypt($request->password),
             'address' => $request->address,
         ]);
@@ -392,6 +404,9 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
+            'born' => $request->born,
+            'gender' => $request->gender,
+            'country' => $request->country,
             'address' => $request->address,
         ]);
 

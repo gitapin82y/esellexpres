@@ -112,8 +112,11 @@ $store = Store::whereHas('users', function ($query) {
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
-    color: #444;
-    line-height: 28px
+    color: #7a7a7a;
+    line-height: 28px;
+}
+input[type="date" i]{
+	color: #999999;
 }
 
 .select2-container--default .select2-selection--single,
@@ -193,6 +196,32 @@ $store = Store::whereHas('users', function ($query) {
 						<input class="input100" type="email" name="email">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Email</span>
+					</div>
+
+
+
+					<div class="form-group mt-3 validate-input" data-validate="Born is required"> 
+						<input class="form-control bg-transparent input100" style="width: 100%;height:60px;" type="date" name="born">
+					</input> </div>
+
+
+					<div class="form-group mt-3 validate-input" data-validate="Gender is required"> 
+						<select class="form-control select2 select2-hidden-accessible" style="width: 100%;" name="gender" tabindex="-1" aria-hidden="true">
+						<option disabled selected value="">Gender</option>
+						<option value="Man">Man</option>
+						<option value="Woman">Woman</option>
+					</select> </div>
+
+					<div class="wrap-input100 validate-input" data-validate="Country is required">
+						<input class="input100" type="text" name="country">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Country</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Address is required">
+						<input class="input100" type="text" name="address">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Address</span>
 					</div>
 					
 					<div class="wrap-input100 validate-input" data-validate="Password is required">

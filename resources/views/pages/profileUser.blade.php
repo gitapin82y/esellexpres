@@ -103,6 +103,36 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
+
+                        <div class="form-group">
+                            <label for="born" class="form-control-label">Born<span class="text-danger">*</span></label>
+                            <input type="date" id="born" name="born" value="{{ old('born') ? old('born') : $users->born }}"
+                                   class="form-control @error('born') is-invalid @enderror">
+                            @error('born')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="gender" class="form-control-label">Gender<span class="text-danger">*</span></label>
+                            <select id="gender" name="gender" class="form-control @error('gender') is-invalid @enderror">
+                                <option value="Man" {{ $users->gender === 'Man' ? 'selected' : '' }}>Man</option>
+                                <option value="Woman" {{ $users->gender === 'Woman' ? 'selected' : '' }}>Woman</option>
+                            </select>
+                            @error('gender')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="country" class="form-control-label">Country<span class="text-danger">*</span></label>
+                            <input type="text" id="country" name="country" value="{{ old('country') ? old('country') : $users->country }}"
+                                   class="form-control @error('country') is-invalid @enderror">
+                            @error('country')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        
     
                         <div class="form-group">
                             <label for="address" class="form-control-label">Address<span class="text-danger">*</span></label>
@@ -129,31 +159,3 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
 
 @endsection
 
-@push('before_script');
-<script>
-    jQuery(document).ready(function($) {
-  $('#mymodal').on('show.bs.modal',function(e){
-      var button = $(e.relatedTarget);
-      var modal = $(this);
-      modal.find('.modal-body').load(button.data('remote'));
-      modal.find('.modal-title').html(button.data('title'));
-  });
-  });
-</script>
-
-<div class="modal" id="mymodal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <i class="fa fa-spinner fa-spin"></i>
-      </div>
-    </div>
-  </div>
-</div>
-@endpush

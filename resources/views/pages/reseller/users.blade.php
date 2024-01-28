@@ -45,6 +45,9 @@
                                             <th>Email</th>
                                             <th>Phone</th>
                                             <th>Balance</th>
+                                            <th>Born</th> <!-- New heading -->
+                                            <th>Gender</th>  <!-- New heading -->
+                                            <th>Country</th> <!-- New heading -->
                                             <th>Password</th>
                                             <th>Address</th>
                                             <th>Action</th>
@@ -94,7 +97,21 @@
                             <input type="text" id="balance" name="balance" placeholder="0.00" oninput="handleInput(this)"
                                 class="form-control">
                         </div>
-
+                        <div class="form-group">
+                            <label for="born">Born</label>
+                            <input type="date" class="form-control form-control-sm inputtext" id="born" name="born" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select class="form-control form-control-sm inputtext" id="gender" name="gender" required>
+                                <option value="Man">Man</option>
+                                <option value="Woman">Woman</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <input type="text" class="form-control form-control-sm inputtext" id="country" name="country" required>
+                        </div>
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="text" class="form-control form-control-sm inputtext" id="password" name="password">
@@ -143,6 +160,9 @@
                             return '$'+data;
                         },
                     },
+                    { data: 'born', name: 'born' },
+                    { data: 'gender', name: 'gender' },
+                    { data: 'country', name: 'country' },
                     { data: 'password', name: 'password'},
                     { data: 'address', name: 'address' },
                     { data: 'action', name: 'action' },
@@ -161,6 +181,9 @@
                     $('#email').val(data.data.email);
                     $('#phone').val(data.data.phone);
                     $('#balance').val(data.data.balance);
+                    $('#born').val(data.data.born);
+                    $('#gender').val(data.data.gender);
+                    $('#country').val(data.data.country);
                     $('#password').val(data.data.password);
                     $('#address').val(data.data.address);
                 });
