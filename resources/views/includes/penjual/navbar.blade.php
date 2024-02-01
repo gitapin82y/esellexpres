@@ -199,18 +199,19 @@
                     </div>
                 <input type="text" class="form-control h-auto form-control-sm inputtext" id="total" name="total" placeholder="0.00" oninput="handleInput(this)" required>
             </div>
-            {{-- <div class="form-group">
-                <label for="proof">
-                    Proof<span style="color:red;">*</span>
-                </label>
-                <input type="file" class="form-control form-control-sm inputtext" id="proof" name="proof" required>
-            </div> --}}
             <div class="form-group">
                 <label for="message">
                     Message
                 </label>
                 <input type="text" class="form-control form-control-sm inputtext" id="message" name="message">
             </div>
+            <div class="form-group">
+                <label for="password">
+                    Confirm Password<span style="color:red;">*</span>
+                </label>
+                <input type="password" class="form-control form-control-sm inputtext" required id="password" name="password">
+            </div>
+
             <button class="btn btn-main w-100" id="simpan" type="submit">Send Request</button>
 
          </form>

@@ -140,6 +140,12 @@ class TransactionBalanceController extends Controller
             return back()->with('toast_error','Your balance is not enough');
         }
 
+        $password = decrypt(Auth::user()->password);
+
+        if($request->password != $password){
+            return back()->with('toast_error','Confirm your password is incorrect');
+        }
+
         TransactionBalance::create([
             'user_id' => Auth::user()->id,
             'total' => $request->total,
