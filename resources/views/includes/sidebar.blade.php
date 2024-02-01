@@ -37,6 +37,15 @@
                     <a href="{{route('users.index')}}"> <i class="menu-icon fa fa-user"></i>All Users</a>
                 </li>
 
+                <li class="menu-title">Transaction</li><!-- /.menu-title -->
+                <li class="{{Request::is('transaction') ? 'active' : '' }}">
+                    <a href="{{route('transaction.index')}}"> <i class="menu-icon fa fa-cart-plus"></i>Incoming Orders{!! $incomingOrders && $incomingOrders->total > 0 ? '<div class="badge"><span>' . $incomingOrders->total . '</span></div>' : '' !!}</a>
+                    
+                    </li>
+                <li class="{{Request::is('topup-request') ? 'active' : '' }}">
+                <a href="{{route('topup-request.index')}}"> <i class="menu-icon fa fa-money"></i>Balance Request{!! $balanceRequest > 0 ? '<div class="badge"><span>' . $balanceRequest . '</span></div>' : '' !!}</a>
+                </li>
+
                 <li class="menu-title">Product</li><!-- /.menu-title -->
                 <li class="{{Request::is('products') || Request::is('products/*') ? 'active' : '' }}">
                     <a href="{{route('products.index')}}"> <i class="menu-icon fa fa-shopping-cart"></i>Product List</a>
@@ -57,19 +66,7 @@
                 <a href="{{route('list-penjual.index')}}"> <i class="menu-icon fa fa-users"></i>Seller List
                 </a>
                 </li>
-                {{-- <li class="{{Request::is('request-penjual') ? 'active' : '' }}">
-                    <a href="{{route('request-penjual.index')}}"> <i class="menu-icon fa fa-send"></i>Seller Request{!! $sellerRequest && $sellerRequest->total > 0 ? '<div class="badge"><span>' . $sellerRequest->total . '</span></div>' : '' !!}</a>
-                    
-                    </li> --}}
-                <li class="menu-title">Transaction</li><!-- /.menu-title -->
-                <li class="{{Request::is('transaction') ? 'active' : '' }}">
-                    <a href="{{route('transaction.index')}}"> <i class="menu-icon fa fa-cart-plus"></i>Incoming Orders{!! $incomingOrders && $incomingOrders->total > 0 ? '<div class="badge"><span>' . $incomingOrders->total . '</span></div>' : '' !!}</a>
-                    
-                    </li>
-                <li class="{{Request::is('topup-request') ? 'active' : '' }}">
-                <a href="{{route('topup-request.index')}}"> <i class="menu-icon fa fa-money"></i>Balance Request{!! $balanceRequest > 0 ? '<div class="badge"><span>' . $balanceRequest . '</span></div>' : '' !!}</a>
-                
-                </li>
+         
             
                 @endif
                 

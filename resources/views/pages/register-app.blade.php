@@ -135,7 +135,11 @@ input[type="date" i]{
     right: 1px;
     width: 20px
 }
-
+input[type="date"]:before {
+        content: "Birthday"; 
+        color: #555;
+        padding: 0 5px;
+    }
 /****** CODE ******/
 
 .file-upload{display:block;text-align:center;font-family: Helvetica, Arial, sans-serif;font-size: 12px;}
@@ -201,7 +205,7 @@ input[type="date" i]{
 
 
 					<div class="form-group mt-3 validate-input" data-validate="Born is required"> 
-						<input class="form-control bg-transparent input100" style="width: 100%;height:60px;" type="date" name="born">
+						<input class="form-control bg-transparent input100"  onfocus="this.showPicker()" style="width: 100%;height:60px;" type="date" name="born">
 					</input> </div>
 
 
