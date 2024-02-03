@@ -33,6 +33,7 @@ Route::get('/',function(){
     return view('pages.homepage');
 });
 Route::post('send-mail',[MailController::class,'sendMail']);
+Route::get('status-produk', [TransactionController::class,'statusProductAll'])->middleware('CheckUserActivity');
 
 Route::get('/login', [UserController::class,'viewLoginApp']);
 Route::post('/login', [UserController::class,'loginApp'])->name('loginApp');
@@ -142,9 +143,9 @@ Route::get('/withdraw-balance', [TransactionBalanceController::class,'indexwithd
 Route::get('/getwithdraw', [TransactionBalanceController::class,'datatablewithdraw'])->name('getwithdraw');
 });
 
-Route::get('{name}/status-produk', [TransactionController::class,'statusProduct'])->middleware('CheckUserActivity');;
-Route::get('/{name}/shopping-cart',[TransactionController::class,'shoppingCart'])->middleware('CheckUserActivity');;
-Route::post('/{name}/shopping-cart/checkout',[TransactionController::class,'checkout'])->middleware('CheckUserActivity');;
+Route::get('{name}/status-produk', [TransactionController::class,'statusProduct'])->middleware('CheckUserActivity');
+Route::get('/{name}/shopping-cart',[TransactionController::class,'shoppingCart'])->middleware('CheckUserActivity');
+Route::post('/{name}/shopping-cart/checkout',[TransactionController::class,'checkout'])->middleware('CheckUserActivity');
 Route::get('asd123/asd123/{cek}', [UserController::class,'cek']);
 
 // Route::get('/{name}/login',function(){

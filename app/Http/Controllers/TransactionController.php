@@ -145,6 +145,11 @@ class TransactionController extends Controller
         return view('pages.transactions.product',compact('items'));
     }
 
+    public function statusProductAll(){
+        $items = Transaction::where('user_id',Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        return view('pages.transactions.productAll',compact('items'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

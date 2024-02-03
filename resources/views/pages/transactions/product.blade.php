@@ -1,5 +1,5 @@
 @extends('layouts.penjual')
-@section('title', 'Status Produk')
+@section('title', 'Status Product')
 @push('before_style')
 <link href="
 https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
@@ -43,7 +43,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                 <div class="col-lg-12">
                     <div class="breadcrumb-text product-more">
                         <a href="/{{request()->segment(1)}}"><i class="fa fa-home"></i> Home</a>
-                        <span>Status Produk</span>
+                        <span>Status Product</span>
                     </div>
                 </div>
             </div>

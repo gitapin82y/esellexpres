@@ -66,6 +66,9 @@
     display: block; /* Keep the dropdown visible on click */
 
 }
+td {
+    vertical-align: middle !important;
+}
 
 .cart-hover {
 
@@ -156,132 +159,84 @@
             </div>
         </nav>
         <!-- Mashead header-->
-            <!-- Hero Section Begin -->
-    <section class="hero-section mt-n2 pb-0" id="home">
-        <div class="hero-items owl-carousel">
-            <div class="single-hero-items set-bg" data-setbg="{{asset('penjual/img/hero-1.jpg')}}">
+        <div class="container mt-5 pt-5">
+            <div class="breacrumb-section">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <span style="font-size: 28px;margin-bottom:10px;">{{ $store->name ?? 'esellexpress' }}</span>
-                            <h1>WELCOME</h1>
-                            <p class="mb-4">
-                                Welcome to {{ $store->name ?? 'esellexpress' }}! Get profits of up to tens of percent per product from sales of the products we have provided, login and register as a seller now!
-                            </p>
-                            @if(Auth::check())
-                            @if (Auth::user()->role == 3)
-                            <a href="/join-seller" class="primary-btn text-decoration-none py-3 px-4 mt-3">Join As Seller</a>
-                            @endif
-                            @else
-                            <a href="/login" class="primary-btn text-decoration-none py-3 px-4 mt-1">Login Now</a>
-                            @endif
+                    <div class="row pt-3">
+                        <div class="col-lg-12">
+                            <div class="breadcrumb-text product-more">
+                                <a href="/" style="text-decoration: none;color:#e79934;"><i class="fa fa-home"></i> Home</a>
+                                <span>Status Product</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="single-hero-items set-bg" data-setbg="{{asset('penjual/img/hero-2.jpg')}}">
-                <div class="container">
+            <div class="row pt-5">
+                <div class="col-lg-12">
                     <div class="row">
-                        <div class="col-lg-5">
-                            <span style="font-size: 28px;margin-bottom:10px;">{{ $store->name ?? 'esellexpress' }}</span>
-                            <h1>JOIN NOW</h1>
-                            <p class="mb-4">
-                                Join {{ $store->name ?? 'esellexpress' }}  for an online shop business from the products we provide, login and register as a seller now!
-                            </p>
-                            @if(Auth::check())
-                            @if (Auth::user()->role == 3)
-                            <a href="/join-seller" class="primary-btn text-decoration-none py-3 px-4 mt-3">Join As Seller</a>
-                            @endif
-                            @else
-                            <a href="/login" class="primary-btn text-decoration-none py-3 px-4 mt-1">Login Now</a>
-                            @endif
+                        <div class="col-lg-12">
+                            <div class="cart-table">
+                            <div class="table-responsive">
+                                <table id="shoppingCardTable" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 130px;">Store</th>
+                                            <th style="width: 130px;">Transaction ID</th>
+                                            <th style="width: 110px;">Total Product</th>
+                                            <th style="width: 110px;">Total Payment</th>
+                                            <th style="width: 150px;">Purchase Date</th>
+                                            <th style="width: 130px;">Status Product</th>
+                                            <th style="width: 130px;">Detail Product</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($items as $item)
+                                            <tr>
+                                                <td>
+                                                    <a href="{{ url($item->stores->name) }}" style="color: #e7ab3c;"> {{$item->stores->name}}</a>
+                                                </td>
+                                                <td>
+                                                    {{$item->uuid}}
+                                                </td>
+                                                <td>
+                                                    {{$item->total_quantity}}
+                                                </td>
+                                                <td style="color: #e7ab3c;font-weight:200;">
+                                                  <b>${{$item->profit}}</b> 
+                                                </td>
+                                                <td>
+                                                    {{ \Carbon\Carbon::parse($item->created_at)->format('F j, Y') }}
+                                                </td>
+                                                <td style="font-weight:bold;@if($item->status == 'The customer has received the order') color: #59d587; @else color: #e7ab3c; @endif">
+                                                    {{$item->status}}
+                                                </td>
+                                                <td>
+                                                    @if ($item->status == 'The order is being delivered to the destination address')
+                                                    <a href="{{ route('transactions.status', ['id' => $item->id, 'status' => 'The customer has received the order']) }}" class="btn btn-success my-1">
+                                                        <i class="fa fa-check"></i>
+                                                        receive orders
+                                                    </a>
+                                                    @endif
+                                                    <a href="#mymodal" data-remote="{{ route('transaction.show',$item->id) }}" data-toggle="modal" data-target="#mymodal" data-title="Detail Transaksi <b>{{ $item->uuid }}</b>" class="btn btn-main my-1"><i class="fa fa-eye"></i> View Detail</a>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                        <td>
+                                            <td colspan="4" class="text-center">Product Purchase Transaction is Empty</td>
+                                        </td>
+                                         
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <section id="benefit">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="row text-center">
-                    <h3 class="display-6 lh-1 mb-5">Benefits of joining us</h3>
-                </div>
-                        <div class="row col-12">
-                            <div class="col-md-3">
-                                <!-- Feature item-->
-                                <div class="text-center">
-                                    <i class="bi-phone icon-feature text-gradient d-block mb-3"></i>
-                                    <h3 class="font-alt">Flexible Use</h3>
-                                    <p class="text-muted mb-0">You can sell products anywhere and anytime</p>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <!-- Feature item-->
-                                <div class="text-center">
-                                    <i class="bi-people icon-feature text-gradient d-block mb-3"></i>
-                                    <h3 class="font-alt">Customer Support</h3>
-                                    <p class="text-muted mb-0">
-                                        We are always online 24 hours to help you at any time
-                                        </p>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <!-- Feature item-->
-                                <div class="text-center">
-                                    <i class="bi-gift icon-feature text-gradient d-block mb-3"></i>
-                                    <h3 class="font-alt">Get Benefit++</h3>
-                                    <p class="text-muted mb-0">
-                                        Get more benefits from the sales of our products
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <!-- Feature item-->
-                                <div class="text-center">
-                                    <i class="bi-patch-check icon-feature text-gradient d-block mb-3"></i>
-                                    <h3 class="font-alt">100% Trusted</h3>
-                                    <p class="text-muted mb-0">You can safely withdraw 100% of your sales profits</p>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-        </div>
-    </section>
-        <!-- Quote/testimonial aside-->
-        <aside class="text-center banner">
-            <div class="container px-5">
-                <div class="row justify-content-center">
-                    <div class="col-xl-8">
-                        <div class="h2 fs-1 text-white mb-4">"Just at home, create your personal shop and sell the products we provide, get profits from the number of sales of our products"</div>
-                        {{-- <img src="{{ optional($store)->logo ?? asset('images/logo.png') }}" alt="..." style="height: 3rem" /> --}}
-                    </div>
-                </div>
-            </div>
-        </aside>
-        <!-- App features section-->
 
-        <!-- Basic features section-->
-        <section class="bg-light" id="product">
-            <div class="container px-5">
-                <div class="row gx-5 align-items-center justify-content-center justify-content-lg-between">
-                    <div class="col-12 col-md-7">
-                        <h2 class="display-4 lh-1 mb-4">We provide various kinds of products in various categories</h2>
-                        <p class="lead fw-normal text-muted mb-2">You register as a seller and take the products provided to resellers online and promote your shop or product to get a profit from total sales, login and register as a seller!!</p>
-                        @if(Auth::check())
-                        @if (Auth::user()->role == 3)
-                        <a href="/join-seller" class="primary-btn text-decoration-none py-3 px-4 mt-4">Join As Seller</a>
-                        @endif
-                        @else
-                        <a href="/login" class="primary-btn text-decoration-none py-3 px-4 mt-4">Login Now</a>
-                        @endif
-                    </div>
-                    <div class="col-sm-8 col-md-5 mt-md-0 mt-5">
-                        <div class="px-5 px-sm-0"><img class="img-fluid" src="{{asset('images/product.png')}}" alt="..." /></div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <!-- App badge section-->
         <section style="background-color: #ff9c2c" id="contact">
@@ -338,6 +293,32 @@
 
         @include('sweetalert::alert')
         @include('includes.penjual.script')
+        <script>
+            jQuery(document).ready(function($) {
+          $('#mymodal').on('show.bs.modal',function(e){
+              var button = $(e.relatedTarget);
+              var modal = $(this);
+              modal.find('.modal-body').load(button.data('remote'));
+              modal.find('.modal-title').html(button.data('title'));
+          });
+          });
+        </script>
+        
+        <div class="modal" id="mymodal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <i class="fa fa-spinner fa-spin"></i>
+              </div>
+            </div>
+          </div>
+        </div>
  
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
