@@ -329,7 +329,7 @@
                         <script>
                             document.write(new Date().getFullYear());
                         </script>
-                        All rights reserved | Esselexpres
+                        All rights reserved | Esellexpress
                     </div>
             </div>
         </footer>

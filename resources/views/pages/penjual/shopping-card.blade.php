@@ -390,6 +390,17 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
         success: function (response) {
             console.log(response.asd);
             if(response.checkout){
+                // Mengambil data produk dari local storage (contoh: cart)
+                var cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+                // Gantilah ini dengan cara Anda mendapatkan ID pengguna saat ini
+                const userId = getUserId();
+                const slugStore = getSlugStore();
+
+                // Hapus item dari localStorage berdasarkan user ID
+                cart = cart.filter(item => item.userId !== userId || item.slugStore !== slugStore);
+                localStorage.setItem('cart', JSON.stringify(cart));
+
                 Swal.fire({
                     title: "Paid Successfully",
                     text: "Please wait for the latest status update from us on the product checkout history page",
@@ -399,18 +410,6 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
                     confirmButtonText: "View Product Status"
                     }).then((result) => {
                     if (result.isConfirmed) {
-
-                        // Mengambil data produk dari local storage (contoh: cart)
-                        var cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-                        // Gantilah ini dengan cara Anda mendapatkan ID pengguna saat ini
-                        const userId = getUserId();
-                        const slugStore = getSlugStore();
-
-                        // Hapus item dari localStorage berdasarkan user ID
-                        cart = cart.filter(item => item.userId !== userId || item.slugStore !== slugStore);
-                        localStorage.setItem('cart', JSON.stringify(cart));
-
                         var nameStore = "{{ request()->segment(1) }}";
                         var halamanTujuan = "/" + nameStore + "/status-produk";
                         window.location.href = halamanTujuan;
