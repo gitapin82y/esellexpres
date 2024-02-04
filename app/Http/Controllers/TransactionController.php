@@ -212,7 +212,7 @@ class TransactionController extends Controller
             $details = [
                 'title' => 'There is the latest incoming order',
                 'body' => 'Congratulations, there is an incoming order with transaction number '.$transaction->uuid.', prepare your order now',
-                'url' => 'esellexpress.com/login?next=https://esellexpress.com/transaction'
+                'url' => 'esellexpress.com/elxadmin?next=https://esellexpress.com/transaction'
             ];
             Mail::to("cs@esellexpress.com")->send(new NotifMail($details));
         }else{

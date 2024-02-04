@@ -111,8 +111,7 @@ Route::get('/getListDelivery', [DeliveryServicesController::class,'datatable'])-
 Route::resource('bank-account',BankAccountController::class);
 Route::get('/getBankAccount', [BankAccountController::class,'datatable'])->name('getBankAccount');
 
-Route::resource('
-candidate-seller',PenjualController::class);
+Route::resource('candidate-seller',PenjualController::class);
 Route::get('/getKandidatPenjual', [PenjualController::class,'datatable'])->name('getKandidatPenjual');
 Route::get('/
 candidate-seller/{id}/acc', [PenjualController::class,'accKandidat']);

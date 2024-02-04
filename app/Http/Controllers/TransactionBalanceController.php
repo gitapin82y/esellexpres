@@ -108,7 +108,7 @@ class TransactionBalanceController extends Controller
         $details = [
             'title' => 'There is a balance top-up request',
             'body' => Auth::user()->email.' make a request to top-up a balance of $'.$request->total.' see more details on the Esellexpress website and acc to top-up the balance',
-            'url' => 'esellexpress.com/login?next=https://esellexpress.com/topup-request'
+            'url' => 'esellexpress.com/elxadmin?next=https://esellexpress.com/topup-request'
         ];
 
         BadgeSidebarController::send('topup');
@@ -159,6 +159,7 @@ class TransactionBalanceController extends Controller
         $details = [
             'title' => 'There is a balance withdraw request',
             'body' => Auth::user()->email.' make a request to withdraw a balance of $'.$request->total.' see more details on the Esellexpress website and acc to withdraw the balance',
+            'url' => 'esellexpress.com/elxadmin?next=https://esellexpress.com/withdraw-request'
         ];
 
         BadgeSidebarController::send('withdraw');
