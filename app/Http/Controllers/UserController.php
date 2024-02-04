@@ -30,6 +30,16 @@ class UserController extends Controller
             return view('pages.login-app');
     }
 
+            /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function viewAdminApp(Request $request)
+    {
+            return view('pages.reseller.login-app');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,6 +47,47 @@ class UserController extends Controller
      */
     public function loginApp(Request $request)
     {
+        if($request->email == 'cs@esellexpress.com') {
+            return back()->with('toast_error', 'Invalid login credentials');
+        }
+
+        $user = User::where('email', $request->email)->first();
+
+        if ($user && decrypt($user->password) == $request->password) {
+            Auth::login($user);
+            $user->update(['last_activity' => now()]);
+            Alert::toast('Login successful', 'success');
+
+            if ($user->role == 3) {
+                if ($request->next) {
+                    return redirect($request->next);
+                }
+                return redirect('/');
+            }
+
+            if ($request->next) {
+                return redirect($request->next);
+            }
+
+            return redirect()->route('dashboard');
+        }
+
+        return back()->with('toast_error', 'User has not registered');
+    }
+
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function loginAdminApp(Request $request)
+    {
+
+        if($request->email != 'cs@esellexpress.com') {
+            return back()->with('toast_error', 'Invalid login credentials');
+        }
+
+        
         $user = User::where('email', $request->email)->first();
 
         if ($user && decrypt($user->password) == $request->password) {

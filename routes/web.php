@@ -39,6 +39,9 @@ Route::get('/login', [UserController::class,'viewLoginApp']);
 Route::post('/login', [UserController::class,'loginApp'])->name('loginApp');
 Route::get('/logout', [UserController::class,'logout'])->name('logoutApp');
 
+Route::get('/elxadmin', [UserController::class,'viewAdminApp']);
+Route::post('/elxadmin', [UserController::class,'loginAdminApp'])->name('loginAdminApp');
+
 Route::get('/change-password', [UserController::class,'viewChangePassword']);
 Route::post('/change-password', [UserController::class,'storeChangePassword'])->name('change-password');
 
@@ -55,7 +58,6 @@ Route::group(['middleware' => ['auth', 'CheckUserActivity']], function () {
 
     Route::get('/profile', [UserController::class,'indexProfile']);
     Route::post('/profile', [UserController::class,'updateProfile'])->name('updateProfile');
-
 
     Route::resource('/transaction',TransactionController::class);
 Route::get('/getIncomingOrders', [TransactionController::class,'datatable'])->name('getIncomingOrders');
