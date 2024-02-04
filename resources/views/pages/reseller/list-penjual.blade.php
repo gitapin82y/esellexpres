@@ -1,6 +1,6 @@
 @extends('layouts.admin')
  
-@section('title', 'List Penjual')
+@section('title', 'List Seller')
  @push('after-style')
  
  <style>
@@ -182,7 +182,7 @@
         
         $('body').on('click', '.profitSeller', function () {
             var id = $(this).data('id');
-            $.get("{{ route('list-penjual.index') }}" + '/' + id + '/profit', function (data) {
+            $.get("{{ route('seller-list.index') }}" + '/' + id + '/profit', function (data) {
                 $('#profit').modal('show');
                 $('#id').val(id);
                 $('.profitinput').val(data.data.stores.profit);
@@ -193,7 +193,7 @@
             var id = $(this).data('id');
             var status = $(this).data('status');
             console.log(status);
-            $.get('list-penjual/status?is_active='+status+'&id='+id, function (data) {
+            $.get('seller-list/status?is_active='+status+'&id='+id, function (data) {
                         table.ajax.reload();
 
                         const Toast = Swal.mixin({
@@ -275,7 +275,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "list-penjual/profit",
+                url: "seller-list/profit",
                 data: formData,
         
                 success: function (data) {

@@ -411,7 +411,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
                     }).then((result) => {
                     if (result.isConfirmed) {
                         var nameStore = "{{ request()->segment(1) }}";
-                        var halamanTujuan = "/" + nameStore + "/status-produk";
+                        var halamanTujuan = "/" + nameStore + "/status-product";
                         window.location.href = halamanTujuan;
                     }
                 });

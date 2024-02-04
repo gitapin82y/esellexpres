@@ -57,13 +57,13 @@
            
 
                 <li class="menu-title">Seller</li><!-- /.menu-title -->
-                <li class="{{Request::is('kandidat-penjual') ? 'active' : '' }}">
-                    <a href="{{route('kandidat-penjual.index')}}"> <i class="menu-icon fa fa-user-plus"></i>Seller Candidates
+                <li class="{{Request::is('candidate-seller') ? 'active' : '' }}">
+                    <a href="{{route('candidate-seller.index')}}"> <i class="menu-icon fa fa-user-plus"></i>Seller Candidates
                         {!! $sellerCandidates && $sellerCandidates->total > 0 ? '<div class="badge"><span>' . $sellerCandidates->total . '</span></div>' : '' !!}
                 </a>
                 </li>
-                <li class="{{Request::is('list-penjual') ? 'active' : '' }}">
-                <a href="{{route('list-penjual.index')}}"> <i class="menu-icon fa fa-users"></i>Seller List
+                <li class="{{Request::is('seller-list') ? 'active' : '' }}">
+                <a href="{{route('seller-list.index')}}"> <i class="menu-icon fa fa-users"></i>Seller List
                 </a>
                 </li>
          

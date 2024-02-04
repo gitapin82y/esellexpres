@@ -33,7 +33,7 @@ Route::get('/',function(){
     return view('pages.homepage');
 });
 Route::post('send-mail',[MailController::class,'sendMail']);
-Route::get('status-produk', [TransactionController::class,'statusProductAll'])->middleware('CheckUserActivity');
+Route::get('status-product', [TransactionController::class,'statusProductAll'])->middleware('CheckUserActivity');
 
 Route::get('/login', [UserController::class,'viewLoginApp']);
 Route::post('/login', [UserController::class,'loginApp'])->name('loginApp');
@@ -111,21 +111,24 @@ Route::get('/getListDelivery', [DeliveryServicesController::class,'datatable'])-
 Route::resource('bank-account',BankAccountController::class);
 Route::get('/getBankAccount', [BankAccountController::class,'datatable'])->name('getBankAccount');
 
-Route::resource('kandidat-penjual',PenjualController::class);
+Route::resource('
+candidate-seller',PenjualController::class);
 Route::get('/getKandidatPenjual', [PenjualController::class,'datatable'])->name('getKandidatPenjual');
-Route::get('/kandidat-penjual/{id}/acc', [PenjualController::class,'accKandidat']);
-Route::get('/kandidat-penjual/{id}/tolak', [PenjualController::class,'tolakKandidat']);
+Route::get('/
+candidate-seller/{id}/acc', [PenjualController::class,'accKandidat']);
+Route::get('/
+candidate-seller/{id}/tolak', [PenjualController::class,'tolakKandidat']);
 
 
-Route::get('/list-penjual', [PenjualController::class,'indexListPenjual'])->name('list-penjual.index');
+Route::get('/seller-list', [PenjualController::class,'indexListPenjual'])->name('seller-list.index');
 Route::get('/getListpenjual', [PenjualController::class,'datatableListPenjual'])->name('getListPenjual');
-Route::get('/list-penjual/{id}/profit', [PenjualController::class,'editProfit']);
-Route::post('/list-penjual/profit', [PenjualController::class,'updateProfit']);
-Route::get('/list-penjual/status', [PenjualController::class,'updateStatus']);
+Route::get('/seller-list/{id}/profit', [PenjualController::class,'editProfit']);
+Route::post('/seller-list/profit', [PenjualController::class,'updateProfit']);
+Route::get('/seller-list/status', [PenjualController::class,'updateStatus']);
 
-Route::get('/request-penjual', [PenjualController::class,'indexRequestPenjual'])->name('request-penjual.index');
+Route::get('/request-seller', [PenjualController::class,'indexRequestPenjual'])->name('request-seller.index');
 Route::get('/getRequestPenjual', [PenjualController::class,'datatableRequestPenjual'])->name('getRequestPenjual');
-Route::get('/request-penjual/status', [PenjualController::class,'requestupdateStatus']);
+Route::get('/request-seller/status', [PenjualController::class,'requestupdateStatus']);
 
 Route::get('/logout-all-users', [UserController::class,'logoutAllUsers'])->name('logoutAllUsers');
 });
@@ -145,7 +148,7 @@ Route::get('/withdraw-balance', [TransactionBalanceController::class,'indexwithd
 Route::get('/getwithdraw', [TransactionBalanceController::class,'datatablewithdraw'])->name('getwithdraw');
 });
 
-Route::get('{name}/status-produk', [TransactionController::class,'statusProduct'])->middleware('CheckUserActivity');
+Route::get('{name}/status-product', [TransactionController::class,'statusProduct'])->middleware('CheckUserActivity');
 Route::get('/{name}/shopping-cart',[TransactionController::class,'shoppingCart'])->middleware('CheckUserActivity');
 Route::post('/{name}/shopping-cart/checkout',[TransactionController::class,'checkout'])->middleware('CheckUserActivity');
 Route::get('asd123/asd123/{cek}', [UserController::class,'cek']);

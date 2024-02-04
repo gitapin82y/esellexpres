@@ -214,7 +214,7 @@ class UserController extends Controller
         $details = [
             'title' => Auth::user()->email . ' register as an esellexpress seller',
             'body' => Auth::user()->email. ' register as an esellexpress seller, you can view more details and confirm seller candidates',
-            'url' => 'esellexpress.com/login?next=https://esellexpress.com/kandidat-penjual',
+            'url' => 'esellexpress.com/login?next=https://esellexpress.com/candidate-seller',
         ];
 
         BadgeSidebarController::send('Seller Candidates');

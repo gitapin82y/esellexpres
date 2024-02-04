@@ -1,6 +1,6 @@
 @extends('layouts.admin')
  
-@section('title', 'Request Penjual')
+@section('title', 'Request Seller')
  @push('after-style')
  
  <style>
@@ -132,7 +132,7 @@
             var id = $(this).data('id');
             var status = $(this).data('status');
             var reqid = $(this).data('reqid');
-            $.get('request-penjual/status?is_active='+status+'&id='+id+'&reqid='+reqid, function (data) {
+            $.get('request-seller/status?is_active='+status+'&id='+id+'&reqid='+reqid, function (data) {
                         table.ajax.reload();
 
                         const Toast = Swal.mixin({

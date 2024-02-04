@@ -133,7 +133,7 @@
                                     @if (Auth::user()->role == 3)
                                     <a href="/join-seller">Join As Seller</a>
                                     <div class="my-2"></div>
-                                    <a href="/status-produk">My Order</a>
+                                    <a href="/status-product">My Order</a>
                                     @endif
                                     <div class="my-2"></div>
                                     <a href="/change-password">Reset Password</a>

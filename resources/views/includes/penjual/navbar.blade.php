@@ -69,7 +69,7 @@
                         </li>
                         @if (Auth::check())
                         <li class="cart-icon">
-                            <a href="/{{request()->segment(1)}}/status-produk">
+                            <a href="/{{request()->segment(1)}}/status-product">
                                 {{Auth::user()->name}}
                                 &nbsp;
                                <a href="#" style="margin-bottom: -12px">
@@ -84,7 +84,7 @@
                                         <br>
                                        @endif
                                        <a href="/{{request()->segment(1)}}/information-profile" class="mb-2" style="font-size:17px;">Profile</a><br>
-                                       <a href="/{{request()->segment(1)}}/status-produk" class="mb-2" style="font-size:17px;">My Order</a>
+                                       <a href="/{{request()->segment(1)}}/status-product" class="mb-2" style="font-size:17px;">My Order</a>
                                        <br>
                                        <a href="#" class="text-dark mb-2" data-toggle="modal" data-target="#topUpModal" style="font-size:17px;">Top Up</a>
                                        <br>

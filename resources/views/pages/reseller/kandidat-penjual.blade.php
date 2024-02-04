@@ -1,6 +1,6 @@
 @extends('layouts.admin')
  
-@section('title', 'Kandidat Penjual')
+@section('title', 'Candidate Seller')
  @push('after-style')
  <style>
     th, td { white-space: nowrap; }
@@ -118,7 +118,7 @@
         // aksi ajax jika tombol edit di klik
         $('body').on('click', '.accKandidat', function () {
             var id = $(this).data('id');
-            $.get("{{ route('kandidat-penjual.index') }}" + '/' + id + '/acc', function (data) {
+            $.get("{{ route('candidate-seller.index') }}" + '/' + id + '/acc', function (data) {
                 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -137,7 +137,7 @@ $('#tableKandidatPenjual').DataTable().ajax.reload();
 
         $('body').on('click', '.tolakKandidat', function () {
             var id = $(this).data('id');
-            $.get("{{ route('kandidat-penjual.index') }}" + '/' + id + '/tolak', function (data) {
+            $.get("{{ route('candidate-seller.index') }}" + '/' + id + '/tolak', function (data) {
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',

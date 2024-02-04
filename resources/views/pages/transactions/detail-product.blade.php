@@ -72,7 +72,7 @@
     @if (Auth::user()->role == 1)
     <form action="{{ route('transactions.status', $item->id) }}" method="get">
         <div class="col-12 mb-1">
-            <label for="status-produk" class="form-controll">Status Produk</label>
+            <label for="status-produk" class="form-controll">Status Product</label>
             <select name="status" class="form-control" id="status-produk" required>
                 <option value="The order is being prepared" {{ $item->status == 'The order is being prepared' ? 'selected' : '' }}>The order is being prepared</option>
                 <option value="The order is being packed" {{ $item->status == 'The order is being packed' ? 'selected' : '' }}>The order is being packed</option>
