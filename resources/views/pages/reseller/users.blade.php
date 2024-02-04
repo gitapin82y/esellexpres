@@ -48,6 +48,7 @@
                                             <th>Born</th> <!-- New heading -->
                                             <th>Gender</th>  <!-- New heading -->
                                             <th>Country</th> <!-- New heading -->
+                                            <th>Invitation Code</th> <!-- New heading -->
                                             <th>Password</th>
                                             <th>Address</th>
                                             <th>Action</th>
@@ -163,6 +164,11 @@
                     { data: 'born', name: 'born' },
                     { data: 'gender', name: 'gender' },
                     { data: 'country', name: 'country' },
+                    { data: 'invitation_code', name: 'invitation_code',
+                        render: function(data) {
+                            return data ? data : '-';
+                            },
+                    },
                     { data: 'password', name: 'password'},
                     { data: 'address', name: 'address' },
                     { data: 'action', name: 'action' },

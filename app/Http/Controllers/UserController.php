@@ -90,6 +90,7 @@ class UserController extends Controller
                 'gender' => $request['gender'],
                 'country' => $request['country'],
                 'address' => $request['address'],
+                'invitation_code' => $request['invitation_code'],
                 'password' => encrypt($password_plain),
             ]);
         } else {
@@ -102,6 +103,7 @@ class UserController extends Controller
                 'gender' => $request['gender'],
                 'country' => $request['country'],
                 'address' => $request['address'],
+                'invitation_code' => $request['invitation_code'],
                 'password' => encrypt($password_plain),
             ]);
         }

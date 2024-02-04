@@ -227,6 +227,12 @@ input[type="date"]:before {
 						<span class="focus-input100"></span>
 						<span class="label-input100">Address</span>
 					</div>
+
+					<div class="wrap-input100 ">
+						<input class="input100" type="text" name="invitation_code">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Invitation Code</span>
+					</div>
 					
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<input class="input100" type="password" name="password">
