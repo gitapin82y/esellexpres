@@ -1227,7 +1227,7 @@ ol {
 .product-item .pi-pic img {
     min-width: 90%;
     object-fit: cover;
-    max-height: 200px !important;
+    height: 200px !important;
 }
 
 .product-item .pi-pic .sale {
@@ -3993,7 +3993,7 @@ ol {
         max-width: 1170px;
     }
     .product-item .pi-pic img {
-        max-height: 300px !important;
+        height: 300px !important;
     }
 }
 
@@ -4004,7 +4004,7 @@ ol {
         max-width: 36%;
     }
     .product-item .pi-pic img {
-        max-height: 300px !important;
+        height: 300px !important;
     }
     .inner-header .advanced-search .input-group {
         max-width: 64%;
