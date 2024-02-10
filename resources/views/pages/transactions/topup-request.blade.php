@@ -5,7 +5,7 @@
  <style>
     th, td { white-space: nowrap; }
     div.dataTables_wrapper {
-        width: 800px;
+        width: 100%;
         margin: 0 auto;
     }
 
@@ -150,11 +150,11 @@
         var table = $('#tableTopup').DataTable({
             processing: true,
             serverside: true,
-            fixedColumns: {
-                right: 1,
-                left: 0,
-            },
-            scrollX: true,
+            // fixedColumns: {
+            //     right: 1,
+            //     left: 0,
+            // },
+            // scrollX: true,
             "order": [
                 [0, "asc"]
             ],
