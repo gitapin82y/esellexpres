@@ -6,7 +6,7 @@
  <style>
     th, td { white-space: nowrap; }
     div.dataTables_wrapper {
-        width: 800px;
+        width: 100%;
         margin: 0 auto;
     }
 
@@ -112,7 +112,7 @@
         var table = $('#tableListPenjual').DataTable({
             processing: true,
             serverside: true,
-            scrollX: true,
+            // scrollX: true,
             "order": [
                 [0, "asc"]
             ],

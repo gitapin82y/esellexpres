@@ -6,7 +6,7 @@
     <style>
         th, td { white-space: nowrap; }
         div.dataTables_wrapper {
-            width: 800px;
+            width: 100%;
             margin: 0 auto;
         }
 
@@ -135,7 +135,7 @@
             var table = $('#tableUsers').DataTable({
                 processing: true,
                 serverSide: true,
-                scrollX: true,
+                // scrollX: true,
                 order: [[0, "asc"]],
                 ajax: {
                     url: '{{ route("getUsers") }}',

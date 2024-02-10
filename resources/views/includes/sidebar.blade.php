@@ -42,7 +42,7 @@
                     <a href="{{route('transaction.index')}}"> <i class="menu-icon fa fa-cart-plus"></i>Incoming Orders{!! $incomingOrders && $incomingOrders->total > 0 ? '<div class="badge"><span>' . $incomingOrders->total . '</span></div>' : '' !!}</a>
                     
                     </li>
-                <li class="{{Request::is('topup-request') ? 'active' : '' }}">
+                <li class="{{Request::is('topup-request') || Request::is('withdraw-request') ? 'active' : '' }}">
                 <a href="{{route('topup-request.index')}}"> <i class="menu-icon fa fa-money"></i>Balance Request{!! $balanceRequest > 0 ? '<div class="badge"><span>' . $balanceRequest . '</span></div>' : '' !!}</a>
                 </li>
 

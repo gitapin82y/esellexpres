@@ -49,6 +49,13 @@ https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/css/lightbox.min.css
     border:1px solid#ffa13d;
     color: #ffa13d;
 }
+
+
+.card-body .table-responsive table td{
+    vertical-align: middle !important;
+}
+
+
 #weatherWidget .currentDesc {
     color: #ffffff!important;
 }

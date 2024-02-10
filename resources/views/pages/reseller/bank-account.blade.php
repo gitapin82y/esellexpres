@@ -6,7 +6,7 @@
  <style>
     th, td { white-space: nowrap; }
     div.dataTables_wrapper {
-        width: 800px;
+        width: 100%;
         margin: 0 auto;
     }
 
@@ -110,10 +110,10 @@
         var table = $('#tableBankAccount').DataTable({
             processing: true,
             serverside: true,
-            scrollX: true,
-            "order": [
-                [0, "asc"]
-            ],
+            // scrollX: true,
+            // "order": [
+            //     [0, "asc"]
+            // ],
             ajax: {
                 url: '{{route("getBankAccount")}}',
             },
@@ -133,6 +133,10 @@
                     name: 'action',
                 },
             ],
+            "columnDefs": [{
+                "className": "dt-center",
+                "targets": "_all"
+            }],
 
         });
 

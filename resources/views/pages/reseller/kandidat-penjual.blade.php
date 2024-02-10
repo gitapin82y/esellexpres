@@ -2,10 +2,11 @@
  
 @section('title', 'Candidate Seller')
  @push('after-style')
+
  <style>
     th, td { white-space: nowrap; }
     div.dataTables_wrapper {
-        width: 800px;
+        width: 100%;
         margin: 0 auto;
     }
 
@@ -31,7 +32,7 @@
 
                     <div class="card-body pb-5 pt-2 w-100">
                         <div class="table-responsive table-invoice overflow-hidden">
-                            <table id="tableKandidatPenjual" class="table">
+                            <table id="tableKandidatPenjual" class="table w-100">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
@@ -60,16 +61,17 @@
 @endsection
 
 @push('after-script')
+
 <script>
      jQuery(document).ready(function ($) {
         $('#tableKandidatPenjual').DataTable({
             processing: true,
             serverside: true,
-            fixedColumns: {
-                right: 1,
-                left: 0,
-            },
-            scrollX: true,
+            // fixedColumns: {
+            //     right: 1,
+            //     left: 0,
+            // },
+            // scrollX: true,
             "order": [
                 [0, "asc"]
             ],

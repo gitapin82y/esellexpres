@@ -1,11 +1,11 @@
 @extends('layouts.admin')
  
-@section('title', 'Topup Request')
+@section('title', 'Top up Request')
  @push('after-style')
  <style>
     th, td { white-space: nowrap; }
     div.dataTables_wrapper {
-        width: 800px;
+        width: 100%;
         margin: 0 auto;
     }
 
@@ -83,7 +83,7 @@
             //     right: 1,
             //     left: 0,
             // },
-            scrollX: true,
+            // scrollX: true,
             "order": [
                 [0, "asc"]
             ],
@@ -152,6 +152,10 @@
                     name: 'action',
                 },
             ],
+            "columnDefs": [{
+                "className": "dt-center vertical-align-center",
+                "targets": "_all"
+            }],
 
         });
         // end data table ajax
