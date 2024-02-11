@@ -74,19 +74,19 @@ Route::get('/{stores}/information-profile', [UserController::class,'indexProfile
 Route::group(['middleware' => ['resellerseller', 'CheckUserActivity']], function () {
 // reseller
 Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
-Route::resource('category',CategoryController::class);
-Route::resource('galleries',ProductGalleryController::class);
 Route::resource('products',ProductController::class);
 Route::resource('products-list',ProductController::class);
 Route::get('products/{id}/take',[ProductController::class,'takeProduct']);
-Route::get('products/{id}/delete',[ProductController::class,'deleteProduct']);
-Route::get('products/{id}/gallery',[ProductController::class,'gallery'])->name('products.gallery');
 //end middleware
 });
 
 // reseller
 Route::group(['middleware' => ['reseller', 'CheckUserActivity']], function () {
-    
+Route::resource('category',CategoryController::class);
+Route::resource('galleries',ProductGalleryController::class);
+Route::get('products/{id}/gallery',[ProductController::class,'gallery'])->name('products.gallery');
+Route::get('products/{id}/delete/{store}',[ProductController::class,'deleteProduct']);
+
 Route::resource('users',UserController::class);
 Route::get('/getUsers', [UserController::class,'datatable'])->name('getUsers');
 
@@ -124,6 +124,9 @@ Route::get('/getListpenjual', [PenjualController::class,'datatableListPenjual'])
 Route::get('/seller-list/{id}/profit', [PenjualController::class,'editProfit']);
 Route::post('/seller-list/profit', [PenjualController::class,'updateProfit']);
 Route::get('/seller-list/status', [PenjualController::class,'updateStatus']);
+
+Route::get('/seller-list/product/{store}', [PenjualController::class,'indexListProductPenjual'])->name('seller-list-product.index');
+Route::get('/getListProductPenjual/{store}', [PenjualController::class,'datatableListProductPenjual'])->name('getListProductPenjual');
 
 Route::get('/request-seller', [PenjualController::class,'indexRequestPenjual'])->name('request-seller.index');
 Route::get('/getRequestPenjual', [PenjualController::class,'datatableRequestPenjual'])->name('getRequestPenjual');

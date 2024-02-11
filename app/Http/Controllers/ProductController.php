@@ -60,14 +60,18 @@ class ProductController extends Controller
             }
         }
     
+        $searchEmpty = false;
         if ($request->has('search')) {
             $searchTerm = $request->input('search');
             $products = collect($products)->filter(function ($product) use ($searchTerm) {
                 return stripos($product->name, $searchTerm) !== false;
             })->values();
+            if($products){
+                $searchEmpty = true;
+            }
         }
     
-        return view('pages.products.index', ['products' => $products]);
+        return view('pages.products.index', ['products' => $products,'searchEmpty' => $searchEmpty]);
     }
     
 
@@ -83,9 +87,9 @@ class ProductController extends Controller
         return back();
     }
 
-    public function deleteProduct($id){
+    public function deleteProduct($id, $store){
         $product = Product::findOrFail($id);
-        $storeid = Store::where('user_id',Auth::user()->id)->first()->id;
+        $storeid = Store::where('name', $store)->first()->id;
         ProductStore::where([
             'store_id'=> $storeid,
             'product_id'=> $product->id,

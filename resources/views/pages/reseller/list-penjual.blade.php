@@ -26,8 +26,7 @@
                 <div class="card">
                     <div class="card-header bg-white py-4 mb-4">
                         <div class="row">
-
-                        <div class="col-md-4 text-left col-12">
+                        <div class="col-md-4 text-left align-self-center col-12">
                             <h4>Seller List</h4>
                         </div>
                         <div class="col-md-8 text-right col-12">

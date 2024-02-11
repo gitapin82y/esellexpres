@@ -12,13 +12,13 @@
                                 <div class="box-title">Product List</div>
                             </div>
                             <div class="col-md-6 col-12">
-                                <form action="{{ route('products.index') }}" method="GET">
+                                <form action="{{ Request::is('products-list') ? route('products-list.index') : route('products.index') }}" method="GET">
                                     <div class="input-group">
                                         <input type="text" class="form-control" name="search" placeholder="Search product name">
                                         <div class="input-group-append">
                                             <button class="btn btn-success" type="submit">Search</button>
                                         </div>
-                                        <a href="/{{request()->segment(1)}}" class="btn btn-secondary">Refresh</a>
+                                        <a href="/{{ request()->segment(1) }}" class="btn btn-secondary">Refresh</a>
                                     </div>
                                 </form>
                             </div>
@@ -96,19 +96,25 @@
                                         @endif
 
                                         @empty
-                                        @if(Auth::user()->role == 1)
+                                        @if ($searchEmpty)
                                         <td>
-                                            <td colspan="9" class="text-center"><strong>The data you are looking for does not exist</strong></td>
+                                            <td colspan="9" class="text-center"><strong>The name of the product you were looking for was not found</strong></td>
                                         </td>
                                         @else
-                                            @if (Request::is('products-list'))
+                                            @if(Auth::user()->role == 1)
                                             <td>
-                                                <td colspan="9" class="text-center"><strong>No products have been taken yet, you can take the product in the reseller product menu</strong></td>
+                                                <td colspan="9" class="text-center"><strong>The data you are looking for does not exist</strong></td>
                                             </td>
                                             @else
-                                            <td>
-                                                <td colspan="9" class="text-center"><strong>The product has been taken, there are no products from resellers</strong></td>
-                                            </td>
+                                                @if (Request::is('products-list'))
+                                                <td>
+                                                    <td colspan="9" class="text-center"><strong>No products have been taken yet, you can take the product in the reseller product menu</strong></td>
+                                                </td>
+                                                @else
+                                                <td>
+                                                    <td colspan="9" class="text-center"><strong>The product has been taken, there are no products from resellers</strong></td>
+                                                </td>
+                                                @endif
                                             @endif
                                         @endif
                                         </tr>

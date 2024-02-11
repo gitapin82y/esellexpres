@@ -14,6 +14,8 @@ use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\BadgeSidebarController;
+use App\Models\Store;
+use App\Models\Product;
 
 class PenjualController extends Controller
 {
@@ -86,6 +88,7 @@ class PenjualController extends Controller
         ->addColumn('list_produk', function ($data) {
             $acction =  '<div class="btn-group">' .
             '<a href="'.$data->stores->slug.'" target="_blank" class="detailProduk mr-1 btn btn-info btn-lg">Visit Store</a>'.
+            '<a href="seller-list/product/'.$data->stores->slug.'" class="detailProduk mr-1 btn btn-success btn-lg">View Product</a>'.
             '<a href="javascript::void(0)" data-id="'.$data->id.'" class="profitSeller btn btn-primary btn-lg mr-1">Profit</a>';
 
             if($data->stores->is_active == "OFF"){
@@ -110,6 +113,37 @@ class PenjualController extends Controller
         ->addIndexColumn()
         ->make(true);
     }
+
+    public function indexListProductPenjual($store)
+    {
+        $stores = Store::with('products')->where('name', $store)->first();
+        return view('pages.reseller.list-product-penjual',compact('store'));
+    }
+
+    public function datatableListProductPenjual($store){
+
+        $stores = Store::with('products')->where('name', $store)->first();
+        $data = [];
+        foreach ($stores->products as $key => $product) {
+            $data[$key] = Product::where('id', $product->product_id)
+                ->with(['categories', 'galleries' => function ($query) {
+                    $query->where('is_default', 1);
+                }])
+                ->latest()
+                ->first();
+        }
+    
+        return Datatables::of($data)
+            ->addColumn('action', function ($data) use ($stores) {
+                $action = '<div class="btn-group"><a href="' . url('products/' . $data->id . '/delete/' . $stores->name ) . '" class="btn btn-warning btn-sm"><i class="fa fa-times"></i> Return</a></div>';
+                return $action;
+            })
+            ->rawColumns(['action'])
+            ->addIndexColumn()
+            ->make(true);
+    }
+    
+
 
     public function editProfit($id){
         $data = User::with('stores')->find($id);
