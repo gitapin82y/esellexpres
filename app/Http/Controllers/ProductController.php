@@ -29,34 +29,48 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->path() == 'products-list'){ // produk yang diambil penjual
-            $stores = Store::with('products')->where('user_id',Auth::user()->id)->first();
-            $products = array();
-            foreach($stores->products as $key => $product){
-                $products[$key] = Product::where('id',$product->product_id)->with(['categories','galleries' => function ($query) {
-                    $query->where('is_default',1);
-                }])->latest()->first();
+        if ($request->path() == 'products-list') {
+            // Produk yang diambil penjual
+            $stores = Store::with('products')->where('user_id', Auth::user()->id)->first();
+            $products = [];
+            foreach ($stores->products as $key => $product) {
+                $products[$key] = Product::where('id', $product->product_id)
+                    ->with(['categories', 'galleries' => function ($query) {
+                        $query->where('is_default', 1);
+                    }])
+                    ->latest()
+                    ->first();
             }
-        }else{
-            if(Auth::user()->role == 1){ // produk yang disediakan reseller
-                $products = Product::with(['categories','galleries' => function ($query) {
-                    $query->where('is_default',1);
+        } else {
+            if (Auth::user()->role == 1) {
+                // Produk yang disediakan reseller
+                $products = Product::with(['categories', 'galleries' => function ($query) {
+                    $query->where('is_default', 1);
                 }])->latest()->get();
-            }else{ // list produk reseller yang belum diambil penjual
-                $stores = Store::with('products')->where('user_id',Auth::user()->id)->first();
-                $kalsu = array();
-                foreach($stores->products as $key => $product){
-                    $kalsu[$key] = Product::where('id',$product->product_id)->first()->id;
+            } else {
+                // List produk reseller yang belum diambil penjual
+                $stores = Store::with('products')->where('user_id', Auth::user()->id)->first();
+                $kalsu = [];
+                foreach ($stores->products as $key => $product) {
+                    $kalsu[$key] = Product::where('id', $product->product_id)->first()->id;
                 }
-                $products = Product::with(['categories','galleries' => function ($query) {
-                    $query->where('is_default',1);
-                }])->latest()->get()->except($kalsu);
+                $products = Product::with(['categories', 'galleries' => function ($query) {
+                    $query->where('is_default', 1);
+                }])->latest()->whereNotIn('id', $kalsu)->get();
             }
         }
-
-
-        return view('pages.products.index',['products'=>$products]);
+    
+        if ($request->has('search')) {
+            $searchTerm = $request->input('search');
+            $products = collect($products)->filter(function ($product) use ($searchTerm) {
+                return stripos($product->name, $searchTerm) !== false;
+            })->values();
+        }
+    
+        return view('pages.products.index', ['products' => $products]);
     }
+    
+
 
     public function takeProduct($id){
         $product = Product::findOrFail($id);

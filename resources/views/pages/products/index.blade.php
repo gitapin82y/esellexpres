@@ -7,12 +7,23 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-9 col-6">
+                        <div class="row justify-content-between">
+                            <div class="col-md-3 col-12">
                                 <div class="box-title">Product List</div>
                             </div>
+                            <div class="col-md-6 col-12">
+                                <form action="{{ route('products.index') }}" method="GET">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="search" placeholder="Search product name">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-success" type="submit">Search</button>
+                                        </div>
+                                        <a href="/{{request()->segment(1)}}" class="btn btn-secondary">Refresh</a>
+                                    </div>
+                                </form>
+                            </div>
                             @if(Auth::user()->role == 1)
-                            <div class="col-md-3 col-6">
+                            <div class="col-md-3 col-12">
                                 <a href="{{route('products.create')}}" class="btn btn-primary w-100">Add Product</a>
                             </div>
                             @endif
