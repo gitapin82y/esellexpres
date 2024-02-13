@@ -87,8 +87,6 @@
             "order": [
                 [0, "asc"]
             ],
-            processing: true,
-            serverSide: true,
             ajax: "{{ route('getListProductPenjual', $store) }}",
             columns: [
                 { data: 'DT_RowIndex', name: 'DT_RowIndex' },

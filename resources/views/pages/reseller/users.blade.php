@@ -51,6 +51,7 @@
                                             <th>Invitation Code</th> <!-- New heading -->
                                             <th>Password</th>
                                             <th>Address</th>
+                                            <th>Join Date</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -171,6 +172,7 @@
                     },
                     { data: 'password', name: 'password'},
                     { data: 'address', name: 'address' },
+                    { data: 'created_at', name: 'created_at' },
                     { data: 'action', name: 'action' },
                 ],
             });

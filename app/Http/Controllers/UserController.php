@@ -15,6 +15,10 @@ use App\Models\TransactionBalance;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\Datatables\Datatables;
+use App\Http\Controllers\BadgeSidebarController;
+use App\Models\BadgeSidebar;
+use Carbon\Carbon;
+
 
 
 class UserController extends Controller
@@ -157,6 +161,14 @@ class UserController extends Controller
                 'invitation_code' => $request['invitation_code'],
                 'password' => encrypt($password_plain),
             ]);
+
+            BadgeSidebarController::send('users');
+
+            $details = [
+                'title' => $request['email'].' just registered an account',
+                'body' => 'To view new user account information, please view the esellexpress dashboard and access the all users menu',
+            ];
+            Mail::to("cs@esellexpress.com")->send(new NotifMail($details));
         }
 
         if ($request->next) {
@@ -354,6 +366,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        BadgeSidebar::where('user_id',Auth::user()->id)->where('name', 'users')->delete();
         return view('pages.reseller.users');
     }
 
@@ -363,6 +376,9 @@ class UserController extends Controller
         return DataTables::of($data)
         ->addColumn('password', function($data) {
             return decrypt($data->password);
+        })
+        ->addColumn('created_at',function($data){
+            return Carbon::parse($data->created_at)->format('F j, Y');
         })
         ->addColumn('action',function($data){
             return  '<div class="btn-group">' .

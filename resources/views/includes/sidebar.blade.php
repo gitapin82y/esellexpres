@@ -14,6 +14,7 @@
                 $sellerRequest = BadgeSidebar::where('user_id',Auth::user()->id)->where('name', 'Seller Request')->first();
                 $withdraw = BadgeSidebar::where('user_id',Auth::user()->id)->where('name', 'withdraw')->first();
                 $topup = BadgeSidebar::where('user_id',Auth::user()->id)->where('name', 'topup')->first();
+                $users = BadgeSidebar::where('user_id',Auth::user()->id)->where('name', 'users')->first();
                 $withdrawTotal = $withdraw ? $withdraw->total : 0;
                 $topupTotal = $topup ? $topup->total : 0;
                 $balanceRequest = $withdrawTotal + $topupTotal;
@@ -34,7 +35,7 @@
                 </li>
 
                 <li class="{{Request::is('users') ? 'active' : '' }}">
-                    <a href="{{route('users.index')}}"> <i class="menu-icon fa fa-user"></i>All Users</a>
+                    <a href="{{route('users.index')}}"> <i class="menu-icon fa fa-user"></i>All Users{!! $users && $users->total > 0 ? '<div class="badge"><span>' . $users->total . '</span></div>' : '' !!}</a>
                 </li>
 
                 <li class="menu-title">Transaction</li><!-- /.menu-title -->
