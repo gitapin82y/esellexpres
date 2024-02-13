@@ -3,7 +3,7 @@
 @section('title', 'Incoming Orders')
  @push('after-style')
  <style>
-    th, td { white-space: nowrap; }
+    /* th, td { white-space: nowrap; } */
     div.dataTables_wrapper {
         width:100%;
         margin: 0 auto;
