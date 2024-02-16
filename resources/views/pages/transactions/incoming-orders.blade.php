@@ -52,8 +52,8 @@ table{
                             </div>
                             @if (Auth::user()->role != 1)
                             <div class="col-md-6 text-right col-12">
-                                <strong>Total profit</strong> <br> Taken <span style="color: #3ce786;">${{$taken}}</span>&nbsp; 
-                                Hold <span style="color:#bbbbbb;">${{$hold}}</span>
+                                <strong>Total profit</strong> <br> Taken <span style="color: #349e5a;"><strong> ${{$taken}}</strong></span>&nbsp; 
+                                Hold <span style="color:#828282;"><strong>${{$hold}}</strong></span>
                             </div>
                             @endif
                         </div>
@@ -148,7 +148,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
                     data: 'transaction_total',
                     name: 'transaction_total',
                     render: function(data) {
-                        return '<span style="color:#e7ab3c;">$'+data+'</span>';
+                        return '<span style="color:#e7973c;"><strong>$'+data+'</strong></span>';
                     },
                 },{
                     data: 'profit',
@@ -166,9 +166,9 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
                     name: 'status',
                     render : function(data){
                         if(data == 'The customer has received the order'){
-                            return '<span style="color: #59d587;">The customer has received the order</span>';
+                            return '<span style="color: #349e5a;">The customer has received the order</span>';
                         }else{
-                            return '<span style="color: #e7ab3c;">'+data+'</span>';
+                            return '<span style="color: #e7973c;">'+data+'</span>';
                         }
                     }
                 },{
@@ -184,5 +184,26 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
     });
 
 </script>
+
+<script>
+    function confirmDelete(transactionId) {
+        Swal.fire({
+            title: 'Are you sure you want to delete?',
+            text: 'If you delete this transaction, the transaction history data will automatically be deleted for the seller or buyer!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Set action form dengan URL yang tepat
+                document.getElementById('deleteForm').action = "{{ route('transactions.destroy', ':transactionId') }}".replace(':transactionId', transactionId);
+                document.getElementById('deleteForm').submit();
+            }
+        });
+    }
+</script>
+
 @endpush
 {{-- end script khusus pada pages daftar anggota --}}

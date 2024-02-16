@@ -1,6 +1,12 @@
 @extends('layouts.admin')
 
 @section('title','Add Product')
+
+@push('after-style')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<!-- Cropper CSS -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css'>
+@endpush
 @section('content')
 <div class="orders">
     <div class="row">
@@ -35,6 +41,20 @@
                         @error('photo')
                         <div class="text-danger">{{ $message }}</div>
                         @enderror
+
+                        @error('photo_input')
+                        @if (!$errors->has('photo')) <!-- Add this condition -->
+                        <div class="text-danger">{{ $message }}</div>
+                        @endif
+                    
+                        @enderror
+                    </div>
+
+                   
+
+                    <div class="form-group">
+                        <img id="photo_preview" src="#" alt="Photo Preview" style="width: 100px;width: 100px; display: none;">
+                        <input type="hidden" name="photo_input" id="photo_input">
                     </div>
                     
                     <div class="form-group">
@@ -128,14 +148,113 @@
                         <button type="submit" class="btn btn-primary btn-block">Add Product</button>
                     </div>
                 </form>
+               
             </div>
         </div>
     </div>
 </div>
 
+
+    <!-- Tambahkan modal untuk pratinjau dan crop gambar -->
+<div class="modal fade modal-lg" id="cropModal" tabindex="-1" role="dialog" aria-labelledby="cropModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cropModalLabel">Crop Image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="" id="image" style="max-width: 100%; width: auto; height: auto;">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="crop">Crop</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
     @endsection
 
     @push('after-script')
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.min.js'></script>
+
+    <script>
+        jQuery(document).ready(function ($) {
+        // Cropper.js initialization
+        var cropper;
+
+        // Ketika pengguna memilih gambar
+        $('#photo').change(function(e) {
+        var file = e.target.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function(event) {
+            $('#cropModal').modal('show');
+            var imageUrl = event.target.result;
+            // Tambahkan timestamp ke URL gambar
+
+            $('#image').attr('src', imageUrl);
+
+            // Inisialisasi Cropper
+            cropper = new Cropper(document.getElementById('image'), {
+                aspectRatio: 1 / 1, // Rasio aspek 1:1
+                viewMode: 1,
+            });
+        }
+
+        reader.readAsDataURL(file);
+    });
+
+        $('#crop').click(function() {
+    if (cropper) {
+        var canvas = cropper.getCroppedCanvas({
+            width: 600, // Lebar gambar hasil crop
+            height: 600, // Tinggi gambar hasil crop
+        });
+
+        if (canvas) {
+            canvas.toBlob(function(blob) {
+                $('#photo_preview').attr('src', url).show();
+                if (blob) {
+                    var url = URL.createObjectURL(blob);
+                    var reader = new FileReader();
+
+                    reader.readAsDataURL(blob);
+                    reader.onloadend = function() {
+                        var base64data = reader.result;
+                        $('#photo_preview').attr('src', base64data);
+                        $('#photo_input').val(base64data); // Set nilai input tersembunyi dengan gambar yang dipangkas
+                        
+                        $('#cropModal').modal('hide');
+                    };
+                } else {
+                    console.error('Canvas is null or undefined.');
+                }
+            });
+        } else {
+            console.error('Failed to get cropped canvas.');
+        }
+    } else {
+        console.error('Cropper is not initialized.');
+    }
+});
+
+    // Reset Cropper saat gambar berubah
+    $('#photo').on('change', function() {
+        if (cropper) {
+            cropper.destroy(); // Hancurkan objek Cropper
+            cropper = null; // Atur cropper menjadi null
+        }
+    });
+
+    });
+</script>
+
     <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
     <script>
         ClassicEditor
@@ -170,4 +289,6 @@
         }
     }
 </script>
+
+
     @endpush

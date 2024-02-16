@@ -220,6 +220,41 @@
         });
 
 
+        $('body').on('click', '.deleteRequest', function () {
+    var requestId = $(this).data('id');
+    Swal.fire({
+        title: 'Are you sure you want to delete?',
+        text: 'If you delete this transaction withdraw, the transaction withdraw history data will automatically be deleted for the seller or buyer!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: '/transactions/balance/' + requestId, // Perbaiki URL ini
+                type: 'DELETE',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                },
+                success: function (response) {
+                    // Handle success response
+                    Swal.fire('Deleted!', 'Transaction withdraw has been deleted.', 'success');
+                    // Reload DataTable
+                    $('#tableBalanceRequest').DataTable().ajax.reload();
+                },
+                error: function (xhr, status, error) {
+                    // Handle error response
+                    Swal.fire('Error!', 'Failed to delete transaction withdraw.', 'error');
+                }
+            });
+        }
+    });
+});
+
+
+
     });
 
 </script>

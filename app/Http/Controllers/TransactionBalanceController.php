@@ -32,13 +32,18 @@ class TransactionBalanceController extends Controller
       return Datatables::of($data)
         ->addColumn('action', function ($data) {
             if($data->status != 'Pending'){
-                return '';
+                return  '<div class="btn-group">' .
+                '<a href="javascript::void(0)" class="deleteRequest ml-1 btn btn-danger btn-lg" data-id="'.$data->id.'" title="delete">' .
+                '<label class="fa fa-trash"></label> Delete</a>' .
+                '</div>';
             }else{
                 return  '<div class="btn-group">' .
-                '<a href="javascript::void(0)" data-id="'.$data->id.'" class="accRequest btn btn-info btn-lg mx-1">'.
+                '<a href="javascript::void(0)" data-id="'.$data->id.'" class="accRequest btn btn-info btn-lg mr-1">'.
                 '<label class="fa fa-check"></label> Acc</a>' .
-                '<a href="javascript::void(0)" data-id="'.$data->id.'" class="rejectRequest btn btn-danger btn-lg" title="reject">' .
+                '<a href="javascript::void(0)" data-id="'.$data->id.'" class="rejectRequest btn btn-warning btn-lg" title="reject">' .
                 '<label class="fa fa-times"></label> Reject</a>' .
+                '<a href="javascript::void(0)" class="deleteRequest ml-1 btn btn-danger btn-lg" data-id="'.$data->id.'" title="delete">' .
+                '<label class="fa fa-trash"></label> Delete</a>' .
                 '</div>';
             }
 
@@ -46,6 +51,12 @@ class TransactionBalanceController extends Controller
         ->rawColumns(['action'])
         ->addIndexColumn()
         ->make(true);
+    }
+
+    public function destroy($id){
+        TransactionBalance::destroy($id);
+
+        return response()->json(['message' => 'Transaction balance deleted successfully'], 200);
     }
 
     public function accRequest($id){
@@ -183,13 +194,18 @@ class TransactionBalanceController extends Controller
       return Datatables::of($data)
         ->addColumn('action', function ($data) {
             if($data->status != 'Pending'){
-                return '';
+                return  '<div class="btn-group">' .
+                '<a href="javascript::void(0)" class="deleteRequest ml-1 btn btn-danger btn-lg" data-id="'.$data->id.'" title="delete">' .
+                '<label class="fa fa-trash"></label> Delete</a>' .
+                '</div>';
             }else{
                 return  '<div class="btn-group">' .
-                '<a href="javascript::void(0)" data-id="'.$data->id.'" data-nominal="'.$data->nominal.'" data-bank_account="'.$data->bank_account.'" data-number="'.$data->number.'"  class="accRequest btn btn-info btn-lg mx-1">'.
+                '<a href="javascript::void(0)" data-id="'.$data->id.'" data-nominal="'.$data->nominal.'" data-bank_account="'.$data->bank_account.'" data-number="'.$data->number.'"  class="accRequest btn btn-info btn-lg mr-1">'.
                 '<label class="fa fa-check"></label> Acc</a>' .
-                '<a href="javascript::void(0)" data-id="'.$data->id.'" class="rejectRequest btn btn-danger btn-lg" title="reject">' .
+                '<a href="javascript::void(0)" data-id="'.$data->id.'" class="rejectRequest btn btn-warning btn-lg" title="reject">' .
                 '<label class="fa fa-times"></label> Reject</a>' .
+                '<a href="javascript::void(0)" class="deleteRequest ml-1 btn btn-danger btn-lg" data-id="'.$data->id.'" title="delete">' .
+                '<label class="fa fa-trash"></label> Delete</a>' .
                 '</div>';
             }
 

@@ -117,34 +117,35 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $request->validate([
+            'photo_input' => 'required',
             'photo' => 'required',
             'category_id' => 'required'
-        ],[
-            'category_id.required' => 'The category field is required.'
+        ], [
+            'category_id.required' => 'The category field is required.',
+            'photo_input.required' => 'The photo you uploaded has not been cropped, upload the product photo and click the crop button.'
         ]);
-
-        if($request['total_views'] == null)
-        $request['total_views'] = 0;
-
-        if($request['total_sold'] == null)
-        $request['total_sold'] = 0;
-
-        $products = $request->except(['photo']);
-        $products['slug'] = Str::slug($request->name);
-        $product = Product::create($products);
-        $path = $request->file('photo')->store('products','public');
-        $photo = 'storage/'.$path;
+    
+        $product = Product::create($request->except(['photo', 'photo_input']) + ['slug' => Str::slug($request->name)]);
+    
+        $image_parts = explode(";base64,", $request->photo_input);
+        $image_base64 = base64_decode($image_parts[1]);
+        $image = imagecreatefromstring($image_base64);
+        $imageName = uniqid() . '.png';
+        $imageFullPath = public_path('storage/products/') . $imageName;
+        imagepng($image, $imageFullPath);
+    
         ProductGallery::create([
             'products_id' => $product->id,
-            'photo' => $photo,
+            'photo' => 'storage/products/' . $imageName,
             'is_default' => 1,
         ]);
+    
         Alert::toast('Add product successfully', 'success');
-
+    
         return redirect()->route('products.index');
-
-        // return redirect()->route('products.index');
     }
+    
+    
 
     /**
      * Display the specified resource.
@@ -193,17 +194,28 @@ class ProductController extends Controller
         if($request['total_sold'] == null)
         $request['total_sold'] = 0;
 
-        $data = $request->except(['photo']);
+        $data = $request->except(['photo','photo_input']);
         $data['slug'] = Str::slug($request->name);
         $product = Product::findOrFail($id);
         $product->update($data);
 
         if($request->hasFile('photo')){
-            $path = $request->file('photo')->store('products','public');
-            $photo = 'storage/'.$path;
-            ProductGallery::where('products_id',$id)->update([
-                'photo' => $photo,
-            ]);    
+            $request->validate([
+                'photo_input' => 'required',
+            ], [
+                'photo_input.required' => 'The photo you uploaded has not been cropped, upload the product photo and click the crop button.'
+            ]);
+                $image_parts = explode(";base64,", $request->photo_input);
+                $image_base64 = base64_decode($image_parts[1]);
+                $image = imagecreatefromstring($image_base64);
+                $imageName = uniqid() . '.png';
+                $imageFullPath = public_path('storage/products/') . $imageName;
+                imagepng($image, $imageFullPath);
+    
+                ProductGallery::where('products_id',$id)->update([
+                    'photo' => 'storage/products/' . $imageName,
+                ]);   
+            
         }
         Alert::toast('Edit product successfully', 'success');
         return redirect()->route('products.index');

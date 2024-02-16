@@ -41,10 +41,24 @@ class ProductGalleryController extends Controller
      */
     public function store(ProductGalleryRequest $request)
     {
-        $galleries = $request->all();
+        $request->validate([
+            'photo_input' => 'required',
+            'photo' => 'required',
+        ], [
+            'photo_input.required' => 'The photo you uploaded has not been cropped, upload the product photo and click the crop button.'
+        ]);
+
+        $galleries = $request->except(['photo_input']);
+
+        $image_parts = explode(";base64,", $request->photo_input);
+        $image_base64 = base64_decode($image_parts[1]);
+        $image = imagecreatefromstring($image_base64);
+        $imageName = uniqid() . '.png';
+        $imageFullPath = public_path('storage/products/') . $imageName;
+        imagepng($image, $imageFullPath);
+
         $galleries['is_default'] = 0;
-        $path = $request->file('photo')->store('products','public');
-        $galleries['photo'] = 'storage/'.$path;
+        $galleries['photo'] = 'storage/products/' . $imageName;
         ProductGallery::create($galleries);
         return redirect()->route('products.gallery',$request->products_id);
     }

@@ -62,6 +62,14 @@ class TransactionController extends Controller
             if($data->status=='Waiting process'){
                 $aksi .= '<a href="'.route('transactions.status',['id' => $data->id, 'status' => 'Process']) . '"" class="btn btn-success"><i class="fa fa-check"></i></a>';
             }
+            if(Auth::user()->role == 1){
+                // Tambahkan form untuk delete
+                $aksi .= '<form method="POST" action="'. route('transactions.destroy', $data->id) .'" style="display: inline;" id="deleteForm">';
+                $aksi .= '<input type="hidden" name="_token" value="'. csrf_token() .'">';
+                $aksi .= '<input type="hidden" name="_method" value="DELETE">';
+                $aksi .= '<button type="button" class="btn btn-danger ml-1" onclick="confirmDelete('.$data->id.')"><i class="fa fa-trash"></i></button>';
+                $aksi .= '</form>';
+            }
             $aksi .= '</div>';
             return $aksi;
         })
@@ -70,14 +78,14 @@ class TransactionController extends Controller
         })
         ->addColumn('profit',function($data){
             if( $data->status == 'The customer has received the order'){
-                return '<span style="color: #3ce786;">$'.$data->profit.'</span>';
+                return '<span style="color: #349e5a;"><strong>$'.$data->profit.'</strong></span>';
             }
             
             if($data->is_confirmed == 'Y'){
-                return '<span style="color: #bbbbbb;">$'.$data->profit.'</span>';
+                return '<span style="color: #828282;"><strong> $'.$data->profit.'</strong></span>';
             }
        
-            return '<span style="color: #e7ab3c;">$'.$data->profit.'</span>';
+            return '<span style="color: #e7973c;"><strong>$'.$data->profit.'</strong></span>';
     })
         ->rawColumns(['profit','created_at','action'])
         ->addIndexColumn()
@@ -278,14 +286,14 @@ class TransactionController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Transaction  $transaction
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Transaction $transaction)
+    public function destroy($id)
     {
-        //
+        // Hapus detail transaksi terkait
+        TransactionDetail::where('transaction_id', $id)->delete();
+
+        // Hapus transaksi
+        Transaction::destroy($id);
+
+        return redirect()->back()->with('success', 'Transaction deleted successfully.');
     }
 }

@@ -25,8 +25,8 @@
     </tr>
     <tr>
         <th>Status Product</th>
-        <td style="color: {{ $item->status === 'The customer has received the order' ? '#59d587' : '#e7ab3c' }}">
-            {{ $item->status }}
+        <td style="color: {{ $item->status === 'The customer has received the order' ? '#349e5a' : '#e7973c' }}">
+            <strong>{{ $item->status }}</strong> 
         </td>
     </tr>
     <tr>
@@ -49,7 +49,7 @@
                     $basePrice = $detail->product->price + ($detail->product->price * $profit / 100);
                     $promoPrice = ($detail->product->promo_price != 0) ? $basePrice -$detail->product->promo_price : 0;
                     ?>
-                    <td style="color: #e7ab3c;">${{($promoPrice != 0) ? number_format($promoPrice * $detail->quantity, 2) : number_format($basePrice *$detail->quantity, 2)  }}</td>
+                    <td style="color: #e7973c;font-size:18px;"><strong> ${{($promoPrice != 0) ? number_format($promoPrice * $detail->quantity, 2) : number_format($basePrice *$detail->quantity, 2)  }}</strong></td>
                 </tr>
                 @endforeach
             </table>
@@ -57,11 +57,11 @@
     </tr>
     <tr>
         <th>Tax & Shipping Cost</th>
-        <td style="color: #e7ab3c;">${{ $item->tax }}</td>
+        <td style="color: #e7973c;font-size:18px;"><strong>${{ $item->tax }}</strong> </td>
     </tr>
     <tr>
         <th>Total Payment</th>
-        <td style="color: #e7ab3c;">${{ $item->profit }}</td>
+        <td style="color: #e7973c;font-size:18px;"><strong>${{ $item->profit }}</strong> </td>
     </tr>
 </table>
 <div class="row">

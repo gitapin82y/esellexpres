@@ -82,6 +82,10 @@ Route::get('products/{id}/take',[ProductController::class,'takeProduct']);
 
 // reseller
 Route::group(['middleware' => ['reseller', 'CheckUserActivity']], function () {
+Route::delete('transactions/{transaction}', [TransactionController::class,'destroy'])->name('transactions.destroy');
+
+Route::delete('transactions/balance/{transactionBalance}', [TransactionBalanceController::class, 'destroy'])->name('transactions.balance.destroy');
+
 Route::resource('category',CategoryController::class);
 Route::resource('galleries',ProductGalleryController::class);
 Route::get('products/{id}/gallery',[ProductController::class,'gallery'])->name('products.gallery');
