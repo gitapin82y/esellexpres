@@ -121,7 +121,6 @@ class PenjualController extends Controller
     }
 
     public function datatableListProductPenjual($store){
-
         $stores = Store::with('products')->where('name', $store)->first();
         $data = [];
         foreach ($stores->products as $key => $product) {
