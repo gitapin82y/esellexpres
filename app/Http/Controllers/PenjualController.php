@@ -116,7 +116,7 @@ class PenjualController extends Controller
 
     public function indexListProductPenjual($store)
     {
-        $stores = Store::with('products')->where('name', $store)->first();
+        $stores = Store::with('products')->where('name', $store)->first()->name;
         return view('pages.reseller.list-product-penjual',compact('store'));
     }
 
