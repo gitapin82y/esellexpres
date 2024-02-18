@@ -27,7 +27,7 @@
                     <div class="card-header bg-white py-4 mb-4">
                         <div class="row justify-content-between">
                         <div class="col-md-4 text-left align-self-center col-12">
-                            <h4>List Product, Store : <strong>{{$store->name}}</strong></h4>
+                            <h4>List Product, Store : <strong>{{$storeName}}</strong></h4>
                         </div>
                         <div class="col-12 col-md-4 text-right">
     
@@ -87,7 +87,7 @@
             "order": [
                 [0, "asc"]
             ],
-            ajax: "{{ route('getListProductPenjual', $store->slug) }}",
+            ajax: "{{ route('getListProductPenjual', $storeName) }}",
             columns: [
                 { data: 'DT_RowIndex', name: 'DT_RowIndex' },
                 { 

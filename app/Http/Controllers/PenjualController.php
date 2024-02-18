@@ -117,11 +117,17 @@ class PenjualController extends Controller
     public function indexListProductPenjual($store)
     {
         $stores = Store::with('products')->where('slug', $store)->first();
-        return view('pages.reseller.list-product-penjual',compact('store'));
+        if ($stores) {
+            $storeName = $stores->name;
+            return view('pages.reseller.list-product-penjual', compact('storeName'));
+        } else {
+            return redirect()->back()->with('error', 'Store not found.');
+        }
     }
 
     public function datatableListProductPenjual($store){
-        $stores = Store::with('products')->where('slug', $store)->first();
+
+        $stores = Store::with('products')->where('name', $store)->first();
         $data = [];
         foreach ($stores->products as $key => $product) {
             $data[$key] = Product::where('id', $product->product_id)
