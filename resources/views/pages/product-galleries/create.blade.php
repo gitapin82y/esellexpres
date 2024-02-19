@@ -74,17 +74,17 @@
 </div>
 
     <!-- Tambahkan modal untuk pratinjau dan crop gambar -->
-    <div class="modal fade modal-lg" id="cropModal" tabindex="-1" role="dialog" aria-labelledby="cropModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal fade" id="cropModal" tabindex="-1" role="dialog" aria-labelledby="cropModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xs">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="cropModalLabel">Crop Image</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="modal-header bg-gradient-info">
+                    <h4 class="modal-title d-inline" id="cropModalLabel">Crop Image</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <img src="" id="image" style="max-width: 100%; width: auto; height: auto;">
+                    <div class="row col-12 text-center justify-content-center d-flex p-0 m-0">
+                        <img src="" id="image" style="max-width: 100%; width:100% !important; height: auto;">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
