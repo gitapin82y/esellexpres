@@ -41,7 +41,7 @@
         <div class="container-fluid">
             <div class="row mt-5 pt-2">
                     <div class="col-6 text-left align-self-center">
-                        <h2 class="font-weight-bold" style="color: #e7ab3c;">Best Selling Product</h2>
+                        <h2 class="font-weight-bold txt-best-selling" style="color: #e7ab3c;">Best Selling Product</h2>
                     </div>
                     <div class="col-6 text-right align-selft-center">
                         <a href="{{ '/' . request()->segment(1) . '/all-products' }}" class="primary-btn">All Product</a>

@@ -1218,15 +1218,16 @@ ol {
 .product-item:hover .pi-pic ul {
     bottom: 0;
 }
-
+.txt-best-selling {
+    font-size: 32px;
+}
 .product-item .pi-pic {
     overflow: hidden;
     position: relative;
 }
 
 .product-item .pi-pic img {
-    min-width: 100%;
-    object-fit: cover;
+    width: 200px;
     height: 200px !important;
 }
 
@@ -3993,6 +3994,7 @@ ol {
         max-width: 1170px;
     }
     .product-item .pi-pic img {
+        width: 300px !important;
         height: 300px !important;
     }
 }
@@ -4004,6 +4006,7 @@ ol {
         max-width: 36%;
     }
     .product-item .pi-pic img {
+        width: 300px !important;
         height: 300px !important;
     }
     .inner-header .advanced-search .input-group {
@@ -4042,6 +4045,7 @@ ol {
     .banner-section {
         padding: 80px 0 50px;
     }
+
     .single-banner {
         margin-bottom: 30px;
     }
@@ -4154,6 +4158,9 @@ ol {
 /* Large Device: 480px */
 
 @media only screen and (max-width: 767px) {
+    .txt-best-selling {
+        font-size: 20px;
+    }
     .instagram-photo .insta-item {
         width: 50%;
         height: 300px;
@@ -4325,6 +4332,9 @@ ol {
 /* Small Device: 320px */
 
 @media only screen and (max-width: 479px) {
+    .txt-best-selling {
+        font-size: 18px;
+    }
     .instagram-photo .insta-item {
         width: 100%;
     }

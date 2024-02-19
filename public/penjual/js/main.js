@@ -72,10 +72,10 @@
         autoplay: true,
         responsive: {
             0: {
-                items: 2,
+                items: 1,
             },
-            576: {
-                items: 3,
+            496: {
+                items: 2,
             },
             992: {
                 items: 3,
