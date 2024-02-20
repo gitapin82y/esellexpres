@@ -44,7 +44,7 @@
                 @endphp
                 @foreach($item->details as $detail )
                 <tr>
-                    <td> <img src="{{ $detail->product->galleries[0]->photo }}" alt="" /></td>
+                    <td> <img src="{{ $detail->product->galleries[0]->photo }}" width="100px;" height="100px;" alt="" /></td>
                     <td>{{ $detail->product->name }}</td>
                     <td>{{ $detail->quantity }}</td>
                     <?php
@@ -72,7 +72,7 @@
     @endif
     
     @if (Auth::user()->role == 1)
-    <form action="{{ route('transactions.status', $item->id) }}" method="get">
+    <form action="{{ route('transactions.status', $item->id) }}" class="w-100" method="get">
         <div class="col-12 mb-1">
             <label for="status-produk" class="form-controll">Status Product</label>
             <select name="status" class="form-control" id="status-produk" required>
