@@ -34,6 +34,7 @@
         <td>
             <table class="table table-bordered w-100 mb-0">
                 <tr>
+                    <th>Photo</th>
                     <th>Product</th>
                     <th>Quantity</th>
                     <th>Price</th>
@@ -43,6 +44,7 @@
                 @endphp
                 @foreach($item->details as $detail )
                 <tr>
+                    <td> <img src="{{ $detail->product->galleries[0]->photo }}" alt="" /></td>
                     <td>{{ $detail->product->name }}</td>
                     <td>{{ $detail->quantity }}</td>
                     <?php
