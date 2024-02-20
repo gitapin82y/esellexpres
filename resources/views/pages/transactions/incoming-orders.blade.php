@@ -117,7 +117,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
 </script>
 
 <div class="modal" id="mymodal" tabindex="-1">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header d-flex">
           <h5 class="modal-title"></h5>
