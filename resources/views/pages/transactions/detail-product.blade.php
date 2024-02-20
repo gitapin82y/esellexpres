@@ -44,7 +44,7 @@
                 @endphp
                 @foreach($item->details as $detail )
                 <tr>
-                    <td> <img src="{{ $detail->product->galleries[0]->photo }}" width="100px;" height="100px;" alt="" /></td>
+                    <td> <img src="{{ $detail->product->galleries[0]->photo }}" width="100px;" height="auto;" alt="" /></td>
                     <td>{{ $detail->product->name }}</td>
                     <td>{{ $detail->quantity }}</td>
                     <?php
