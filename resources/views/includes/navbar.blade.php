@@ -14,10 +14,10 @@
                 </div>
             </div>
             <div class="top-right">
-                <div class="header-menu">
+                <div class="header-menu justify-content-between">
                     <div class="header-left">
                         @if (Auth::check() && Auth::user()->role == 1)
-                        <div class="dropdown">
+                        <div class="dropdown d-flex">
 
                             <div class="d-none d-md-block">
                                 Balance <small>(Total Income)</small> : 
