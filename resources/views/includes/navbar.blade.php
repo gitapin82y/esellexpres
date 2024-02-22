@@ -13,7 +13,7 @@
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
-            <div class="top-right">
+            <div class="top-right px-0">
                 <div class="header-menu justify-content-between">
                     <div class="header-left">
                         @if (Auth::check() && Auth::user()->role == 1)
@@ -23,16 +23,16 @@
                                 Balance <small>(Total Income)</small> : 
                             </div>
 
-                            <span style="color:#e7ab3c; font-size:20px;">${{Auth::user()->balance}}</span>
+                            <span style="color:#e7ab3c; font-size:20px;">&nbsp; ${{Auth::user()->balance}}</span>
                         </div>
                         @else
                         <div class="dropdown">
-                            <a href="#" class="text-dark" data-toggle="modal" data-target="#topUpModal">
+                            <a href="#" class="text-dark d-flex" data-toggle="modal" data-target="#topUpModal">
                                 <div class="d-none d-md-block">
                                     Balance : 
                                 </div>
-                            <span style="color:#e7ab3c;font-size:20px;">${{Auth::user()->balance}}</span>
-                                <i class="fa fa-plus-circle" style="color: #e7ab3c;"></i>
+                            <span style="color:#e7ab3c;font-size:20px;">&nbsp; ${{Auth::user()->balance}}</span>
+                                <i class="fa fa-plus-circle align-self-center ml-2" style="color: #e7ab3c;"></i>
                             </a>
                         </div>
                         @endif
