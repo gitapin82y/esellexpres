@@ -53,7 +53,7 @@
                         @forelse ($products as $product)
                         <div class="product-item">
                             <a href="{{ '/' . request()->segment(1) . '/' . $product->slug }}">
-                            <div class="pi-pic">
+                            <div class="pi-pic justify-content-center d-flex">
                                 <img src="{{ $product->galleries[0]->photo }}" alt="" />
                                 <ul>
                                     <li class="quick-view">+ Quick View</li>
