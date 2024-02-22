@@ -113,7 +113,7 @@
                     @forelse ($products as $product)
                     <div class="product-item col-12 col-md-4 col-lg-3">
                         <a href="{{ '/' . request()->segment(1) . '/' . $product->slug }}">
-                            <div class="pi-pic">
+                            <div class="pi-pic justify-content-center d-flex">
                                 {{-- Mengakses kolom photo langsung dari hasil kueri --}}
                                 <img src="{{ asset($product->photo) }}" alt="" />
                                 <ul>
