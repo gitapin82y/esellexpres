@@ -40,7 +40,7 @@
 
                 <li class="menu-title">Transaction</li><!-- /.menu-title -->
                 <li class="{{Request::is('transaction') ? 'active' : '' }}">
-                    <a href="{{route('transaction.index')}}"> <i class="menu-icon fa fa-cart-plus"></i>Incoming Orders{!! $incomingOrders && $incomingOrders->total > 0 ? '<div class="badge"><span>' . $incomingOrders->total . '</span></div>' : '' !!}</a>
+                    <a href="{{route('transaction.index')}}"> <i class="menu-icon fa fa-cart-plus"></i>Orders{!! $incomingOrders && $incomingOrders->total > 0 ? '<div class="badge"><span>' . $incomingOrders->total . '</span></div>' : '' !!}</a>
                     
                     </li>
                 <li class="{{Request::is('topup-request') || Request::is('withdraw-request') ? 'active' : '' }}">
@@ -89,7 +89,7 @@
 
                 <li class="menu-title">Transaction</li><!-- /.menu-title -->
                     <li class="{{Request::is('transaction') ? 'active' : '' }}">
-                    <a href="{{route('transaction.index')}}"> <i class="menu-icon fa fa-cart-plus"></i>Incoming Orders   {!! $incomingOrders && $incomingOrders->total > 0 ? '<div class="badge"><span>' . $incomingOrders->total . '</span></div>' : ''!!}</a>
+                    <a href="{{route('transaction.index')}}"> <i class="menu-icon fa fa-cart-plus"></i>Orders{!! $incomingOrders && $incomingOrders->total > 0 ? '<div class="badge"><span>' . $incomingOrders->total . '</span></div>' : ''!!}</a>
                  
                     </li>
                     <li class="{{Request::is('topup-balance') ? 'active' : '' }}">

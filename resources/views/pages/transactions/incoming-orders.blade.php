@@ -1,6 +1,6 @@
 @extends('layouts.admin')
  
-@section('title', 'Incoming Orders')
+@section('title', 'Orders')
  @push('after-style')
  <style>
     /* th, td { white-space: nowrap; } */
@@ -46,14 +46,51 @@ table{
                             </button>
                           </div>
                           @endif
-                        <div class="row col-12">
-                            <div class="col-md-6 text-left col-12 align-self-center">
+                        <div class="row col-12 justify-content-between">
+                            <div class="col-md-4 text-left col-6 align-self-center">
                                 <h4>All product order lists</h4>
                             </div>
                             @if (Auth::user()->role != 1)
-                            <div class="col-md-6 text-right col-12">
+                            <div class="col-md-4 text-center col-6 align-self-center">
+                                <label for="filterDate">Filter by Month:</label>
+                                <select id="filterMonth" class="form-control">
+                                    <option value="">Select Month</option>
+                                    <option value="01">January</option>
+                                    <option value="02">February</option>
+                                    <option value="03">March</option>
+                                    <option value="04">April</option>
+                                    <option value="05">May</option>
+                                    <option value="06">June</option>
+                                    <option value="07">July</option>
+                                    <option value="08">August</option>
+                                    <option value="09">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 text-center text-md-right col-12">
                                 <strong>Total profit</strong> <br> Taken <span style="color: #349e5a;"><strong> ${{$taken}}</strong></span>&nbsp; 
                                 Hold <span style="color:#828282;"><strong>${{$hold}}</strong></span>
+                            </div>
+                            @else
+                            <div class="col-md-4 text-right col-6 align-self-center">
+                                <label for="filterDate">Filter by Month:</label>
+                                <select id="filterMonth" class="form-control">
+                                    <option value="">Select Month</option>
+                                    <option value="01">January</option>
+                                    <option value="02">February</option>
+                                    <option value="03">March</option>
+                                    <option value="04">April</option>
+                                    <option value="05">May</option>
+                                    <option value="06">June</option>
+                                    <option value="07">July</option>
+                                    <option value="08">August</option>
+                                    <option value="09">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
                             </div>
                             @endif
                         </div>
@@ -180,6 +217,17 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
 
         });
         // end data table ajax
+
+        $(document).on('change', '.filter-date', function () {
+            var selectedDate = $(this).val();
+            table.column(4).search(selectedDate).draw();
+        });
+        $('#filterMonth').change(function () {
+            var selectedMonth = $('#filterMonth').val();
+            table.column(4).search(selectedMonth).draw();
+        });
+
+
 
     });
 
