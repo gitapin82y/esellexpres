@@ -204,6 +204,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
                     render : function(data){
                         if(data == 'The customer has received the order'){
                             return '<span style="color: #349e5a;">The customer has received the order</span>';
+                        }else if(data == 'Reject order'){
+                            return '<span style="color: #dc3545;">Reject order</span>';
                         }else{
                             return '<span style="color: #e7973c;">'+data+'</span>';
                         }

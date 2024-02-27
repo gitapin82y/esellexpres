@@ -25,7 +25,7 @@
     </tr>
     <tr>
         <th>Status Product</th>
-        <td style="color: {{ $item->status === 'The customer has received the order' ? '#349e5a' : '#e7973c' }}">
+        <td style="color: {{ $item->status === 'Reject order' ? '#dc3545' : ($item->status === 'The customer has received the order' ? '#349e5a' : '#e7973c') }}">
             <strong>{{ $item->status }}</strong> 
         </td>
     </tr>

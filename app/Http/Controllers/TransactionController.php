@@ -35,7 +35,7 @@ class TransactionController extends Controller
         }else{
             $store = Store::where('user_id', Auth::id())->first();
     
-            $hold = Transaction::where('store_id', $store->id)->where('is_confirmed', 'Y')->where('status','!=', 'The customer has received the order')->sum('profit');
+            $hold = Transaction::where('store_id', $store->id)->where('is_confirmed', 'Y')->where('status','!=', 'The customer has received the order')->where('status','!=', 'Reject order')->sum('profit');
         
             $taken = Transaction::where('store_id', $store->id)->where('is_confirmed', 'Y')
                 ->where('status', 'The customer has received the order')->sum('profit');
@@ -58,11 +58,17 @@ class TransactionController extends Controller
         ->addColumn('action', function ($data) {
 
             $aksi = '<div class="btn-group">' .
-            '<a href="#mymodal" data-remote="'. route('transaction.show',$data->id) .'" data-toggle="modal" data-target="#mymodal" data-title="Detail Transaksi <b>'. $data->uuid .'</b>" class="btn btn-main"><i class="fa fa-eye text-white"></i></a>';
+            '<a href="#mymodal" data-remote="'. route('transaction.show',$data->id) .'" data-toggle="modal" data-target="#mymodal" data-title="Detail Transaksi <b>'. $data->uuid .'</b>" class="btn btn-primary"><i class="fa fa-eye text-white"></i></a>';
             if($data->status=='Waiting process'){
                 $aksi .= '<a href="'.route('transactions.status',['id' => $data->id, 'status' => 'Process']) . '"" class="btn btn-success"><i class="fa fa-check"></i></a>';
             }
             if(Auth::user()->role == 1){
+                if($data->status == 'Reject order' || $data->status == 'The customer has received the order'){
+                    $aksi .= '<a href="javascript:void(0)" style="opacity:0.2;" class="btn btn-main disabled ml-1 text-light"><i class="fa fa-times"></i></a>';
+                }else{
+                    $aksi .= '<a href="'.route('transactions.status',['id' => $data->id, 'status' => 'Reject order']) . '"" class="btn btn-main  ml-1 text-light"><i class="fa fa-times"></i></a>';
+                }
+                
                 // Tambahkan form untuk delete
                 $aksi .= '<form method="POST" action="'. route('transactions.destroy', $data->id) .'" style="display: inline;" id="deleteForm">';
                 $aksi .= '<input type="hidden" name="_token" value="'. csrf_token() .'">';
@@ -79,6 +85,10 @@ class TransactionController extends Controller
         ->addColumn('profit',function($data){
             if( $data->status == 'The customer has received the order'){
                 return '<span style="color: #349e5a;"><strong>$'.$data->profit.'</strong></span>';
+            }
+
+            if( $data->status == 'Reject order'){
+                return '<span style="color: #dc3545;"><strong>$'.$data->profit.'</strong></span>';
             }
             
             if($data->is_confirmed == 'Y'){
@@ -214,6 +224,13 @@ class TransactionController extends Controller
             BadgeSidebarController::send('Incoming Orders');
             
             $notifOrderMasuk = true;
+        }
+
+
+        if($request->status == 'Reject order'){
+            User::where('id', $transaction->stores->user_id)->increment('balance', $transaction->transaction_total);
+            User::where('role', 1)->decrement('balance', $transaction->transaction_total);
+            User::where('id', $transaction->user_id)->increment('balance', $transaction->profit);
         }
 
         if($notifOrderMasuk){

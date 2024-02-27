@@ -86,7 +86,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                                                 <td>
                                                     {{ \Carbon\Carbon::parse($item->created_at)->format('F j, Y') }}
                                                 </td>
-                                                <td style="font-weight:bold;@if($item->status == 'The customer has received the order') color: #59d587; @else color: #e7ab3c; @endif">
+                                                <td style="font-weight:bold;@if($item->status == 'Reject order') color: #dc3545; @elseif($item->status == 'The customer has received the order') color: #59d587; @else color: #e7ab3c; @endif">
                                                     {{$item->status}}
                                                 </td>
                                                 <td>
