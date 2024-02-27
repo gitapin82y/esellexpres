@@ -328,6 +328,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
 
     $('body').on('click', '#checkout-product', function (e) {
     e.preventDefault();
+    
+    $(this).prop('disabled', true).addClass('loading');
 
     // Setup Ajax headers
     $.ajaxSetup({
