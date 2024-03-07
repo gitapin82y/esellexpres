@@ -125,10 +125,11 @@ class ProductController extends Controller
             'photo_input.required' => 'The photo you uploaded has not been cropped, upload the product photo and click the crop button.'
         ]);
     
+        $request['total_sold'] = $request->total_sold ?? 0;
+        $request['total_views'] = $request->total_views ?? 0;
+        
         $productData = $request->except(['photo', 'photo_input']) + [
-            'slug' => Str::slug($request->name),
-            'total_sold' => $request->total_sold ?? 0,
-            'total_views' => $request->total_views ?? 0,
+            'slug' => Str::slug($request->name)
         ];
     
         $product = Product::create($productData);
