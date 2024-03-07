@@ -10,7 +10,7 @@ use App\Models\TransactionBalance;
 use App\Jobs\SendTopupNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Validation\Validator;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\BadgeSidebarController;
 
 
