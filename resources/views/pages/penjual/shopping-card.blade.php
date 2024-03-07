@@ -451,6 +451,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
             // // Lakukan tindakan lain jika diperlukan
         }
     });
+    $(this).prop('disabled', false).removeClass('loading');
 
     });
 
