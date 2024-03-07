@@ -326,7 +326,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
 
     // Validasi formulir di sini menggunakan fungsi validateForm()
     if (!validateForm()) {
-            return false;
+        $(this).prop('disabled', false).removeClass('loading');
+        return false;
     }
 
     var nilaiTotal = updateCheckoutTable();
