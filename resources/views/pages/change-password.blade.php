@@ -102,7 +102,7 @@
 			
 
 					<div class="container-login100-form-btn">
-						<button type="submit" class="login100-form-btn">
+						<button type="submit" class="login100-form-btn" onclick="this.disabled=true;this.form.submit();">
 							Change Password Now
 						</button>
 					</div>

@@ -129,7 +129,7 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block">Save Product</button>
+                        <button type="submit" class="btn btn-primary btn-block" onclick="this.disabled=true;this.form.submit();">Save Product</button>
                     </div>
                 </form>
             </div>

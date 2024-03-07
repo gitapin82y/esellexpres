@@ -53,7 +53,7 @@
                                             class="form-control" required>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-block">Save</button>
+                                        <button type="submit" class="btn btn-primary btn-block" onclick="this.disabled=true;this.form.submit();">Save</button>
                                     </div>
                                 </form>
                             </div>

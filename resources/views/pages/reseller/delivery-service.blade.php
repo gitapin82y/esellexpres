@@ -107,7 +107,7 @@
                 <input type="text" class="form-control form-control-sm inputtext" id="nameDelivery" name="name" required>
             </div>
 
-            <button class="btn btn-main" id="simpan" type="submit">Save</button>
+            <button class="btn btn-main" id="simpan" type="submit" onclick="this.disabled=true;this.form.submit();">Save</button>
 
          </form>
         </div>

@@ -92,7 +92,7 @@
         
         </div>
         <div class="col-12 pt-3">
-            <button type="submit" class="btn btn-success w-100">Update Status</button>
+            <button type="submit" class="btn btn-success w-100" onclick="this.disabled=true;this.form.submit();">Update Status</button>
         </div>
     </form>
     @endif

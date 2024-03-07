@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block">Add Category</button>
+                        <button type="submit" class="btn btn-primary btn-block" onclick="this.disabled=true;this.form.submit();">Add Category</button>
                     </div>
                 </form>
             </div>

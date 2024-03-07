@@ -258,7 +258,7 @@ input[type="date"]:before {
 			
 
 					<div class="container-login100-form-btn">
-						<button type="submit" class="login100-form-btn">
+						<button type="submit" class="login100-form-btn" onclick="this.disabled=true;this.form.submit();">
 							Register
 						</button>
 					</div>

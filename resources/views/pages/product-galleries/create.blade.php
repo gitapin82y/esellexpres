@@ -65,7 +65,7 @@
                     </div> --}}
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block">Add Product Photos</button>
+                        <button type="submit" class="btn btn-primary btn-block" onclick="this.disabled=true;this.form.submit();">Add Product Photos</button>
                     </div>
                 </form>
             </div>

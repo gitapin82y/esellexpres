@@ -271,7 +271,7 @@ td {
                           </div>
                                  
                 <div class="d-flex flex-column flex-lg-row align-items-center justify-content-center">
-                    <button type="submit" class="btn btn-outline-light py-3 px-4 w-100 mt-3">Send Message</button>
+                    <button type="submit" class="btn btn-outline-light py-3 px-4 w-100 mt-3" onclick="this.disabled=true;this.form.submit();">Send Message</button>
                 </div>
                     </form>
                 </div>

@@ -97,7 +97,7 @@
 
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-main w-100">Save Profile</button>
+                        <button type="submit" class="btn btn-main w-100" onclick="this.disabled=true;this.form.submit();">Save Profile</button>
                     </div>
                 </form>
             </div>

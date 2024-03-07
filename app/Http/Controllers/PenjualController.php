@@ -37,9 +37,9 @@ class PenjualController extends Controller
       return Datatables::of($data)
         ->addColumn('action', function ($data) {
             return  '<div class="btn-group">' .
-            '<a href="javascript::void(0)" data-id="'.$data->id.'" class="accKandidat mx-1 btn btn-info btn-lg">'.
+            '<a href="javascript::void(0)" onclick="this.disabled=true;" data-id="'.$data->id.'" class="accKandidat mx-1 btn btn-info btn-lg">'.
             '<label class="fa fa-pencil-alt"></label>Acc</a>' .
-            '<a href="javascript::void(0)" data-id="'.$data->id.'" class="tolakKandidat btn btn-danger btn-lg" title="tolak">Tolak</a>' .
+            '<a href="javascript::void(0)" onclick="this.disabled=true;" data-id="'.$data->id.'" class="tolakKandidat btn btn-danger btn-lg" title="tolak" >Tolak</a>' .
             '</div>';
         })
         ->addColumn('card',function($data){

@@ -29,7 +29,7 @@
                         <a href="{{ '/' . request()->segment(1) . '/all-products' }}" style=";color:#f78104;font-weight:bold;">Reset Filter</a>
                     </div>
                     <div class="col-5 p-0">
-                        <button type="submit" class="btn btn-main btn-lg w-100" style="margin-bottom:-10px;">Filter</button>
+                        <button type="submit" class="btn btn-main btn-lg w-100" style="margin-bottom:-10px;" onclick="this.disabled=true;this.form.submit();">Filter</button>
                     </div>
      
                 </div>
