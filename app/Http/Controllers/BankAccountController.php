@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\BankAccount;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class BankAccountController extends Controller
 {
@@ -56,6 +57,15 @@ class BankAccountController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'type_payment' => 'required',
+            'account_number' => 'required',
+        ]);
+ 
+        if ($validator->fails()) {
+            return back()->with('toast_error', 'Please complete your data.');
+        }
+
         $data = BankAccount::updateOrCreate([
             'id' => $request->id
         ],[

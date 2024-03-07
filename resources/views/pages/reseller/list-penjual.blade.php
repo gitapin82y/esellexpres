@@ -90,7 +90,7 @@
                 </label>
                 <input type="text" class="form-control form-control-sm inputtext profitinput" name="profit">
             </div>
-            <button class="btn btn-success" id="simpan" type="submit" onclick="this.disabled=true;this.form.submit();">Set Profit</button>
+            <button class="btn btn-success" id="simpan" type="submit">Set Profit</button>
 
          </form>
         </div>

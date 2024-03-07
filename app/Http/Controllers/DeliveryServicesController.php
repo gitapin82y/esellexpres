@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DeliveryServices;
 use App\Models\ShippingFee;
 use Illuminate\Http\Request;
-use Yajra\Datatables\Datatables;
 use Illuminate\Support\Carbon;
+use App\Models\DeliveryServices;
+use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Validator;
 
 class DeliveryServicesController extends Controller
 {
@@ -59,6 +60,14 @@ class DeliveryServicesController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+        ]);
+ 
+        if ($validator->fails()) {
+            return back()->with('toast_error', 'Please complete your data.');
+        }
+
         $data = DeliveryServices::updateOrCreate([
             'id' => $request->id
         ], [

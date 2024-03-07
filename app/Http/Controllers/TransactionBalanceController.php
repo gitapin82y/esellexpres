@@ -39,11 +39,11 @@ class TransactionBalanceController extends Controller
                 '</div>';
             }else{
                 return  '<div class="btn-group">' .
-                '<a href="javascript::void(0)" onclick="this.disabled=true;" data-id="'.$data->id.'" class="accRequest btn btn-info btn-lg mr-1">'.
+                '<a href="javascript::void(0)"  data-id="'.$data->id.'" class="accRequest btn btn-info btn-lg mr-1">'.
                 '<label class="fa fa-check"></label> Acc</a>' .
-                '<a href="javascript::void(0)" onclick="this.disabled=true;" data-id="'.$data->id.'" class="rejectRequest btn btn-warning btn-lg" title="reject">' .
+                '<a href="javascript::void(0)"  data-id="'.$data->id.'" class="rejectRequest btn btn-warning btn-lg" title="reject">' .
                 '<label class="fa fa-times"></label> Reject</a>' .
-                '<a href="javascript::void(0)" onclick="this.disabled=true;" class="deleteRequest ml-1 btn btn-danger btn-lg" data-id="'.$data->id.'" title="delete">' .
+                '<a href="javascript::void(0)"  class="deleteRequest ml-1 btn btn-danger btn-lg" data-id="'.$data->id.'" title="delete">' .
                 '<label class="fa fa-trash"></label> Delete</a>' .
                 '</div>';
             }
@@ -62,6 +62,9 @@ class TransactionBalanceController extends Controller
 
     public function accRequest($id){
         $data = TransactionBalance::with('users')->where('id',$id)->first();
+        if ($data->status === 'Success') {
+            return;
+        }
         $data->status = 'Success';
         $data->users->balance = $data->users->balance + $data->total;
         $data->save();
@@ -221,11 +224,11 @@ class TransactionBalanceController extends Controller
                 '</div>';
             }else{
                 return  '<div class="btn-group">' .
-                '<a href="javascript::void(0)" onclick="this.disabled=true;" data-id="'.$data->id.'" data-nominal="'.$data->nominal.'" data-bank_account="'.$data->bank_account.'" data-number="'.$data->number.'"  class="accRequest btn btn-info btn-lg mr-1">'.
+                '<a href="javascript::void(0)"  data-id="'.$data->id.'" data-nominal="'.$data->nominal.'" data-bank_account="'.$data->bank_account.'" data-number="'.$data->number.'"  class="accRequest btn btn-info btn-lg mr-1">'.
                 '<label class="fa fa-check"></label> Acc</a>' .
-                '<a href="javascript::void(0)" onclick="this.disabled=true;" data-id="'.$data->id.'" class="rejectRequest btn btn-warning btn-lg" title="reject">' .
+                '<a href="javascript::void(0)"  data-id="'.$data->id.'" class="rejectRequest btn btn-warning btn-lg" title="reject">' .
                 '<label class="fa fa-times"></label> Reject</a>' .
-                '<a href="javascript::void(0)" onclick="this.disabled=true;" class="deleteRequest ml-1 btn btn-danger btn-lg" data-id="'.$data->id.'" title="delete">' .
+                '<a href="javascript::void(0)"  class="deleteRequest ml-1 btn btn-danger btn-lg" data-id="'.$data->id.'" title="delete">' .
                 '<label class="fa fa-trash"></label> Delete</a>' .
                 '</div>';
             }
@@ -238,6 +241,9 @@ class TransactionBalanceController extends Controller
 
     public function accRequestWithdaw($id){
         $data = TransactionBalance::with('users')->where('id',$id)->first();
+        if ($data->status === 'Success') {
+            return;
+        }
         $data->status = 'Success';
         $data->users->balance = $data->users->balance - $data->total;
         $data->save();
