@@ -156,7 +156,7 @@
                 </label>
                 <input type="text" class="form-control form-control-sm inputtext" id="message" name="message">
             </div>
-            <button class="btn btn-main w-100" id="simpan" type="submit">Send Request</button>
+            <button class="btn btn-main w-100" id="simpan" type="submit" onclick="this.disabled=true;this.form.submit();">Send Request</button>
 
          </form>
         </div>

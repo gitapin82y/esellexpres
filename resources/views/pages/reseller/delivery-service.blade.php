@@ -294,6 +294,7 @@
      
             $('#modalDelivery').on('hidden.bs.modal', function () {
                 // Mengosongkan nilai formulir saat modal ditutup
+                $('#id').val('');
                 $('#form-delivery')[0].reset();
             });
     });

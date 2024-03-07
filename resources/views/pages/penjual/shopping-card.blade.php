@@ -239,20 +239,6 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
         };
     }
 
-    // UPDATE QUANTITY INPUT > LOCAL STORAGE
-    // function updateQuantity(productId, newQuantity) {
-    //         let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    //         let updatedCart = cart.map(item => {
-    //             if (item.id === productId) {
-    //                 item.quantity = newQuantity;
-    //             }
-    //             return item;
-    //         });
-    //         localStorage.setItem('cart', JSON.stringify(updatedCart));
-    //         updateCheckoutTable();
-    //         updateData();
-    //     }
-
     function deleteProduct(productId) {
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         // Gantilah ini dengan cara Anda mendapatkan ID pengguna saat ini
