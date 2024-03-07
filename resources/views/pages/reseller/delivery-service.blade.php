@@ -292,7 +292,10 @@
 
             });
      
-
+            $('#modalDelivery').on('hidden.bs.modal', function () {
+                // Mengosongkan nilai formulir saat modal ditutup
+                $('#form-delivery')[0].reset();
+            });
     });
 
     // $('#modal').modal('show');
