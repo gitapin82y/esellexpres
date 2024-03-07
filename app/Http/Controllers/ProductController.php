@@ -125,7 +125,14 @@ class ProductController extends Controller
             'photo_input.required' => 'The photo you uploaded has not been cropped, upload the product photo and click the crop button.'
         ]);
     
-        $product = Product::create($request->except(['photo', 'photo_input']) + ['slug' => Str::slug($request->name)]);
+            // Menyimpan data dengan nilai default 0 jika null
+            $productData = $request->except(['photo', 'photo_input']) + [
+                'slug' => Str::slug($request->name),
+                'total_sold' => coalesce($request->total_sold, 0),
+                'total_views' => coalesce($request->total_views, 0),
+            ];
+
+            $product = Product::create($productData);
     
         $image_parts = explode(";base64,", $request->photo_input);
         $image_base64 = base64_decode($image_parts[1]);
