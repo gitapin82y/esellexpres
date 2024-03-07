@@ -104,7 +104,7 @@
                 <label for="account_number">
                     Name Delivery<span style="color:red;">*</span>
                 </label>
-                <input type="text" class="form-control form-control-sm inputtext" id="nameDelivery" name="name" required>
+                <input type="text" class="form-control form-control-sm inputtext" id="nameDelivery" name="name">
             </div>
 
             <button class="btn btn-main" id="simpan" type="submit">Save</button>

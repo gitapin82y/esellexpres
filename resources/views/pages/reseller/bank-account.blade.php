@@ -86,7 +86,7 @@
                 <label for="account_number">
                     Account Number<span style="color:red;">*</span>
                 </label>
-                <input type="text" class="form-control form-control-sm inputtext" id="account_number" name="account_number" required>
+                <input type="text" class="form-control form-control-sm inputtext" id="account_number" name="account_number">
             </div>
 
             <button class="btn btn-success" id="simpan" type="submit">Save</button>

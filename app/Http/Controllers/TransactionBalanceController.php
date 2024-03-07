@@ -81,6 +81,9 @@ class TransactionBalanceController extends Controller
 
     public function rejectRequest($id){
         $data = TransactionBalance::with('users')->find($id);
+        if ($data->status !== 'Pending') {
+            return;
+        }
         $data->update(['status' => 'Failure']);
 
         $details = [
@@ -260,6 +263,11 @@ class TransactionBalanceController extends Controller
 
     public function rejectRequestWithdaw($id){
         $data = TransactionBalance::with('users')->find($id);
+        
+        if ($data->status !== 'Pending') {
+            return;
+        }
+    
         $data->update(['status' => 'Failure']);
 
         $details = [

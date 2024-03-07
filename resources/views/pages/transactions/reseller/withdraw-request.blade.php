@@ -156,6 +156,7 @@
 
         // aksi ajax jika tombol edit di klik
         $('body').on('click', '.accRequest', function () {
+            $(this).text('Loading...');
             var id = $(this).data('id');
             var nominal = $(this).data('nominal');
             var bank_account = $(this).data('bank_account');
@@ -192,6 +193,7 @@
                                 });
                             }
                         });
+                        $(this).text('Acc');
                     }
                 });
         });
@@ -200,6 +202,7 @@
 
      // aksi ajax jika tombol edit di klik
      $('body').on('click', '.rejectRequest', function () {
+            $(this).text('Loading...');
             var id = $(this).data('id');
             $.get("{{ route('withdraw-request.index') }}" + '/' + id + '/reject', function (data) {
                 const Toast = Swal.mixin({
@@ -215,7 +218,7 @@
             });
 
             $('#tableBalanceRequest').DataTable().ajax.reload();
-
+            $(this).text('Reject');
             });
         });
 
