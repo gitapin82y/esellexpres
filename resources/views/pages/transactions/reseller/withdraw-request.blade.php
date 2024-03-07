@@ -186,14 +186,15 @@
                                     title: 'Successful in accepting the request'
                                 });
                                 table.ajax.reload();
+                                $(this).text('Acc');
                             } else {
                                 Toast.fire({
                                     icon: 'error',
                                     title: 'Failed to accept the request'
                                 });
+                                $(this).text('Acc');
                             }
                         });
-                        $(this).text('Acc');
                     }
                 });
         });

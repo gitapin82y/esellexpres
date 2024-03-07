@@ -88,7 +88,7 @@
 							<p class="txt1 d-inline">
 								Want to come in?
 							</p>
-							<a href="/register{{ isset($_GET['next']) ? '?next=' . $_GET['next'] : '' }}" class="txt1 text-warning">
+							<a href="/login{{ isset($_GET['next']) ? '?next=' . $_GET['next'] : '' }}" class="txt1 text-warning">
 								Login Now
 							</a>
 						</div>
