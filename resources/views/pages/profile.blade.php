@@ -59,7 +59,7 @@
 
                     <div class="form-group">
                         <label for="born" class="form-control-label">Born<span class="text-danger">*</span></label>
-                        <input type="date" id="born" name="born" value="{{ old('born') ? old('born') : $users->born }}"
+                        <input type="date" id="born" onfocus="this.showPicker()"  name="born" value="{{ old('born') ? old('born') : $users->born }}"
                                class="form-control @error('born') is-invalid @enderror">
                         @error('born')
                         <div class="text-danger">{{ $message }}</div>

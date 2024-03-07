@@ -22,13 +22,13 @@ class MailController extends Controller
             Mail::to("cs@esellexpress.com")
                 ->send(new NotifMail($details));
     
-            return back()->with('success', 'Email berhasil dikirim');
+            return back()->with('success', 'Sent successfully');
         } catch (\Exception $e) {
             // cek error
             // return response()->json(['error'=>$e->getMessage()]);
     
             // Return back with an alert for failure
-            return back()->with('info', 'Email gagal dikirim. Silakan coba lagi.');
+            return back()->with('info', 'Email failed to send. Please try again.');
         }
     }
     

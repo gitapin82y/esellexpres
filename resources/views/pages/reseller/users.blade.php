@@ -122,7 +122,7 @@
                             <label for="address">Address</label>
                             <input type="text" class="form-control form-control-sm inputtext" id="address" name="address" required>
                         </div>
-                        <button class="btn btn-success" id="simpan" type="submit" onclick="this.disabled=true;this.form.submit();">Update</button>
+                        <button class="btn btn-success" id="simpan" type="submit">Update</button>
                     </form>
                 </div>
             </div>
