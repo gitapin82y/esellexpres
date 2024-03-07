@@ -195,6 +195,8 @@
                                 $(this).text('Acc');
                             }
                         });
+                    }else{
+                        $(this).text('Acc');
                     }
                 });
         });
