@@ -10,6 +10,7 @@ use App\Models\TransactionBalance;
 use App\Jobs\SendTopupNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Validator;
 use App\Http\Controllers\BadgeSidebarController;
 
 
@@ -104,6 +105,15 @@ class TransactionBalanceController extends Controller
 
     public function storetopup(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'total' => 'required',
+            'proof' => 'required',
+        ]);
+ 
+        if ($validator->fails()) {
+            return back()->with('toast_error', 'Please complete your data.');
+        }
+
         $path = $request->file('proof')->store('proof-transaction','public');
         $file = 'storage/'.$path;
 
@@ -146,6 +156,17 @@ class TransactionBalanceController extends Controller
 
     public function storewithdraw(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'bank_account' => 'required',
+            'number' => 'required',
+            'password' => 'required',
+            'total' => 'required',
+        ]);
+ 
+        if ($validator->fails()) {
+            return back()->with('toast_error', 'Please complete your data.');
+        }
+
         $nominal = Auth::user()->balance - $request->total;
         if($nominal < 0){
             return back()->with('toast_error','Your balance is not enough');
