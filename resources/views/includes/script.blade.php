@@ -41,16 +41,30 @@
 <!-- Initialize Clipboard.js -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var clipboard = new ClipboardJS('.copy-button');
+        // var clipboard = new ClipboardJS('.copy-button');
 
-        clipboard.on('success', function(e) {
-            alert('Account number copied! ' + e.text);
-            e.clearSelection();
-        });
+        // clipboard.on('success', function(e) {
+        //     alert('Account number copied! ' + e.text);
+        //     e.clearSelection();
+        // });
 
-        clipboard.on('error', function(e) {
-            alert('Unable to copy. Please copy the account number manually.');
-        });
+        // clipboard.on('error', function(e) {
+        //     alert('Unable to copy. Please copy the account number manually.');
+        // });
+        var clipboard = new ClipboardJS('.copy-button', {
+        target: function(trigger) {
+            return trigger.previousElementSibling; // Target the previous sibling with class 'copy-target'
+        }
+    });
+
+    clipboard.on('success', function(e) {
+        alert('Account number copied! ' + e.text);
+        e.clearSelection();
+    });
+
+    clipboard.on('error', function(e) {
+        alert('Unable to copy. Please copy the account number manually.');
+    });
     });
 </script>
 
