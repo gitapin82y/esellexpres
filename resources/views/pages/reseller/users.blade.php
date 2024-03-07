@@ -101,7 +101,7 @@
                         </div>
                         <div class="form-group">
                             <label for="born">Born</label>
-                            <input type="date" class="form-control form-control-sm inputtext" id="born" name="born" required>
+                            <input type="date" onfocus="this.showPicker()"  class="form-control form-control-sm inputtext" id="born" name="born" required>
                         </div>
                         <div class="form-group">
                             <label for="gender">Gender</label>
@@ -122,7 +122,7 @@
                             <label for="address">Address</label>
                             <input type="text" class="form-control form-control-sm inputtext" id="address" name="address" required>
                         </div>
-                        <button class="btn btn-success" id="simpan" type="submit">Update</button>
+                        <button class="btn btn-success w-100" id="simpan" type="submit">Update</button>
                     </form>
                 </div>
             </div>
