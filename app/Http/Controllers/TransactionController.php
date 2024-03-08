@@ -115,7 +115,10 @@ class TransactionController extends Controller
 
     public function checkout(Request $request){
         $user = Auth::user();
-        if($user->balance > $request->transaction_total){
+
+        $newBalance = $user->balance - $request->transaction_total;
+
+        if($newBalance >= 0){
             
             $data = $request->except('products');
             $data['uuid'] = 'INV-' . date('Ymd') . '-' . sprintf('%03d', mt_rand(1, 999));
