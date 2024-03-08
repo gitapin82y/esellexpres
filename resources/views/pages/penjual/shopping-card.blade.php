@@ -91,7 +91,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="noHP">Phone</label>
-                                                <input type="text" class="form-control" id="noHP" aria-describedby="noHPHelp" value="{{Auth::user()->phone}}" placeholder="Masukan No. HP">
+                                                <input type="number" class="form-control" id="noHP" aria-describedby="noHPHelp" value="{{Auth::user()->phone}}" placeholder="Masukan No. HP">
                                                 <span class="error-message" id="error-noHP"></span>
                                             </div>
                                         </div>

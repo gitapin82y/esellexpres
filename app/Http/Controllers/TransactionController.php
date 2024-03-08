@@ -116,7 +116,7 @@ class TransactionController extends Controller
     public function checkout(Request $request){
         $user = Auth::user();
 
-        $newBalance = $user->balance - $request->transaction_total;
+        $newBalance = $user->balance - $request->profit;
 
         if($newBalance >= 0.00){
             
