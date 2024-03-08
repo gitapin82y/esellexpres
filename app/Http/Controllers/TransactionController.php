@@ -118,7 +118,7 @@ class TransactionController extends Controller
 
         $newBalance = $user->balance - $request->transaction_total;
 
-        if($newBalance >= 0){
+        if($newBalance >= 0.00){
             
             $data = $request->except('products');
             $data['uuid'] = 'INV-' . date('Ymd') . '-' . sprintf('%03d', mt_rand(1, 999));
