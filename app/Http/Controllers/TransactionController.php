@@ -212,8 +212,8 @@ class TransactionController extends Controller
         $notifOrderMasuk = false;
         if ($request->status == 'Process') {
             $userId = Auth::id();
-
-            if(Auth::user()->balance < $transaction->transaction_total){
+            $newBalance = Auth::user()->balance - $transaction->transaction_total;
+            if($newBalance >= 0.00){
                 return back()->with('failedConfirm', '
                 Your balance is not enough to take advantage of the product');
             }
