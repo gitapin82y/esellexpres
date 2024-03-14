@@ -213,9 +213,9 @@ class TransactionController extends Controller
         if ($request->status == 'Process') {
             $userId = Auth::id();
             $newBalance = Auth::user()->balance - $transaction->transaction_total;
-            if($newBalance >= 0.00){
+            if($newBalance >= 0.00 || $newBalance >= 0){
                 return back()->with('failedConfirm', '
-                Your balance is not enough to take advantage of the product');
+                Your balance is not enough to buy products from resellers');
             }
              // Update the current user's balance
             User::where('id', $userId)->decrement('balance', $transaction->transaction_total);
