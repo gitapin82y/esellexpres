@@ -43,7 +43,10 @@
                 background-image: url('images/banner.png');
                 width: 100%;
                 background-size: cover;
+                background-position: center center;
                 height: auto;
+                min-height: 40vh;
+                background-repeat: no-repeat
             }
             .logo-homepage img{
                     max-height: 50px; 
@@ -253,7 +256,7 @@
             <div class="container px-5">
                 <div class="row justify-content-center">
                     <div class="col-xl-8">
-                        <div class="h2 fs-1 text-white mb-4">"Just at home, create your personal shop and sell the products we provide, get profits from the number of sales of our products"</div>
+                        {{-- <div class="h2 fs-1 text-white mb-4">"Just at home, create your personal shop and sell the products we provide, get profits from the number of sales of our products"</div> --}}
                         {{-- <img src="{{ optional($store)->logo ?? asset('images/logo.png') }}" alt="..." style="height: 3rem" /> --}}
                     </div>
                 </div>
