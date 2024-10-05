@@ -363,21 +363,22 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
             user_id: $('#user_id').val(),
             delivery_service_id: parseInt($('#selectOption').val(),11),
             address: $('#alamatLengkap').val(),
-            store_id:parseInt(store_id,11),
+            store_id:store_id,
             total_quantity: totalQuantity,
             transaction_total: parseFloat(nilaiTotal.total).toFixed(2),
             profit: parseFloat(nilaiTotal.profit).toFixed(2),
             tax: parseFloat(nilaiTotal.tax).toFixed(2),
             products: userCart
         };
-
+    
     $.ajax({
         type: 'POST',
         url: 'shopping-cart/checkout',
         data: formData,
         dataType: 'json',
         success: function (response) {
-            console.log(response.asd);
+       
+            if(!response.product_empty){
             if(response.checkout){
                 // Mengambil data produk dari local storage (contoh: cart)
                 var cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -418,7 +419,33 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
                     }
                 });
             }
+            }else{
+                Swal.fire({
+                    title: "The product is no longer available",
+                    html: 'Sorry, the product <strong>'+response.product_name+'</strong> you selected is no longer available or is out of stock',
+                    icon: "warning",
+                    confirmButtonColor: "#e7ab3c",
+                    allowOutsideClick: false,
+                    confirmButtonText: "Shopping again"
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Mengambil data produk dari local storage (contoh: cart)
+                        var cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+                        // Gantilah ini dengan cara Anda mendapatkan ID pengguna saat ini
+                        const userId = getUserId();
+                        const slugStore = getSlugStore();
+
+                        // Hapus item dari localStorage berdasarkan user ID
+                        cart = cart.filter(item => item.userId !== userId || item.slugStore !== slugStore);
+                        localStorage.setItem('cart', JSON.stringify(cart));
+
+                        var nameStore = "{{ request()->segment(1) }}";
+                        var halamanTujuan = "/" + nameStore + "/all-products";
+                        window.location.href = halamanTujuan;
+                    }
+                });
+            }
         },
         error: function (error) {
             Swal.fire({

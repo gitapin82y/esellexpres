@@ -59,8 +59,7 @@
 
                 <li class="menu-title">Seller</li><!-- /.menu-title -->
                 <li class="{{Request::is('candidate-seller') ? 'active' : '' }}">
-                    <a href="{{route('candidate-seller.index')}}"> <i class="menu-icon fa fa-user-plus"></i>Seller Candidates
-                        {!! $sellerCandidates && $sellerCandidates->total > 0 ? '<div class="badge"><span>' . $sellerCandidates->total . '</span></div>' : '' !!}
+                    <a href="{{route('candidate-seller.index')}}"> <i class="menu-icon fa fa-user-plus"></i>Seller Candidates{!! $sellerCandidates && $sellerCandidates->total > 0 ? '<div class="badge"><span>' . $sellerCandidates->total . '</span></div>' : '' !!}
                 </a>
                 </li>
                 <li class="{{Request::is('seller-list') ? 'active' : '' }}">

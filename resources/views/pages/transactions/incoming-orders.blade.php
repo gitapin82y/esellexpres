@@ -174,7 +174,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
         var table = $('#tableTopup').DataTable({
             processing: true,
             serverside: true,
-            order: [[4, 'desc']],
+            order: [0, 'desc'],
             ajax: {
                 url: '{{route("getIncomingOrders")}}',
             },
@@ -224,10 +224,16 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
             var selectedDate = $(this).val();
             table.column(4).search(selectedDate).draw();
         });
-        $('#filterMonth').change(function () {
-            var selectedMonth = $('#filterMonth').val();
-            table.column(4).search(selectedMonth).draw();
-        });
+
+         $('#filterMonth').change(function () {
+    var selectedMonth = $('#filterMonth').val();
+     if (selectedMonth) {
+          var searchTerm = moment(selectedMonth, 'M').format('MMMM');
+    table.column(4).search(searchTerm, true).draw();
+    } else {
+        table.column(4).search('').draw();
+    }
+});
 
 
 

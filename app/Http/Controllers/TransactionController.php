@@ -48,10 +48,10 @@ class TransactionController extends Controller
 
     public function datatable(){
         if (Auth::user()->role == 1) {
-            $data = Transaction::where('is_confirmed', 'Y')->orderBy('id', 'desc')->get();
+            $data = Transaction::where('is_confirmed', 'Y')->orderBy('created_at', 'desc')->get();
         } else {
             $stores = Store::where('user_id', Auth::user()->id)->first();
-            $data = Transaction::where('store_id', $stores->id)->orderBy('id', 'desc')->get();
+            $data = Transaction::where('store_id', $stores->id)->orderBy('created_at', 'desc')->get();
         }
 
       return Datatables::of($data)
@@ -112,9 +112,18 @@ class TransactionController extends Controller
             return redirect('login?next='.$fullUrl);
         }
     }
+    
 
     public function checkout(Request $request){
         $user = Auth::user();
+        
+        // cek ketersediaan produk
+        foreach($request->products as $product){
+            $prod = Product::find($product['id']);
+            if(!$prod || $prod->quantity < $product['quantity']){
+                return response()->json(['product_empty' => true,'product_name'=>$product['name']]);
+            }
+        }
 
         $newBalance = $user->balance - $request->profit;
 

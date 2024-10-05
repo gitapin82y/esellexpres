@@ -371,7 +371,7 @@ class UserController extends Controller
     }
 
     public function datatable(){
-        $data = User::where('role','!=','1')->get();
+        $data = User::where('role', '!=', '1')->latest()->get();
 
         return DataTables::of($data)
         ->addColumn('password', function($data) {
