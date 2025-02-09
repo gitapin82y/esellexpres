@@ -103,6 +103,8 @@ table{
                                 <thead>
                                     <tr>
                                         <th>Transaction ID</th>
+                                        <th class="@if (Auth::user()->role != 1) d-none @endif">Buyer Name</th>
+                                        <th class="@if (Auth::user()->role != 1) d-none @endif">Seller Name</th>
                                         <th>Purchase Price @if (Auth::user()->role != 1)<br><small>reseller</small>@endif</th>
                                         <th>Total Payment @if (Auth::user()->role != 1)<br><small>selling profit</small>@endif</th>
                                         <th>Total Product</th>
@@ -181,7 +183,12 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
             columns: [{
                     data: 'uuid',
                     name: 'uuid',
-                },{
+                },
+                 { data: 'buyer_name', name: 'buyer_name', className: 'text-center @if (Auth::user()->role != 1) d-none @endif' },
+        { data: 'seller_name', name: 'seller_name', className: 'text-center @if (Auth::user()->role != 1) d-none @endif' },
+                { data: 'seller_name', name: 'seller_name', className: 'text-center' }, // Kolom Nama Penjual
+                { data: 'buyer_name', name: 'buyer_name', className: 'text-center' },
+                {
                     data: 'transaction_total',
                     name: 'transaction_total',
                     render: function(data) {
