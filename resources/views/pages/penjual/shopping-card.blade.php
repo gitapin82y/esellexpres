@@ -84,14 +84,14 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                                             <input type="hidden" class="form-control" id="user_id" aria-describedby="user_id" value="{{Auth::user()->id}}">
                                             <div class="form-group">
                                                 <label for="namaLengkap">Full Name</label>
-                                                <input type="text" class="form-control" id="namaLengkap" aria-describedby="namaHelp" value="{{Auth::user()->name}}" placeholder="Masukan Nama">
+                                                <input type="text" class="form-control" id="namaLengkap" aria-describedby="namaHelp" value="{{Auth::user()->name}}" placeholder="Input Full Name">
                                                 <span class="error-message" id="error-namaLengkap"></span>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="noHP">Phone</label>
-                                                <input type="number" class="form-control" id="noHP" aria-describedby="noHPHelp" value="{{Auth::user()->phone}}" placeholder="Masukan No. HP">
+                                                <input type="text" class="form-control" id="noHP" aria-describedby="noHPHelp" value="{{Auth::user()->phone}}" placeholder="Input Phone Number">
                                                 <span class="error-message" id="error-noHP"></span>
                                             </div>
                                         </div>
