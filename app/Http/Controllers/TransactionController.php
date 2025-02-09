@@ -48,7 +48,16 @@ class TransactionController extends Controller
 
     public function datatable(){
         if (Auth::user()->role == 1) {
-            $data = Transaction::where('is_confirmed', 'Y')->orderBy('created_at', 'desc')->get();
+            $data = Transaction::select(
+                'transactions.*',
+                'users.name as buyer_name',
+                'stores.name as seller_name'
+            )
+            ->join('users', 'transactions.user_id', '=', 'users.id') // Join ke tabel users
+            ->join('stores', 'transactions.store_id', '=', 'stores.id') // Join ke tabel stores
+            ->where('is_confirmed', 'Y')
+            ->orderBy('transactions.created_at', 'desc')
+            ->get();
         } else {
             $stores = Store::where('user_id', Auth::user()->id)->first();
             $data = Transaction::where('store_id', $stores->id)->orderBy('created_at', 'desc')->get();
@@ -96,6 +105,12 @@ class TransactionController extends Controller
             }
        
             return '<span style="color: #e7973c;"><strong>$'.$data->profit.'</strong></span>';
+    })
+    ->addColumn('seller_name', function($data) {
+        return $data->seller_name;
+    })
+    ->addColumn('buyer_name', function($data) {
+        return $data->buyer_name;
     })
         ->rawColumns(['profit','created_at','action'])
         ->addIndexColumn()
