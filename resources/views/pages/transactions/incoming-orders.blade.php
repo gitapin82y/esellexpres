@@ -37,8 +37,6 @@ table{
                             <strong>Purchase Price</strong> is the total that must be paid to the reseller. Make sure you have sufficient balance.
                             <br><strong>Total Payment</strong> is the amount you will get when the product order reaches the customer.
                             <hr>
-                            <strong>Purchase Price</strong> and <strong>Total Payment</strong> include shipping costs
-                            <hr>
                             <p class="mb-0 text-main">Confirm the order and wait until the product status is "The customer has received the order" to get benefits.</p>
                             <p class="mb-0 text-main">Profit per product obtained is <strong>{{$profit}}%</strong>, get lots of sales for additional profit from product sales!</p>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -54,19 +52,19 @@ table{
                             <div class="col-md-4 text-center col-6 align-self-center">
                                 <label for="filterDate">Filter by Month:</label>
                                 <select id="filterMonth" class="form-control">
-                                    <option value="">Select Month</option>
-                                    <option value="01">January</option>
-                                    <option value="02">February</option>
-                                    <option value="03">March</option>
-                                    <option value="04">April</option>
-                                    <option value="05">May</option>
-                                    <option value="06">June</option>
-                                    <option value="07">July</option>
-                                    <option value="08">August</option>
-                                    <option value="09">September</option>
-                                    <option value="10">October</option>
-                                    <option value="11">November</option>
-                                    <option value="12">December</option>
+                                        <option value="">Select Month</option>
+                                    <option value="January">January</option>
+                                    <option value="February">February</option>
+                                    <option value="March">March</option>
+                                    <option value="April">April</option>
+                                    <option value="May">May</option>
+                                    <option value="June">June</option>
+                                    <option value="July">July</option>
+                                    <option value="August">August</option>
+                                    <option value="September">September</option>
+                                    <option value="October">October</option>
+                                    <option value="November">November</option>
+                                    <option value="December">December</option>
                                 </select>
                             </div>
                             <div class="col-md-4 text-center text-md-right col-12">
@@ -77,19 +75,19 @@ table{
                             <div class="col-md-4 text-right col-6 align-self-center">
                                 <label for="filterDate">Filter by Month:</label>
                                 <select id="filterMonth" class="form-control">
-                                    <option value="">Select Month</option>
-                                    <option value="01">January</option>
-                                    <option value="02">February</option>
-                                    <option value="03">March</option>
-                                    <option value="04">April</option>
-                                    <option value="05">May</option>
-                                    <option value="06">June</option>
-                                    <option value="07">July</option>
-                                    <option value="08">August</option>
-                                    <option value="09">September</option>
-                                    <option value="10">October</option>
-                                    <option value="11">November</option>
-                                    <option value="12">December</option>
+                                           <option value="">Select Month</option>
+                                    <option value="January">January</option>
+                                    <option value="February">February</option>
+                                    <option value="March">March</option>
+                                    <option value="April">April</option>
+                                    <option value="May">May</option>
+                                    <option value="June">June</option>
+                                    <option value="July">July</option>
+                                    <option value="August">August</option>
+                                    <option value="September">September</option>
+                                    <option value="October">October</option>
+                                    <option value="November">November</option>
+                                    <option value="December">December</option>
                                 </select>
                             </div>
                             @endif
@@ -106,7 +104,7 @@ table{
                                         <th class="@if (Auth::user()->role != 1) d-none @endif">Buyer Name</th>
                                         <th class="@if (Auth::user()->role != 1) d-none @endif">Seller Name</th>
                                         <th>Purchase Price @if (Auth::user()->role != 1)<br><small>reseller</small>@endif</th>
-                                        <th>Total Payment @if (Auth::user()->role != 1)<br><small>selling profit</small>@endif</th>
+                                        <th>Total Payment @if (Auth::user()->role != 1)<br><small>selling profit</small>@else <small>+ tax</small> @endif</th>
                                         <th>Total Product</th>
                                         <th>Purchase Date</th>
                                         <th>Status Product</th>
@@ -173,6 +171,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
 <script>
 
        jQuery(document).ready(function ($) {
+            var userRole = {{ Auth::user()->role }};
         var table = $('#tableTopup').DataTable({
             processing: true,
             serverside: true,
@@ -187,15 +186,23 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
                 { data: 'buyer_name', name: 'buyer_name', className: 'text-center @if (Auth::user()->role != 1) d-none @endif' },
                 { data: 'seller_name', name: 'seller_name', className: 'text-center @if (Auth::user()->role != 1) d-none @endif' },
                 {
-                    data: 'transaction_total',
-                    name: 'transaction_total',
-                    render: function(data) {
-                        return '<span style="color:#e7973c;"><strong>$'+data+'</strong></span>';
-                    },
-                },{
-                    data: 'profit',
-                    name: 'profit',
-                     className: 'text-center'
+            data: 'transaction_total',
+            name: 'transaction_total',
+            render: function(data, type, row) {
+                // Pastikan 'row.tax_transaction' ada agar tidak error
+                let total = parseFloat(row.transaction_total) || 0;
+                let tax = parseFloat(row.tax) || 0;
+
+                 let netTotal = total - tax;
+
+                
+                return '<span style="color:#e7973c;"><strong>$' + netTotal.toFixed(2) + '</strong></span>';
+            }
+        },
+        {
+    data: 'profit',
+    name: 'profit',
+    className: 'text-center',
                 },{
                     data: 'total_quantity',
                     name: 'total_quantity',
@@ -230,13 +237,12 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
             table.column(4).search(selectedDate).draw();
         });
 
-         $('#filterMonth').change(function () {
+  $('#filterMonth').change(function () {
     var selectedMonth = $('#filterMonth').val();
-     if (selectedMonth) {
-          var searchTerm = moment(selectedMonth, 'M').format('MMMM');
-    table.column(4).search(searchTerm, true).draw();
+    if (selectedMonth) {
+        table.search(selectedMonth, true, false).draw();
     } else {
-        table.column(4).search('').draw();
+        table.search('').draw();
     }
 });
 

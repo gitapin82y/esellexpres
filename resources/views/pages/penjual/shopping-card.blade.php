@@ -226,12 +226,12 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
         var taxRate = {!! json_encode($shipping->fee)!!};
 
         // Hitung total keseluruhan
-        var totalProfitPrice = (parseFloat(profitPrice) + parseFloat(taxRate)).toFixed(2);
+        var totalProfitPrice = (parseFloat(profitPrice)).toFixed(2);
         var totalNormalPrice = (parseFloat(normalPrice) + parseFloat(taxRate)).toFixed(2);
 
         document.getElementById('total-price-shopping-cart').innerText =  "$" + parseFloat(profitPrice).toFixed(2);
         document.getElementById('taxAmount').innerText = "$" + parseFloat(taxRate).toFixed(2);
-        document.getElementById('totalAmount').innerText =  "$" + totalProfitPrice;
+        document.getElementById('totalAmount').innerText =  "$" + (parseFloat(profitPrice) + parseFloat(taxRate)).toFixed(2);
         return {
             total: totalNormalPrice,
             profit: totalProfitPrice,

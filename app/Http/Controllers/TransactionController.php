@@ -56,7 +56,7 @@ class TransactionController extends Controller
             ->join('users', 'transactions.user_id', '=', 'users.id') // Join ke tabel users
             ->join('stores', 'transactions.store_id', '=', 'stores.id') // Join ke tabel stores
             ->where('is_confirmed', 'Y')
-            ->orderBy('transactions.created_at', 'desc')
+            ->orderBy('created_at', 'desc')
             ->get();
         } else {
             $stores = Store::where('user_id', Auth::user()->id)->first();
@@ -92,6 +92,11 @@ class TransactionController extends Controller
                 return Carbon::parse($data->created_at)->format('F j, Y');
         })
         ->addColumn('profit',function($data){
+            
+            if(Auth::user()->role==1){
+                $data->profit = $data->profit + $data->tax;
+            }
+            
             if( $data->status == 'The customer has received the order'){
                 return '<span style="color: #349e5a;"><strong>$'.$data->profit.'</strong></span>';
             }
@@ -140,7 +145,7 @@ class TransactionController extends Controller
             }
         }
 
-        $newBalance = $user->balance - $request->profit;
+        $newBalance = $user->balance - ($request->profit + $request->tax);
 
         if($newBalance >= 0.00){
             
@@ -163,7 +168,7 @@ class TransactionController extends Controller
 
             $transaction->details()->saveMany($details);
 
-            $newsaldo = $user->balance - $request->profit;
+            $newsaldo = $user->balance - ($request->profit  + $request->tax);
             User::where('id', $user->id)->update([
                 'balance' => $newsaldo,
             ]);
@@ -236,13 +241,13 @@ class TransactionController extends Controller
         $notifOrderMasuk = false;
         if ($request->status == 'Process') {
             $userId = Auth::id();
-            $newBalance = Auth::user()->balance - $transaction->transaction_total;
+            $newBalance = Auth::user()->balance - $transaction->transaction_total - $transaction->tax;
             if($newBalance <= 0.00){
                 return back()->with('failedConfirm', '
                 Your balance is not enough to buy products from resellers');
             }
              // Update the current user's balance
-            User::where('id', $userId)->decrement('balance', $transaction->transaction_total);
+            User::where('id', $userId)->decrement('balance', $transaction->transaction_total - $transaction->tax);
 
             // Update the balance for the user with role_id == 1
             User::where('role', 1)->increment('balance', $transaction->transaction_total);
@@ -255,9 +260,12 @@ class TransactionController extends Controller
 
 
         if($request->status == 'Reject order'){
-            User::where('id', $transaction->stores->user_id)->increment('balance', $transaction->transaction_total);
+            User::where('id', $transaction->stores->user_id)->increment('balance', $transaction->transaction_total - $transaction->tax);
             User::where('role', 1)->decrement('balance', $transaction->transaction_total);
-            User::where('id', $transaction->user_id)->increment('balance', $transaction->profit);
+            User::where('id', $transaction->user_id)->increment('balance', $transaction->profit + $transaction->tax);
+              $transaction->save();
+                 return back()->with('toast_success', 'Transaction successfully declined');
+
         }
 
         if($notifOrderMasuk){

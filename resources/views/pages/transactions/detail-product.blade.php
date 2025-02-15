@@ -57,14 +57,22 @@
             </table>
         </td>
     </tr>
+    @if(Auth::user()->role == 2)
     <tr>
+        <th>Total Payment Buyer</th>
+        <td style="color: #e7973c;font-size:18px;"><strong>${{ $item->profit }}</strong> </td>
+    </tr>
+    @else
+     <tr>
         <th>Tax & Shipping Cost</th>
         <td style="color: #e7973c;font-size:18px;"><strong>${{ $item->tax }}</strong> </td>
     </tr>
     <tr>
         <th>Total Payment</th>
-        <td style="color: #e7973c;font-size:18px;"><strong>${{ $item->profit }}</strong> </td>
+        <td style="color: #e7973c;font-size:18px;"><strong>${{ $item->profit + $item->tax }}</strong> </td>
     </tr>
+    
+    @endif
 </table>
 <div class="row">
     @if (Auth::user()->role == 2 && $item->status=='Waiting process')

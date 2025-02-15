@@ -193,7 +193,7 @@
                      data: 'created_at',
             name: 'created_at',
             render: function(data) {
-                return moment(data).locale('id').format('DD MMMM YYYY'); 
+                return moment(data).locale('en').format('DD MMMM YYYY'); 
             }
                 },
                 {

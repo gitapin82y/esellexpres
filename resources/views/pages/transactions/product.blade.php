@@ -81,7 +81,12 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                                                     {{$item->total_quantity}}
                                                 </td>
                                                 <td style="color: #e7ab3c;font-weight:200;">
-                                                  <b>${{$item->profit}}</b> 
+                                                    @if(Auth::user()->role == 3)
+        <b>${{ $item->profit + $item->tax }}</b>
+    @else
+        <b>${{ $item->profit }}</b>
+    @endif
+                                             
                                                 </td>
                                                 <td>
                                                     {{ \Carbon\Carbon::parse($item->created_at)->format('F j, Y') }}
