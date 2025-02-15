@@ -44,6 +44,7 @@
                                         <th>Account Name</th>
                                         <th>Account Number</th>
                                         <th>Total</th>
+                                          <th>Date</th>
                                         <th>Message</th>
                                         <th>Status</th>
                                     </tr>
@@ -148,6 +149,12 @@
                     render: function(data) {
                         return '$'+data
                     }
+                },{
+                     data: 'created_at',
+            name: 'created_at',
+            render: function(data) {
+                return moment(data).locale('id').format('DD MMMM YYYY'); 
+            }
                 },{
                     data: 'message',
                     name: 'message',

@@ -57,6 +57,7 @@
 
              <!-- Animated -->
              <div class="animated fadeIn">
+
                 <!-- Widgets  -->
                 <div class="row">
                     <div class="col-lg-4 col-md-6">
@@ -69,7 +70,7 @@
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-text">$<span class="NON-count">{{$totalIncome}}</span></div>
-                                            <div class="stat-heading">Total Income</div>
+                                            <div class="stat-heading">Total Income(this month)</div>
                                         </div>
                                     </div>
                                 </div>
@@ -87,7 +88,7 @@
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count">{{$totalProductSales}}</span></div>
-                                            <div class="stat-heading">Total Product Sales </div>
+                                            <div class="stat-heading">Total Product Sales<small>(this month)</small></div>
                                         </div>
                                     </div>
                                 </div>
@@ -123,7 +124,7 @@
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count">{{$incomingOrders}}</span></div>
-                                            <div class="stat-heading">Incoming Orders</div>
+                                            <div class="stat-heading">Incoming Orders<small>(this month)</small></div>
                                         </div>
                                     </div>
                                 </div>
@@ -141,7 +142,7 @@
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count">{{$orderProcess}}</span></div>
-                                            <div class="stat-heading">Orders Process</div>
+                                            <div class="stat-heading">Orders Process<small>(this month)</small></div>
                                         </div>
                                     </div>
                                 </div>
@@ -159,7 +160,7 @@
                                     <div class="stat-content">
                                         <div class="text-left dib">
                                             <div class="stat-text"><span class="count">{{$orderCompleted}}</span></div>
-                                            <div class="stat-heading">Orders Completed</div>
+                                            <div class="stat-heading">Orders Completed<small>(this month)</small></div>
                                         </div>
                                     </div>
                                 </div>
@@ -197,7 +198,17 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script>
+     Highcharts.setOptions({
+        lang: {
+            decimalPoint: '.',
+            thousandsSep: ','
+        },
+        accessibility: {
+            enabled: false // Matikan aksesibilitas jika tidak diperlukan
+        }
+    });
     var currentYear = new Date().getFullYear();
+
     Highcharts.chart('container', {
         chart: {
             type: 'column'
@@ -232,10 +243,10 @@
             {
                 name: 'Total Sales',
                 data: [
-                    @foreach($totalProductSalesPerMonth as $month => $total)
-                        {{ $total }},
-                    @endforeach
-                ]
+                      @foreach($totalProductSalesPerMonth as $month => $total)
+        {{ $total }},
+    @endforeach
+                    ]
             },
         ]
     });

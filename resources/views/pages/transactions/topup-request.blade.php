@@ -41,8 +41,10 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Transaction</th>
+                                          
+                                            <!--<th>Transaction</th>-->
                                         <th>Total</th>
+                                         <th>Date</th>
                                         <th>Message</th>
                                         <th>Status</th>
                                     </tr>
@@ -123,6 +125,10 @@
 @endsection
 
 @push('after-script')
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/id.min.js"></script>
+
 <script>
      function handleInput(inputElement) {
           let value = inputElement.value;
@@ -165,19 +171,32 @@
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex',
                 },
-                {
-                    data: 'proof',
-                    name: 'proof',
-                    render: function(data) {
-                        return '<a href="'+data+'" data-lightbox="roadtrip"><img src="'+data+'" width="90px"></a>'
-                    }
-                },{
+                
+
+    // {
+    //     data: 'proof',
+    //     name: 'proof',
+    //     render: function(data) {
+    //         return '<a href="'+data+'" data-lightbox="roadtrip"><img src="'+data+'" width="90px"></a>';
+    //     }
+    // },
+    
+    
+              {
                     data: 'total',
                     name: 'total',
                     render: function(data) {
                         return '$'+data
                     }
-                },{
+                },
+                {
+                     data: 'created_at',
+            name: 'created_at',
+            render: function(data) {
+                return moment(data).locale('id').format('DD MMMM YYYY'); 
+            }
+                },
+                {
                     data: 'message',
                     name: 'message',
                 },{

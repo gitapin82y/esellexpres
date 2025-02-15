@@ -68,7 +68,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                                             <th style="width: 110px;">Total Payment</th>
                                             <th style="width: 150px;">Purchase Date</th>
                                             <th style="width: 130px;">Status Product</th>
-                                            <th style="width: 130px;">Detail Product</th>
+                                            <th style="width: 130px;">Product Detail</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -96,7 +96,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.min.css
                                                         receive orders
                                                     </a>
                                                     @endif
-                                                    <a href="#mymodal" data-remote="{{ route('transaction.show',$item->id) }}" data-toggle="modal" data-target="#mymodal" data-title="Detail Transaksi <b>{{ $item->uuid }}</b>" class="btn btn-main my-1"><i class="fa fa-eye"></i> View Detail</a>
+                                                    <a href="#mymodal" data-remote="{{ route('transaction.show',$item->id) }}" data-toggle="modal" data-target="#mymodal" data-title="Transaction Details <b>{{ $item->uuid }}</b>" class="btn btn-main my-1"><i class="fa fa-eye"></i> View Detail</a>
                                                 </td>
                                             </tr>
                                         @empty

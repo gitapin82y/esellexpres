@@ -67,7 +67,7 @@ class TransactionController extends Controller
         ->addColumn('action', function ($data) {
 
             $aksi = '<div class="btn-group">' .
-            '<a href="#mymodal" data-remote="'. route('transaction.show',$data->id) .'" data-toggle="modal" data-target="#mymodal" data-title="Detail Transaksi <b>'. $data->uuid .'</b>" class="btn btn-primary"><i class="fa fa-eye text-white"></i></a>';
+            '<a href="#mymodal" data-remote="'. route('transaction.show',$data->id) .'" data-toggle="modal" data-target="#mymodal" data-title="Transaction Details <b>'. $data->uuid .'</b>" class="btn btn-primary"><i class="fa fa-eye text-white"></i></a>';
             if($data->status=='Waiting process'){
                 $aksi .= '<a href="'.route('transactions.status',['id' => $data->id, 'status' => 'Process']) . '"" class="btn btn-success"><i class="fa fa-check"></i></a>';
             }
