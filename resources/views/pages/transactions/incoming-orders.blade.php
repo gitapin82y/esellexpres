@@ -101,6 +101,9 @@ table{
                                 <thead>
                                     <tr>
                                         <th>Transaction ID</th>
+                                          @if (Auth::user()->role == 1)
+                                            <th>Acc Seller</th>
+                                        @endif
                                         <th class="@if (Auth::user()->role != 1) d-none @endif">Buyer Name</th>
                                         <th class="@if (Auth::user()->role != 1) d-none @endif">Seller Name</th>
                                         <th>Purchase Price @if (Auth::user()->role != 1)<br><small>reseller</small>@endif</th>
@@ -183,6 +186,20 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.9.0/dist/sweetalert2.all.min.js
                     data: 'uuid',
                     name: 'uuid',
                 },
+                  @if (Auth::user()->role == 1)
+             {
+    data: 'acc_seller',
+    name: 'acc_seller',
+    className: 'text-center',
+    render: function(data, type, row) {
+        if (data) {
+            return moment(data).locale('id').format('LL'); // Contoh: "7 Maret 2025"
+        }
+        return '-'; // Jika null atau kosong, tampilkan "-"
+    }
+},
+
+            @endif
                 { data: 'buyer_name', name: 'buyer_name', className: 'text-center @if (Auth::user()->role != 1) d-none @endif' },
                 { data: 'seller_name', name: 'seller_name', className: 'text-center @if (Auth::user()->role != 1) d-none @endif' },
                 {

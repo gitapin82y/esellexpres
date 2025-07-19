@@ -246,6 +246,11 @@ class TransactionController extends Controller
                 return back()->with('failedConfirm', '
                 Your balance is not enough to buy products from resellers');
             }
+            
+            \Carbon\Carbon::setLocale('id');
+            $transaction->acc_seller = \Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->toDateString();
+
+            
              // Update the current user's balance
             User::where('id', $userId)->decrement('balance', $transaction->transaction_total - $transaction->tax);
 

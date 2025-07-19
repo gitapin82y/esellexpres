@@ -65,7 +65,19 @@ class PenjualController extends Controller
         response()->json(['success' => 'Data']);
     }
 
-    public function tolakKandidat(){
+       public function tolakKandidat($id){
+        $user = User::find($id);
+
+        $user->update(['register' => null]);
+
+        Store::where('user_id', $id)->delete();
+
+        $details = [
+            'title' => 'Sorry, your seller registration has been rejected.',
+            'body' => 'You can resubmit the appropriate files or contact the admin so that your seller registration is approved.',
+        ];
+
+        Mail::to($user->email)->send(new NotifMail($details));
         response()->json(['success' => 'Data']);
     }
 
