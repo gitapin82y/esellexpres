@@ -181,7 +181,7 @@ class TransactionController extends Controller
 
             BadgeSidebarController::send('Incoming Orders',$transaction->stores->users->id);
             
-            Mail::to($transaction->stores->users->email)->send(new NotifMail($details));
+            // Mail::to($transaction->stores->users->email)->send(new NotifMail($details));
             
             return response()->json(['checkout' => true]);
         }else{
@@ -231,9 +231,9 @@ class TransactionController extends Controller
             $emailCustomer = $transaction->email;
             $emailSeller = $transaction->stores->users->email;
             $emailReseller = "cs@esellexpress.com";
-            Mail::to($emailCustomer)
-            ->bcc([$emailSeller, $emailReseller])
-            ->send(new NotifMail($details));
+            // Mail::to($emailCustomer)
+            // ->bcc([$emailSeller, $emailReseller])
+            // ->send(new NotifMail($details));
 
             return back()->with('toast_success', 'Successfully confirmed receipt of order');
         }
@@ -279,7 +279,7 @@ class TransactionController extends Controller
                 'body' => 'Congratulations, there is an incoming order with transaction number '.$transaction->uuid.', prepare your order now',
                 'url' => 'esellexpress.com/elxadmin?next=https://esellexpress.com/transaction'
             ];
-            Mail::to("cs@esellexpress.com")->send(new NotifMail($details));
+            // Mail::to("cs@esellexpress.com")->send(new NotifMail($details));
         }else{
             $details = [
                 'title' => 'Order with transaction number '.$transaction->uuid,
@@ -287,9 +287,9 @@ class TransactionController extends Controller
             ];
             $emailCustomer = $transaction->email;
             $emailSeller = $transaction->stores->users->email;
-            Mail::to($emailCustomer)
-            ->bcc([$emailSeller])
-            ->send(new NotifMail($details));   
+            // Mail::to($emailCustomer)
+            // ->bcc([$emailSeller])
+            // ->send(new NotifMail($details));   
         }
     
         $transaction->save();

@@ -61,7 +61,7 @@ class PenjualController extends Controller
             'url' => 'esellexpress.com/login',
         ];
 
-        Mail::to($user->email)->send(new NotifMail($details));
+        // Mail::to($user->email)->send(new NotifMail($details));
         response()->json(['success' => 'Data']);
     }
 
@@ -77,7 +77,7 @@ class PenjualController extends Controller
             'body' => 'You can resubmit the appropriate files or contact the admin so that your seller registration is approved.',
         ];
 
-        Mail::to($user->email)->send(new NotifMail($details));
+        // Mail::to($user->email)->send(new NotifMail($details));
         response()->json(['success' => 'Data']);
     }
 
@@ -183,7 +183,7 @@ class PenjualController extends Controller
             'title' => 'Your shop status was changed by the admin',
             'body' => 'Your shop status has now been changed by the admin to '.$request->is_active.'. If you want to activate or deactivate the shop again, please send an email to cs@esellexpress.com',
         ];
-        Mail::to($data->email)->send(new NotifMail($details));
+        // Mail::to($data->email)->send(new NotifMail($details));
 
         return response()->json(['success' => 'Store status updated successfully']);
     }
@@ -245,7 +245,7 @@ class PenjualController extends Controller
             'title' => 'Store status request has been accepted',
             'body' => 'Congratulations. The shop status request has been received, now your shop is '.$request->is_active.'. To request off/on again, please access your shop dashboard',
         ];
-        Mail::to($data->email)->send(new NotifMail($details));
+        // Mail::to($data->email)->send(new NotifMail($details));
         return response()->json(['success' => 'Store status request has been accepted']);
     }
 }

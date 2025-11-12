@@ -168,7 +168,7 @@ class UserController extends Controller
                 'title' => $request['email'].' just registered an account',
                 'body' => 'To view new user account information, please view the esellexpress dashboard and access the all users menu',
             ];
-            Mail::to("cs@esellexpress.com")->send(new NotifMail($details));
+            // Mail::to("cs@esellexpress.com")->send(new NotifMail($details));
         }
 
         if ($request->next) {
@@ -231,7 +231,7 @@ class UserController extends Controller
 
         BadgeSidebarController::send('Seller Candidates');
 
-        Mail::to("cs@esellexpress.com")->send(new NotifMail($details));
+        // Mail::to("cs@esellexpress.com")->send(new NotifMail($details));
 
         return redirect('/')->with('success','Successfully registered, wait for admin confirmation via email '. Auth::user()->email);
     }
@@ -328,7 +328,7 @@ class UserController extends Controller
             'body' => 'If you reset your password, please press the reset password confirmation button, but if you dont reset your password, please change your password for account security on the website www.esellexpress.com',
             'url' => 'esellexpress.com/confirmResetPassword?token='.$tokenEmail.'-'.$tokenPassword
         ];
-        Mail::to($request->email)->send(new ConfirmMail($details));
+        // Mail::to($request->email)->send(new ConfirmMail($details));
     
         return back()->with('success', 'We have sent a password reset confirmation via email '.$request->email);
     }
